@@ -1,0 +1,734 @@
+/* Universal Styles */
+body {
+  /* 
+  padding: 0;
+*/
+  font-family: "Arial", sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Full viewport height */
+  margin: 0;
+  background-color: #f4f4f4;
+}
+
+.content-wrapper {
+  flex: 1; /* This allows the content to grow and consume available space, pushing the footer down */
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* NavBar Styles */
+.navbar {
+  background-color: #501214; /* Maroon inspired by Texas State University */
+  padding: 10px 0;
+  font-family: Arial, sans-serif;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.nav-logo {
+  color: #fecb00; /* Gold inspired by Texas State University */
+  text-decoration: none;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.nav-search {
+  flex: 1;
+  margin: 0 20px;
+}
+
+.nav-search input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.nav-links {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-item {
+  color: white;
+  text-decoration: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.nav-item:hover {
+  background-color: #fecb00; /* Gold hover effect */
+  color: #501214; /* Maroon text on hover */
+}
+
+.user-profile-icon {
+  font-size: 24px;
+  background-color: #fecb00; /* Gold background */
+  border-radius: 50%;
+  padding: 5px 10px;
+}
+
+/* Forms */
+form {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+form div {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="date"],
+input[type="time"],
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Ride Card */
+.RideCard {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.RideCard h3 {
+  margin-top: 0;
+}
+
+/* RideListings */
+.ride-listings {
+  background-color: #fff;
+  padding: 20px;
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+}
+
+.ride-listings h2 {
+  color: #501214; /* Maroon */
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.ride-filters {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.ride-filters button {
+  padding: 5px 10px;
+  background-color: #501214; /* Maroon */
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.ride-filters button:hover {
+  background-color: #3a0d0a;
+}
+
+.ride-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.ride-card {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fefefe;
+}
+
+.ride-card h3 {
+  color: #501214; /* Maroon */
+}
+
+.ride-card p {
+  margin: 5px 0;
+  color: #666;
+}
+
+/* RideDetails */
+.ride-details {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 5px;
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.driver-info,
+.route-info {
+  margin-bottom: 20px;
+}
+
+h2 {
+  color: #501214; /* Maroon */
+  margin-bottom: 10px;
+}
+
+p {
+  margin: 5px 0;
+  color: #666;
+}
+
+.reviews {
+  margin-top: 10px;
+}
+
+.review {
+  padding: 5px;
+  border-bottom: 1px solid #eee;
+}
+
+.review:last-child {
+  border-bottom: none;
+}
+
+.join-ride-btn {
+  display: inline-block;
+  padding: 10px 15px;
+  background-color: #501214; /* Maroon */
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.join-ride-btn:hover {
+  background-color: #3a0d0a;
+}
+
+/* Chat */
+.Chat {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.Chat input[type="text"] {
+  width: 80%;
+  display: inline-block;
+}
+
+/* Home */
+.content-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.hero {
+  background-color: #ac9155; /* Maroon */
+  color: #501214; /* Gold */
+  padding: 100px 0;
+  text-align: center;
+}
+
+.cta-btn {
+  background-color: #501214; /* Gold */
+  color: #ac9155; /* Maroon */
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.cta-btn:hover {
+  background-color: #d3a000;
+}
+
+.stats {
+  background-color: #fff;
+  padding: 50px 0;
+  text-align: center;
+}
+
+.statistics {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.stat-item {
+  flex: 1;
+  padding: 10px;
+}
+
+.stat-item strong {
+  display: block;
+  font-size: 24px;
+  color: #501214; /* Maroon */
+}
+
+.testimonials {
+  background-color: #f5f5f5;
+  padding: 50px 0;
+  text-align: center;
+}
+
+.testimonial-card {
+  max-width: 500px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Footer */
+.footer {
+  background-color: #501214; /* Maroon */
+  padding: 20px 0;
+  font-family: Arial, sans-serif;
+  width: 100%; /* Ensure it spans the full width */
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.footer-logo {
+  color: #fecb00; /* Gold */
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.footer-links {
+  display: flex;
+  gap: 20px;
+}
+
+.footer-item {
+  color: white;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-item:hover {
+  color: #fecb00; /* Gold hover effect */
+}
+
+.footer-copyright {
+  text-align: center;
+  color: white;
+  padding-top: 10px;
+}
+
+/* FindRideForm */
+.find-ride-form {
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #501214; /* Maroon border color */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  margin: 40px auto;
+}
+
+.find-ride-form h2 {
+  color: #501214; /* Maroon heading color */
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.input-group {
+  margin-bottom: 20px;
+}
+
+.input-group label {
+  display: block;
+  color: #501214; /* Maroon label color */
+  margin-bottom: 5px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #501214; /* Maroon button color */
+  color: #fff; /* White text color */
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #3f0e0d; /* Darkened Maroon for hover */
+}
+
+/* RideDetails */
+.ride-details {
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #501214; /* Maroon border color */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  margin: 20px auto;
+}
+
+.ride-details h2 {
+  color: #501214; /* Maroon heading color */
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.details-group {
+  margin-bottom: 15px;
+}
+
+.details-group label {
+  color: #501214; /* Maroon label color */
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.details-group span {
+  color: #333; /* Dark text color for details */
+}
+
+/* RegisterAsDriverForm */
+.register-driver-form {
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #501214; /* Maroon border color */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  margin: 40px auto;
+}
+
+.register-driver-form h2 {
+  color: #501214; /* Maroon heading color */
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.input-group {
+  margin-bottom: 20px;
+}
+
+.input-group label {
+  display: block;
+  color: #501214; /* Maroon label color */
+  margin-bottom: 5px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #501214; /* Maroon button color */
+  color: #fff; /* White text color */
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #3f0e0d; /* Darkened Maroon for hover */
+}
+
+/* PostRideForm */
+.post-ride-form-wrapper {
+  background-color: #fff;
+  padding: 40px;
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  max-width: 500px;
+  margin: 40px auto;
+}
+
+.post-ride-form h2 {
+  color: #501214; /* Maroon */
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.post-ride-form input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.post-ride-form input[type="submit"] {
+  background-color: #501214; /* Maroon */
+  color: #fecb00; /* Gold */
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.post-ride-form input[type="submit"]:hover {
+  background-color: #3a0d0a;
+}
+
+/*User Profile */
+.user-profile {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 5px;
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.profile-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+h1,
+h2 {
+  color: #501214; /* Maroon */
+  margin-bottom: 10px;
+}
+
+.rides,
+.reviews {
+  margin-bottom: 20px;
+}
+
+.ride,
+.review {
+  padding: 10px;
+  background-color: #f5f5f5;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.edit-profile-btn,
+.settings-btn {
+  padding: 10px 15px;
+  background-color: #501214; /* Maroon */
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.edit-profile-btn:hover,
+.settings-btn:hover {
+  background-color: #3a0d0a;
+}
+
+/* LoginRegister */
+.login-register {
+  width: 300px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
+  margin: 40px auto;
+}
+
+.toggle-buttons {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.toggle-buttons button {
+  padding: 10px 20px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  transition: color 0.3s, border-bottom 0.3s;
+  border-bottom: 2px solid transparent;
+}
+
+.toggle-buttons button.active {
+  color: #501214; /* Maroon */
+  border-bottom: 2px solid #501214; /* Maroon */
+}
+
+.login-form input,
+.register-form input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 10px 15px;
+  background-color: #501214; /* Maroon */
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.submit-btn:hover {
+  background-color: #3a0d0a;
+}
+
+/* FAQ */
+.faq {
+  padding: 20px;
+  background-color: #fff;
+}
+
+.faq h2 {
+  color: #501214; /* Maroon */
+}
+
+.faq-item {
+  border-top: 1px solid #ccc;
+  padding: 10px 0;
+}
+
+.faq-item h3 {
+  color: #501214; /* Maroon */
+}
+
+/* ContactForm */
+.contact-form {
+  padding: 20px;
+  background-color: #fff;
+}
+
+.contact-form h2 {
+  color: #501214; /* Maroon */
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+
+.contact-form button {
+  background-color: #501214; /* Maroon */
+  color: #fff;
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
+}
+
+.contact-form button:hover {
+  background-color: #3a0d0a;
+}
+
+/* About */
+.about {
+  padding: 20px;
+  background-color: #fff;
+}
+
+.about h2 {
+  color: #501214; /* Maroon */
+}
+
+.about p {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.about img {
+  max-width: 100%;
+}
+
+/* HowItWorks */
+.how-it-works {
+  padding: 20px;
+  background-color: #fff;
+}
+
+.how-it-works h2 {
+  color: #501214; /* Maroon */
+}
+
+.how-it-works ol {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.how-it-works ol li {
+  margin-bottom: 10px;
+}
+
+.how-it-works img {
+  max-width: 100%;
+}
