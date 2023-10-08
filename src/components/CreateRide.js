@@ -1,21 +1,29 @@
 import React, { useState } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const CreateRide = () => {
   const [rideData, setRideData] = useState({
     source: "",
     destination: "",
-    date: "",
+    date: new Date(),
     time: "",
     seats: "",
+    pricePerSeat: "",
   });
 
   const handleChange = (e) => {
     setRideData({ ...rideData, [e.target.name]: e.target.value });
   };
 
+  const handleDateChange = (date) => {
+    setRideData({ ...rideData, date });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     // Save ride logic goes here
+    console.log(rideData);
   };
 
   return (
@@ -44,12 +52,11 @@ const CreateRide = () => {
         </div>
         <div>
           <label>Date:</label>
-          <input
-            type="date"
-            name="date"
-            value={rideData.date}
-            onChange={handleChange}
-            required
+          <DatePicker
+            selected={rideData.date}
+            onChange={handleDateChange}
+            dateFormat="MMMM d, yyyy"
+            isClearable
           />
         </div>
         <div>
@@ -68,6 +75,16 @@ const CreateRide = () => {
             type="number"
             name="seats"
             value={rideData.seats}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div>
+          <label>Price per Seat:</label>
+          <input
+            type="number"
+            name="pricePerSeat"
+            value={rideData.pricePerSeat}
             onChange={handleChange}
             required
           />
