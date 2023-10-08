@@ -14,6 +14,7 @@ import FAQ from "./components/FAQ";
 import About from "./components/About";
 import HowItWorks from "./components/HowItWorks";
 import LoginRegister from "./components/LoginRegister";
+import UserProfile from "./components/UserProfile";
 
 const MainRoutes = () => {
   return (
@@ -31,7 +32,7 @@ const MainRoutes = () => {
         path="/register-as-driver-form"
         element={<RegisterAsDriverForm />}
       />
-      <Route path="/feedback" element={<UserFeedback />} />
+      <Route path="/user-profile" element={<UserProfile />} />
       <Route path="/contact" element={<ContactForm />} />
       <Route path="/faq" element={<FAQ />} />
       <Route path="/about" element={<About />} />
