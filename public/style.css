@@ -590,12 +590,13 @@ h2 {
 
 /* LoginRegister */
 .login-register {
-  width: 300px;
-  background-color: #fff;
+  font-family: Arial, sans-serif;
+  width: 400px;
+  margin: 0 auto;
   padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
-  margin: 40px auto;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  background-color: #ffffff;
 }
 
 .toggle-buttons {
@@ -607,39 +608,53 @@ h2 {
 .toggle-buttons button {
   padding: 10px 20px;
   border: none;
-  background-color: transparent;
+  background-color: #f4f4f4;
   cursor: pointer;
-  transition: color 0.3s, border-bottom 0.3s;
-  border-bottom: 2px solid transparent;
+  transition: background-color 0.3s ease;
 }
 
 .toggle-buttons button.active {
-  color: #501214; /* Maroon */
-  border-bottom: 2px solid #501214; /* Maroon */
+  background-color: #007bff;
+  color: #ffffff;
+}
+
+.toggle-buttons button:not(.active):hover {
+  background-color: #e1e1e1;
+}
+
+.login-form,
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .login-form input,
 .register-form input {
-  width: 100%;
   padding: 10px;
-  margin-bottom: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  outline: none;
+}
+
+.login-form input:focus,
+.register-form input:focus {
+  border-color: #007bff;
 }
 
 .submit-btn {
-  width: 100%;
-  padding: 10px 15px;
-  background-color: #501214; /* Maroon */
-  color: #fff;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #ffffff;
   border: none;
-  border-radius: 5px;
+  border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s ease;
 }
 
 .submit-btn:hover {
-  background-color: #3a0d0a;
+  background-color: #0056b3;
 }
 
 /* FAQ */
