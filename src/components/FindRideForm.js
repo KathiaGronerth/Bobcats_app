@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 
 const FindRideForm = () => {
-  const [startLocation, setStartLocation] = useState("");
-  const [destination, setDestination] = useState("");
-  const [dateTime, setDateTime] = useState("");
+  // Using dummy data for the fields as initial values
+  const [startLocation, setStartLocation] = useState("New York City");
+  const [destination, setDestination] = useState("Boston");
+  const [dateTime, setDateTime] = useState("2023-11-01T12:00");
+  const [specialNeeds, setSpecialNeeds] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // Handle the submission logic here (e.g., call an API or update state)
-    console.log({ startLocation, destination, dateTime });
+    console.log({ startLocation, destination, dateTime, specialNeeds });
   };
 
   return (
@@ -39,6 +41,15 @@ const FindRideForm = () => {
             type="datetime-local"
             value={dateTime}
             onChange={(e) => setDateTime(e.target.value)}
+          />
+        </div>
+        <div className="input-group">
+          <label>Special Needs:</label>
+          <textarea
+            rows="4"
+            value={specialNeeds}
+            onChange={(e) => setSpecialNeeds(e.target.value)}
+            placeholder="Specify any special needs or requirements..."
           />
         </div>
         <button type="submit">Search Rides</button>
