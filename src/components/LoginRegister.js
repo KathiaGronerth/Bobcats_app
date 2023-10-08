@@ -14,15 +14,44 @@ const LoginRegister = () => {
   const [username, setUsername] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [photo, setPhoto] = useState(null);
 
   const handleLogin = (e) => {
     e.preventDefault();
-    // Logic to authenticate the user goes here.
+
+    // Dummy data for login
+    const dummyEmail = "admin@example.com";
+    const dummyPassword = "admin123";
+
+    if (email === dummyEmail && password === dummyPassword) {
+      alert("Logged in successfully!");
+    } else {
+      alert("Invalid credentials!");
+    }
   };
 
   const handleRegister = (e) => {
     e.preventDefault();
-    // Logic to register the user goes here.
+
+    // Dummy registration logic
+    if (
+      fullName &&
+      registerEmail &&
+      username &&
+      registerPassword &&
+      confirmPassword
+    ) {
+      if (registerPassword !== confirmPassword) {
+        alert("Passwords do not match!");
+      } else {
+        alert("Registration successful!");
+        if (photo) {
+          alert(`Uploaded photo: ${photo.name}`);
+        }
+      }
+    } else {
+      alert("Please fill in all registration fields!");
+    }
   };
 
   return (
@@ -98,6 +127,11 @@ const LoginRegister = () => {
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
+          />
+          <input
+            type="file"
+            accept=".jpg"
+            onChange={(e) => setPhoto(e.target.files[0])}
           />
           <button type="submit" className="submit-btn">
             Register
