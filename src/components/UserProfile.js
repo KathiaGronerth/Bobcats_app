@@ -1,6 +1,35 @@
 import React from "react";
 
-const UserProfile = ({ user }) => {
+// Dummy user data
+const dummyUser = {
+  name: "John Doe",
+  rides: [
+    {
+      source: "New York",
+      destination: "Washington DC",
+      date: "2023-10-08",
+      time: "14:00",
+    },
+    {
+      source: "Los Angeles",
+      destination: "San Francisco",
+      date: "2023-10-10",
+      time: "09:00",
+    },
+  ],
+  reviews: [
+    {
+      reviewer: "Alice",
+      comment: "Great ride! John is a safe driver.",
+    },
+    {
+      reviewer: "Bob",
+      comment: "Had a pleasant trip with John. Would recommend!",
+    },
+  ],
+};
+
+const UserProfile = ({ user = dummyUser }) => {
   return (
     <div className="user-profile">
       <div className="profile-header">
