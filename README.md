@@ -10,4 +10,6 @@
 
 #npm install css-loader style-loader --save-dev
 
+npm install react-datepicker
+
 #npm run build
