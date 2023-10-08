@@ -1,12 +1,10 @@
 import React, { useState } from "react";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 
 const CreateRide = () => {
   const [rideData, setRideData] = useState({
     source: "",
     destination: "",
-    date: new Date(),
+    date: "",
     time: "",
     seats: "",
     pricePerSeat: "",
@@ -50,23 +48,12 @@ const CreateRide = () => {
             required
           />
         </div>
-        <div>
-          <label>Date:</label>
-          <DatePicker
-            selected={rideData.date}
-            onChange={handleDateChange}
-            dateFormat="MMMM d, yyyy"
-            isClearable
-          />
-        </div>
-        <div>
-          <label>Time:</label>
+        <div className="input-group">
+          <label>Date and Time:</label>
           <input
-            type="time"
-            name="time"
-            value={rideData.time}
-            onChange={handleChange}
-            required
+            type="datetime-local"
+            value={rideData.date}
+            onChange={(e) => handleDateChange(e.target.value)}
           />
         </div>
         <div>
