@@ -1,7 +1,6 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Home from "./components/Home";
-import Register from "./components/Register";
 import CarProfile from "./components/CarProfile";
 import CreateRide from "./components/CreateRide";
 import SearchRides from "./components/SearchRides";
@@ -21,7 +20,6 @@ const MainRoutes = () => {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<LoginRegister />} />
-      <Route path="/register" element={<Register />} />
       <Route path="/car-profile" element={<CarProfile />} />
       <Route path="/create-ride" element={<CreateRide />} />
       <Route path="/search-rides" element={<SearchRides />} />
