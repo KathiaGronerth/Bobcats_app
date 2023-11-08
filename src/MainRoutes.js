@@ -15,6 +15,7 @@ import About from "./components/About";
 import HowItWorks from "./components/HowItWorks";
 import LoginRegister from "./components/LoginRegister";
 import UserProfile from "./components/UserProfile";
+import Calendar from "./components/calendar/Calendar";
 
 const MainRoutes = () => {
   return (
@@ -37,6 +38,7 @@ const MainRoutes = () => {
       <Route path="/faq" element={<FAQ />} />
       <Route path="/about" element={<About />} />
       <Route path="/how-it-works" element={<HowItWorks />} />
+      <Route path="/calendar" element={<Calendar />} />
       {/* You can also add a 404 route here if you like */}
       {/* <Route path="*" element={<NotFound />} /> */}
     </Routes>
