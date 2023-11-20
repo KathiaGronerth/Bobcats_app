@@ -1,12 +1,16 @@
 const Sequelize = require("sequelize");
-const db = require("../db"); // Assuming you have a db.js file for database connection
+const db = require("../db");
 
 const Car = db.define("Car", {
+  model: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
   make: {
     type: Sequelize.STRING,
     allowNull: false,
   },
-  model: {
+  color: {
     type: Sequelize.STRING,
     allowNull: false,
   },
@@ -17,6 +21,18 @@ const Car = db.define("Car", {
       min: 1886, // The year the first car was invented
       max: new Date().getFullYear(), // Current year
     },
+  },
+  licensePlate: {
+    type: Sequelize.STRING, // Changed to STRING
+    allowNull: true,
+  },
+  createdAt: {
+    type: Sequelize.DATE,
+    defaultValue: Sequelize.NOW,
+  },
+  updatedAt: {
+    type: Sequelize.DATE,
+    defaultValue: Sequelize.NOW,
   },
 });
 
