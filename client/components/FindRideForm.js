@@ -1,13 +1,15 @@
 import React, { useState } from "react";
+import RideListings from "./RideListings";
 
-const FindRideForm = () => {
+const FindRideForm = ({ onFilterChange, rides, filterData }) => {
+  const [listing, setListing] = useState(false);
   const [formData, setFormData] = useState({
     startLocationLatitude: "",
     startLocationLongitude: "",
     endLocationLatitude: "",
     endLocationLongitude: "",
-    date: "", 
-    time: "", 
+    date: "", // Initially empty
+    time: "", // Initially empty
     specialNeeds: "",
   });
 
@@ -17,7 +19,8 @@ const FindRideForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
+    setListing(true);
+    onFilterChange(formData); // Call the passed callback function with form data
   };
 
   return (
@@ -93,6 +96,7 @@ const FindRideForm = () => {
         </div>
         <button type="submit">Search Rides</button>
       </form>
+      {listing && <RideListings rides={rides} filterData={filterData} />}
     </div>
   );
 };
