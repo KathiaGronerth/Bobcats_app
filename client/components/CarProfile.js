@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { createCar } from "../store/carsReducer";
 
 const CarProfile = () => {
   const [carData, setCarData] = useState({
@@ -6,6 +8,7 @@ const CarProfile = () => {
     model: "",
     year: "",
   });
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     setCarData({ ...carData, [e.target.name]: e.target.value });
@@ -13,7 +16,8 @@ const CarProfile = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Save car profile logic goes here
+    dispatch(createCar(carData)); // Dispatch the action to create a new car
+    // Optionally, reset the form or navigate away after submission
   };
 
   return (
