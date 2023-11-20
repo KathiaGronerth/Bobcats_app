@@ -2,28 +2,39 @@ const Sequelize = require("sequelize");
 const db = require("../db"); // Make sure you have a db.js for your database connection
 
 const Ride = db.define("Ride", {
-  source: {
-    type: Sequelize.STRING,
-    allowNull: false,
+  startLocationLatitude: {
+    type: Sequelize.FLOAT,
   },
-  destination: {
-    type: Sequelize.STRING,
-    allowNull: false,
+  startLocationLongitude: {
+    type: Sequelize.FLOAT,
+  },
+  endLocationLatitude: {
+    type: Sequelize.FLOAT,
+  },
+  endLocationLongitude: {
+    type: Sequelize.FLOAT,
   },
   date: {
-    type: Sequelize.DATE,
-    allowNull: false,
+    type: Sequelize.DATEONLY,
   },
-  seats: {
+  time: {
+    type: Sequelize.TIME,
+  },
+  availableSeats: {
     type: Sequelize.INTEGER,
-    allowNull: false,
     validate: {
       min: 1,
     },
   },
   pricePerSeat: {
     type: Sequelize.DECIMAL(10, 2),
-    allowNull: false,
+  },
+  createdAt: {
+    type: Sequelize.DATE,
+    defaultValue: Sequelize.NOW,
+  },
+  driverId: {
+    type: Sequelize.INTEGER,
   },
 });
 
