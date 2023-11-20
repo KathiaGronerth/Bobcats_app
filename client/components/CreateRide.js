@@ -4,12 +4,15 @@ import { createRide } from "../store/ridesReducer";
 
 const CreateRide = () => {
   const [rideData, setRideData] = useState({
-    source: "",
-    destination: "",
+    startLocationLatitude: "",
+    startLocationLongitude: "",
+    endLocationLatitude: "",
+    endLocationLongitude: "",
     date: "",
-    time: "",
-    seats: "",
+    dateTime: "",
+    availableSeats: "",
     pricePerSeat: "",
+    // Add driverId if needed
   });
 
   const dispatch = useDispatch();
@@ -18,36 +21,65 @@ const CreateRide = () => {
     setRideData({ ...rideData, [e.target.name]: e.target.value });
   };
 
-  const handleDateChange = (date) => {
-    setRideData({ ...rideData, date });
+  const handleDateChange = (e) => {
+    setRideData({ ...rideData, dateTime: e.target.value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(createRide(rideData)); // Dispatch the action to create a new ride
-    console.log(rideData); // Optionally, you can remove this log after confirming it works
+
+    if (!rideData.dateTime) {
+      console.error("Date and time are required");
+      return; // Optionally, show an error message to the user
+    }
+
+    const [date, time] = rideData.dateTime.split("T");
+    const newRideData = { ...rideData, date, time };
+
+    dispatch(createRide(newRideData)); // Dispatch the action to create a new ride
   };
 
   return (
     <div>
       <h2>Create a Ride</h2>
       <form onSubmit={handleSubmit}>
+        {/* Additional input fields for latitude and longitude */}
         <div>
-          <label>Source:</label>
+          <label>Start Location Latitude:</label>
           <input
-            type="text"
-            name="source"
-            value={rideData.source}
+            type="number"
+            name="startLocationLatitude"
+            value={rideData.startLocationLatitude}
             onChange={handleChange}
             required
           />
         </div>
         <div>
-          <label>Destination:</label>
+          <label>Start Location Longitude:</label>
           <input
-            type="text"
-            name="destination"
-            value={rideData.destination}
+            type="number"
+            name="startLocationLongitude"
+            value={rideData.startLocationLongitude}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div>
+          <label>End Location Latitude:</label>
+          <input
+            type="number"
+            name="endLocationLatitude"
+            value={rideData.endLocationLatitude}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div>
+          <label>End Location Longitude:</label>
+          <input
+            type="number"
+            name="endLocationLongitude"
+            value={rideData.endLocationLongitude}
             onChange={handleChange}
             required
           />
@@ -56,16 +88,17 @@ const CreateRide = () => {
           <label>Date and Time:</label>
           <input
             type="datetime-local"
-            value={rideData.date}
-            onChange={(e) => handleDateChange(e.target.value)}
+            name="dateTime"
+            value={rideData.dateTime}
+            onChange={handleChange}
           />
         </div>
         <div>
           <label>Available Seats:</label>
           <input
             type="number"
-            name="seats"
-            value={rideData.seats}
+            name="availableSeats"
+            value={rideData.availableSeats}
             onChange={handleChange}
             required
           />
@@ -80,6 +113,7 @@ const CreateRide = () => {
             required
           />
         </div>
+        {/* Remaining fields stay the same */}
         <button type="submit">Create</button>
       </form>
     </div>
