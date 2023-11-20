@@ -6,8 +6,8 @@ const FindRideForm = () => {
     startLocationLongitude: "",
     endLocationLatitude: "",
     endLocationLongitude: "",
-    date: "2023-11-01", // Default date
-    time: "12:00", // Default time
+    date: "", 
+    time: "", 
     specialNeeds: "",
   });
 
@@ -17,7 +17,6 @@ const FindRideForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle the submission logic here (e.g., call an API or update state)
     console.log(formData);
   };
 
