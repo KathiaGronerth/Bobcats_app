@@ -1,29 +1,46 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import RideCard from "./RideCard";
 
-const RideListings = ({ rides }) => {
-  const [filteredRides, setFilteredRides] = useState(rides);
+const RideListings = ({ rides, filterData }) => {
+  const [filteredRides, setFilteredRides] = useState([]);
 
-  const handleSort = (method) => {
-    let sortedRides = [...filteredRides];
-    if (method === "date") {
-      sortedRides.sort((a, b) => new Date(a.date) - new Date(b.date));
-    }
-    // Add other sorting methods as needed
-    setFilteredRides(sortedRides);
-  };
+  useEffect(() => {
+    // Filter logic
+    const filtered = rides.filter((ride) => {
+      // Check for each filter criteria, return true if all match
+      return (
+        (!filterData.startLocationLatitude ||
+          ride.startLocationLatitude ===
+            parseFloat(filterData.startLocationLatitude)) &&
+        (!filterData.startLocationLongitude ||
+          ride.startLocationLongitude ===
+            parseFloat(filterData.startLocationLongitude)) &&
+        (!filterData.endLocationLatitude ||
+          ride.endLocationLatitude ===
+            parseFloat(filterData.endLocationLatitude)) &&
+        (!filterData.endLocationLongitude ||
+          ride.endLocationLongitude ===
+            parseFloat(filterData.endLocationLongitude)) &&
+        (!filterData.date || ride.date === filterData.date) &&
+        (!filterData.time || ride.time === filterData.time)
+        // Add any additional filter criteria here
+      );
+    });
+
+    setFilteredRides(filtered);
+  }, [rides, filterData]);
 
   return (
     <div className="ride-listings">
       <h2>Available Rides</h2>
-      <div className="ride-filters">
-        <button onClick={() => handleSort("date")}>Sort by Date</button>
-        {/* Add other filter buttons as needed */}
-      </div>
       <div className="ride-cards">
-        {filteredRides.map((ride, index) => (
-          <RideCard key={index} ride={ride} />
-        ))}
+        {filteredRides.length > 0 ? (
+          filteredRides.map((ride, index) => (
+            <RideCard key={index} ride={ride} />
+          ))
+        ) : (
+          <p>No rides matching the criteria.</p>
+        )}
       </div>
     </div>
   );
