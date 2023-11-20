@@ -6,8 +6,11 @@ const CarProfile = () => {
   const [carData, setCarData] = useState({
     make: "",
     model: "",
+    color: "", // Added color field
     year: "",
+    licensePlate: "", // Added license plate field
   });
+
   const dispatch = useDispatch();
 
   const handleChange = (e) => {
@@ -17,7 +20,6 @@ const CarProfile = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(createCar(carData)); // Dispatch the action to create a new car
-    // Optionally, reset the form or navigate away after submission
   };
 
   return (
@@ -45,6 +47,16 @@ const CarProfile = () => {
           />
         </div>
         <div>
+          <label>Color:</label>
+          <input
+            type="text"
+            name="color"
+            value={carData.color}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div>
           <label>Year:</label>
           <input
             type="number"
@@ -52,6 +64,15 @@ const CarProfile = () => {
             value={carData.year}
             onChange={handleChange}
             required
+          />
+        </div>
+        <div>
+          <label>License Plate:</label>
+          <input
+            type="text"
+            name="licensePlate"
+            value={carData.licensePlate}
+            onChange={handleChange}
           />
         </div>
         <button type="submit">Save</button>
