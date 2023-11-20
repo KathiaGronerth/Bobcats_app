@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { createRide } from "../store/ridesReducer";
 
 const CreateRide = () => {
   const [rideData, setRideData] = useState({
@@ -10,6 +12,8 @@ const CreateRide = () => {
     pricePerSeat: "",
   });
 
+  const dispatch = useDispatch();
+
   const handleChange = (e) => {
     setRideData({ ...rideData, [e.target.name]: e.target.value });
   };
@@ -20,8 +24,8 @@ const CreateRide = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Save ride logic goes here
-    console.log(rideData);
+    dispatch(createRide(rideData)); // Dispatch the action to create a new ride
+    console.log(rideData); // Optionally, you can remove this log after confirming it works
   };
 
   return (
