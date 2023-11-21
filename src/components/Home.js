@@ -1,6 +1,9 @@
 import React from "react";
 import Footer from "./Footer";
 import FindRideForm from "./FindRideForm";
+import Search from "./ride/Search";
+import backgroundImage from "../../assets/images/background1.png";
+import { SiGooglemaps } from "react-icons/si";
 
 const Home = () => {
   return (
@@ -13,8 +16,24 @@ const Home = () => {
         </p>
         <button className="cta-btn">Join Us Today!</button>
       </section>
+      <div className="tag">
+        <img
+          src={backgroundImage}
+          alt="Bobcat Carpool Logo"
+          style={{ width: "100%", height: "auto" }}
+        />
+        <h2 className="tagline">
+          Sharing Journeys, Creating Connections{" "}
+          <SiGooglemaps
+            style={{ width: "25px", height: "auto", color: "#98ed64" }}
+          />
+        </h2>
+        <div className="tagline1">Request a ride, hop in, and go.</div>
+      </div>
+
+      <Search />
       <section className="stats">
-        <h2>Our Impact</h2>
+        <h2 className="title">Our Impact</h2>
         <div className="statistics">
           <div className="stat-item">
             <strong>15,000+</strong>
@@ -30,9 +49,8 @@ const Home = () => {
           </div>
         </div>
       </section>
-      <FindRideForm />
       <section className="testimonials">
-        <h2>What Our Users Say</h2>
+        <h2 className="title">What Our Users Say</h2>
         <div className="testimonial-card">
           <p>"The best ride-sharing experience I've had!"</p>
           <cite>- Jane Doe, Student</cite>

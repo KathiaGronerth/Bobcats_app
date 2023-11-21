@@ -16,7 +16,8 @@ import HowItWorks from "./components/HowItWorks";
 import LoginRegister from "./components/LoginRegister";
 import UserProfile from "./components/UserProfile";
 import Calendar from "./components/calendar/Calendar";
-
+import Search from "./components/ride/Search";
+import RidesPage from "./components/ride/RidesPage";
 const MainRoutes = () => {
   return (
     <Routes>
@@ -39,6 +40,9 @@ const MainRoutes = () => {
       <Route path="/about" element={<About />} />
       <Route path="/how-it-works" element={<HowItWorks />} />
       <Route path="/calendar" element={<Calendar />} />
+      <Route path="/search" element={<Search />} />
+      <Route path="/rides" element={<RidesPage />} />
+
       {/* You can also add a 404 route here if you like */}
       {/* <Route path="*" element={<NotFound />} /> */}
     </Routes>

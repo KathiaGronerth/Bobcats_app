@@ -1,10 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import logoImage from "../assets/images/logo.png";
+import { FaUserAlt } from "react-icons/fa";
 
 const NavBar = () => {
   return (
     <nav className="navbar">
       <div className="nav-container">
+        <div className="nav-logo-img">
+          <img
+            src={logoImage}
+            alt="Bobcat Carpool Logo"
+            style={{ width: "55px", height: "auto" }}
+          />
+        </div>
         <Link to="/" className="nav-logo">
           Bobcat Carpool
         </Link>
@@ -27,7 +36,7 @@ const NavBar = () => {
         </div>
         <div className="nav-user">
           <Link to="/login" className="nav-item user-profile-icon">
-            🚹
+            <FaUserAlt />
           </Link>
         </div>
       </div>
