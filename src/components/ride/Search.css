@@ -1,0 +1,100 @@
+/* Search.css */
+.search-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff;
+  font-family: 'Poppins', sans-serif;
+  padding: 1px;
+}
+
+.card {
+  display: flex; /* Make it a flex container */
+  flex-direction: row;
+  border-radius: 12px;
+  width: 90%;
+  margin-top: 10px; /* Add margin to separate from the tagline */
+  background-color: #e7f7fe;
+  box-shadow: #C0C0C0;
+}
+
+.card-content {
+  display: flex;
+  justify-content: space-between; /* Add this line */
+  padding: 20px;
+}
+
+
+.location-search-input-container {
+  width: 250px;
+  align-items: center;  /* Remove quotes around center */
+  justify-content: center;
+  margin-right: 35px;
+  
+ 
+}
+
+.location-search-input-container input {
+  border: 2px solid #C0C0C0;
+  border-radius: 4px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.location-search-input {
+  padding: 10px;
+  font-size: 16px;
+    
+}
+
+.autocomplete-dropdown-container {
+  position: absolute;
+  background-color: #fff;
+  border-top: none;
+  z-index: 1000;
+  border-radius: 0 0 8px 8px;
+  padding: 5px;
+}
+
+.suggestion-item {
+  padding: 10px;
+  cursor: pointer;
+  color: #054652;
+}
+
+.suggestion-item--active {
+  background-color: #008ec2;
+  color: #fff;
+  cursor: pointer;
+}
+
+.search-button {
+  background-color: #00aff5;
+  color: #fff;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  width: 100px;
+  margin-bottom: 10px;
+  transition: background-color 0.3s;
+
+}
+
+.search-button:hover {
+  background-color: #054957;
+}
+
+
+.input-field {
+  margin-right: 10px;
+  
+}
+
+.input-field input {
+  width: 90%;
+  padding: 10px;
+  border: 2px solid #C0C0C0;
+  border-radius: 4px;
+  font-family: 'Poppins', sans-serif;
+}

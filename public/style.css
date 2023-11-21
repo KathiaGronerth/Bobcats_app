@@ -3,12 +3,13 @@ body {
   /* 
   padding: 0;
 */
-  font-family: "Arial", sans-serif;
+  font-family: 'Poppins', sans-serif;
   display: flex;
   flex-direction: column;
   min-height: 100vh; /* Full viewport height */
   margin: 0;
   background-color: #f4f4f4;
+  width: auto;
 }
 
 .content-wrapper {
@@ -18,29 +19,49 @@ body {
 .container {
   max-width: 800px;
   margin: 0 auto;
-  padding: 20px;
+ 
 }
 
-button {
-  background-color: #007bff;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-top: 10px;
+.title {
+  color: #00aff5;
+  font-size: 18px;
 }
 
 button:hover {
-  background-color: #0056b3;
+  background-color: #054957;
+}
+
+.tag {
+  background-color: white;
+}
+
+.tagline {
+  color: #054652;
+  font-size: 20px;
+  font-style: italic;
+  margin: 10px;
+  background-color: #fff;
+}
+
+.tagline1 {
+  color: #00aff5;
+  font-size: 16px;
+  text-align: center;
+  
 }
 
 /* NavBar Styles */
 .navbar {
-  background-color: #501214; /* Maroon inspired by Texas State University */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: #fff; /* Maroon inspired by Texas State University */
   padding: 10px 0;
-  font-family: Arial, sans-serif;
+  font-family: 'Poppins', sans-serif;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  
 }
 
 .nav-container {
@@ -53,11 +74,13 @@ button:hover {
 }
 
 .nav-logo {
-  color: #fecb00; /* Gold inspired by Texas State University */
+  color: #054652; /* Gold inspired by Texas State University */
   text-decoration: none;
-  font-size: 24px;
+  font-size: 26px;
   font-weight: bold;
+  margin-left: 10px;
 }
+
 
 .nav-search {
   flex: 1;
@@ -79,21 +102,21 @@ button:hover {
 }
 
 .nav-item {
-  color: white;
+  color: #00aff5;
   text-decoration: none;
   padding: 10px 15px;
   border-radius: 4px;
   transition: background-color 0.3s ease;
+  font-weight: bold;
 }
 
 .nav-item:hover {
-  background-color: #fecb00; /* Gold hover effect */
-  color: #501214; /* Maroon text on hover */
+  color: #008ec2; /* Maroon text on hover */
 }
 
 .user-profile-icon {
   font-size: 24px;
-  background-color: #fecb00; /* Gold background */
+  background-color: 	#e7f7fe; /* Gold background */
   border-radius: 50%;
   padding: 5px 10px;
 }
@@ -212,7 +235,7 @@ textarea {
 }
 
 h2 {
-  color: #501214; /* Maroon */
+  color: #fff; 
   margin-bottom: 10px;
 }
 
@@ -270,30 +293,32 @@ p {
 }
 
 .hero {
-  background-color: #ac9155; /* Maroon */
-  color: #501214; /* Gold */
+  background-color: #e7f7fe; /* Maroon */
+  color: #00aff5; /* Gold */
   padding: 100px 0;
   text-align: center;
 }
 
 .cta-btn {
-  background-color: #501214; /* Gold */
-  color: #ac9155; /* Maroon */
+  background-color: #00aff5; /* Gold */
+  color: #fff; /* Maroon */
   padding: 10px 20px;
-  border-radius: 5px;
+  border-radius: 20px;
   border: none;
   cursor: pointer;
   transition: background-color 0.3s;
+ 
 }
 
 .cta-btn:hover {
-  background-color: #d3a000;
+  background-color: #008ec2;
 }
 
 .stats {
   background-color: #fff;
   padding: 50px 0;
   text-align: center;
+  color: #054957;
 }
 
 .statistics {
@@ -310,13 +335,14 @@ p {
 .stat-item strong {
   display: block;
   font-size: 24px;
-  color: #501214; /* Maroon */
+  color: #054957; /* Maroon */
 }
 
 .testimonials {
   background-color: #f5f5f5;
   padding: 50px 0;
   text-align: center;
+  color: #054957;
 }
 
 .testimonial-card {
@@ -329,9 +355,9 @@ p {
 
 /* Footer */
 .footer {
-  background-color: #501214; /* Maroon */
+  background-color: #054957; /* Maroon */
   padding: 20px 0;
-  font-family: Arial, sans-serif;
+  font-family: 'Poppins', sans-serif;
   width: 100%; /* Ensure it spans the full width */
 }
 
@@ -345,7 +371,7 @@ p {
 }
 
 .footer-logo {
-  color: #fecb00; /* Gold */
+  color: #fff; /* Gold */
   text-decoration: none;
   font-size: 20px;
   font-weight: bold;
@@ -501,6 +527,9 @@ button:hover {
 }
 
 /* PostRideForm */
+.post-ride-main-container {
+  padding-top: 60px;
+}
 .post-ride-form-wrapper {
   background-color: #fff;
   padding: 40px;
@@ -510,10 +539,11 @@ button:hover {
   margin: 40px auto;
 }
 
-.post-ride-form h2 {
-  color: #501214; /* Maroon */
+.post-ride-form-wrapper h2 {
+  color: #054957; 
   text-align: center;
   margin-bottom: 20px;
+  font-size: 24px;
 }
 
 .post-ride-form input {
@@ -534,7 +564,7 @@ button:hover {
   transition: background-color 0.3s;
 }
 
-.post-ride-form input[type="submit"]:hover {
+.post-ride-form-wrapper input[type="submit"]:hover {
   background-color: #3a0d0a;
 }
 
@@ -555,7 +585,7 @@ button:hover {
 
 h1,
 h2 {
-  color: #501214; /* Maroon */
+  color: #054957; /* Maroon */
   margin-bottom: 10px;
 }
 
@@ -677,13 +707,17 @@ h2 {
 }
 
 /* FAQ */
+.faq-container {
+  padding-top: 80px;
+}
 .faq {
   padding: 20px;
   background-color: #fff;
 }
 
 .faq h2 {
-  color: #501214; /* Maroon */
+  color: #054957; 
+  font-size: 24px;
 }
 
 .faq-item {
@@ -692,37 +726,63 @@ h2 {
 }
 
 .faq-item h3 {
-  color: #501214; /* Maroon */
+  color: #054957; /* Maroon */
 }
 
 /* ContactForm */
 .contact-form {
-  padding: 20px;
-  background-color: #fff;
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  flex-direction: column;
+  padding-top: 100px;
+  background-color: #e7f7fe;
+  height: auto;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 10px;
+ 
 }
 
 .contact-form h2 {
-  color: #501214; /* Maroon */
+  color: #054957; 
+  font-size: 24px;
+  margin-bottom: 20px;
+ 
 }
+
+.contact-form .card-form {
+  border: 1.5px solid #ccc;
+  width: 70%; /* Set the width of the form if needed */
+  padding: 30px;
+  margin-bottom: 15px;
+}
+
+
 
 .contact-form input,
 .contact-form textarea {
   width: 100%;
-  margin-bottom: 10px;
+  margin-bottom: 18px;
   padding: 10px;
   border: 1px solid #ccc;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
 }
 
 .contact-form button {
-  background-color: #501214; /* Maroon */
+  font-family: 'Poppins', sans-serif;
+  background-color: #00aff5; 
   color: #fff;
   padding: 10px 15px;
   border: none;
+  border-radius: 25px;
   cursor: pointer;
 }
 
 .contact-form button:hover {
-  background-color: #3a0d0a;
+  background-color: #008ec2;
 }
 
 /* About */

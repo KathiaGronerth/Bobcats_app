@@ -1,5 +1,5 @@
 import React from "react";
-
+import { FcFaq } from "react-icons/fc";
 const FAQ = () => {
   const questions = [
     {
@@ -16,14 +16,24 @@ const FAQ = () => {
   ];
 
   return (
-    <div className="faq">
-      <h2>Frequently Asked Questions</h2>
-      {questions.map((item, index) => (
-        <div key={index} className="faq-item">
-          <h3>{item.question}</h3>
-          <p>{item.answer}</p>
-        </div>
-      ))}
+    <div className="faq-container">
+      <div className="faq">
+        <h2>
+          Frequently Asked Questions{" "}
+          <FcFaq
+            style={{
+              width: "30px",
+              height: "auto",
+            }}
+          />
+        </h2>
+        {questions.map((item, index) => (
+          <div key={index} className="faq-item">
+            <h3>{item.question}</h3>
+            <p>{item.answer}</p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
