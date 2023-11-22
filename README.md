@@ -11,3 +11,5 @@
 ## npm install css-loader style-loader --save-dev
 
 ## npm run build
+
+## npm run start
