@@ -73,9 +73,11 @@ const ChatComponent = ({ userId }) => {
   };
 
   return (
-    <div className="chat-container">
-      <MessageList messages={messages} currentUserId={userId} />
-      <ChatInput onSend={sendMessage} />
+     <div className="chat">
+      <div className="chat-container">
+        <MessageList messages={messages} currentUserId={userId} />
+        <ChatInput onSend={sendMessage} />
+      </div>
     </div>
   );
 };
