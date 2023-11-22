@@ -19,6 +19,7 @@ import Calendar from "./components/calendar/Calendar";
 import Search from "./components/ride/Search";
 import RidesPage from "./components/ride/RidesPage";
 import Register from "./components/Register";
+import RideOptionsPage from "./components/rideoption/RideOptionsPage";
 const MainRoutes = () => {
   return (
     <Routes>
@@ -44,6 +45,7 @@ const MainRoutes = () => {
       <Route path="/search" element={<Search />} />
       <Route path="/rides" element={<RidesPage />} />
       <Route path="/register" element={<Register />} />
+      <Route path="/rideoption" element={<RideOptionsPage />} />
 
       {/* You can also add a 404 route here if you like */}
       {/* <Route path="*" element={<NotFound />} /> */}

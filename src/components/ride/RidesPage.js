@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./RidePage.css";
-import config from "../../config.js";
+import config from "../config.js";
 import Search from "./Search.js";
 import { MdAccessTime } from "react-icons/md";
 import { MdOutlineAirlineSeatReclineNormal } from "react-icons/md";

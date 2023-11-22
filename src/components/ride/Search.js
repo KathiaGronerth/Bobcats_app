@@ -1,40 +1,37 @@
 // Search.jsx
 import React, { useEffect, useState } from "react";
-import LocationSearchInput from "./LocationSearchInput";
-import DestinationSearchInput from "./DestinationSearchInput";
-import "./Search.css"; // Import your stylesheet
+import PlacesAutocomplete, {
+  geocodeByAddress,
+  getLatLng,
+} from "react-places-autocomplete";
 import { useNavigate } from "react-router-dom";
-
-import config from "../../config.js";
+import useScript from "../useScript.js";
+import config from "../config.js";
+import "./Search.css";
 
 const Search = () => {
-  const [scriptLoaded, setScriptLoaded] = useState(false);
   const [dateTime, setDateTime] = useState("2023-11-01T12:00");
-  const [specialNeeds, setSpecialNeeds] = useState("");
-  const [passengerCount, setPassengerCount] = useState(1); // Initialize with default value
+  const [passengerCount, setPassengerCount] = useState(1);
+  const [source, setSource] = useState("");
+  const [destination, setDestination] = useState("");
   const navigate = useNavigate();
   const apiKey = config.googleMapsApiKey;
 
+  // Use the custom useScript hook
+  const [scriptLoaded, scriptError] = useScript(
+    `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places`
+  );
+
   useEffect(() => {
-    const script = document.createElement("script");
-    script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places`;
-    script.async = true;
-    script.defer = true;
-
-    script.addEventListener("load", () => {
-      setScriptLoaded(true);
-    });
-
-    document.head.appendChild(script);
-
-    return () => {
-      document.head.removeChild(script);
-    };
-  }, []);
-
-  if (!scriptLoaded) {
-    return <div>Loading...</div>;
-  }
+    // Check if the script has been loaded successfully
+    if (scriptLoaded) {
+      console.log("Google Maps API script has been loaded");
+    }
+    // Handle any errors if the script fails to load
+    if (scriptError) {
+      console.error("Error loading Google Maps API script", scriptError);
+    }
+  }, [scriptLoaded, scriptError]);
 
   const handleSearchClick = () => {
     // Add logic for handling the search (e.g., fetching available rides)
@@ -42,14 +39,121 @@ const Search = () => {
     navigate("/rides");
   };
 
+  const handleSelectSource = async (selected) => {
+    try {
+      const results = await geocodeByAddress(selected);
+      const latLng = await getLatLng(results[0]);
+      console.log("Selected address:", selected);
+      console.log("Selected coordinates:", latLng);
+
+      // Set the selected address to the input field
+      setSource(selected);
+
+      // Focus on the input field after selection
+      document.activeElement.blur();
+    } catch (error) {
+      console.error("Error selecting place", error);
+    }
+  };
+
+  const handleSelectDestination = async (selected) => {
+    try {
+      const results = await geocodeByAddress(selected);
+      const latLng = await getLatLng(results[0]);
+      console.log("Selected address:", selected);
+      console.log("Selected coordinates:", latLng);
+
+      // Set the selected address to the input field
+      setDestination(selected);
+
+      // Focus on the input field after selection
+      document.activeElement.blur();
+    } catch (error) {
+      console.error("Error selecting place", error);
+    }
+  };
+
+  if (!scriptLoaded) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div className="search-container">
       <div className="card">
         <div className="card-content">
-          <LocationSearchInput />
-          <div>
-            <DestinationSearchInput />
+          <div className="location-search-input-container">
+            <PlacesAutocomplete
+              value={source}
+              onChange={setSource}
+              onSelect={handleSelectSource}
+            >
+              {({
+                getInputProps,
+                getSuggestionItemProps,
+                suggestions,
+                loading,
+              }) => (
+                <div>
+                  <input
+                    {...getInputProps({
+                      placeholder: "Leaving from...",
+                      className: "location-search-input",
+                      required: true,
+                    })}
+                  />
+                  <div className="autocomplete-dropdown-container">
+                    {loading && <div>Loading...</div>}
+                    {suggestions.map((suggestion) => (
+                      <div
+                        {...getSuggestionItemProps(suggestion)}
+                        key={suggestion.placeId}
+                        className="suggestion-item"
+                      >
+                        {suggestion.description}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </PlacesAutocomplete>
           </div>
+          <div className="location-search-input-container">
+            <PlacesAutocomplete
+              value={destination}
+              onChange={setDestination}
+              onSelect={handleSelectDestination}
+            >
+              {({
+                getInputProps,
+                getSuggestionItemProps,
+                suggestions,
+                loading,
+              }) => (
+                <div>
+                  <input
+                    {...getInputProps({
+                      placeholder: "Going to...",
+                      className: "location-search-input",
+                      required: true,
+                    })}
+                  />
+                  <div className="autocomplete-dropdown-container">
+                    {loading && <div>Loading...</div>}
+                    {suggestions.map((suggestion) => (
+                      <div
+                        {...getSuggestionItemProps(suggestion)}
+                        key={suggestion.placeId}
+                        className="suggestion-item"
+                      >
+                        {suggestion.description}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </PlacesAutocomplete>
+          </div>
+
           <div className="input-field">
             <input
               type="datetime-local"

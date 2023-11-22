@@ -46,7 +46,7 @@ const LoginRegister = () => {
         console.log("Access token:", access);
         console.log("Refresh token:", refresh);
         alert("Login Successful!");
-        navigate("/");
+        navigate("/rideoption");
       }
     } catch (error) {
       // Handle errors here
