@@ -298,6 +298,12 @@ p {
 }
 
 /* Chat */
+.chat {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
 .chat-container {
   display: flex;
   flex-direction: column;
@@ -305,11 +311,11 @@ p {
   border: 1px solid #ccc;
   border-radius: 8px;
   background-color: #fff;
-  margin: 10px;
   overflow: hidden;
   font-family: "Poppins", sans-serif;
-  padding-bottom: 70px; /* Adjusted to prevent overlap with the navbar */
+  padding-bottom: 70px;
   margin-top: 350px;
+  width: 70vw;
 }
 
 .message-list {
