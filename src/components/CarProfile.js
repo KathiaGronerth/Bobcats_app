@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 
-const CarProfile = () => {
-  const [carData, setCarData] = useState({
-    make: "",
-    model: "",
-    year: "",
-  });
+const CarProfile = ({ carData }) => {
+  // const [carData, setCarData] = useState({
+  //   make: "",
+  //   model: "",
+  //   year: "",
+  // });
 
   const handleChange = (e) => {
-    setCarData({ ...carData, [e.target.name]: e.target.value });
+    //setCarData({ ...carData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e) => {
@@ -17,8 +17,8 @@ const CarProfile = () => {
   };
 
   return (
-    <div>
-      <h2>Car Profile</h2>
+    <div className="car-profile">
+      <h2>Car Details</h2>
       <form onSubmit={handleSubmit}>
         <div>
           <label>Make:</label>
