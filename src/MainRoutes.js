@@ -4,7 +4,7 @@ import Home from "./components/Home";
 import CarProfile from "./components/CarProfile";
 import CreateRide from "./components/CreateRide";
 import SearchRides from "./components/SearchRides";
-import Chat from "./components/Chat";
+import ChatComponent from "./components/chat/ChatComponent";
 import UserFeedback from "./components/UserFeedback";
 import FindRideForm from "./components/FindRideForm";
 import RegisterAsDriverForm from "./components/RegisterAsDriverForm";
@@ -28,7 +28,7 @@ const MainRoutes = () => {
       <Route path="/car-profile" element={<CarProfile />} />
       <Route path="/create-ride" element={<CreateRide />} />
       <Route path="/search-rides" element={<SearchRides />} />
-      <Route path="/chat" element={<Chat />} />
+      <Route path="/chat" element={<ChatComponent />} />
       <Route path="/feedback" element={<UserFeedback />} />
       <Route path="/find-ride-form" element={<FindRideForm />} />
       <Route path="/post-ride-form" element={<PostRideForm />} />
