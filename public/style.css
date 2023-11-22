@@ -492,6 +492,10 @@ button:hover {
   font-family: 'Poppins', sans-serif;
 
 }
+
+.find-ride-button:hover {
+  background-color: #008ec2;
+}
 /* RideDetails */
 .ride-details {
   padding: 20px;
@@ -869,10 +873,12 @@ h2 {
 .about {
   padding: 20px;
   background-color: #fff;
+  padding-top: 100px;
 }
 
 .about h2 {
-  color: #501214; /* Maroon */
+  color: #054957; 
+  font-size: 22px;
 }
 
 .about p {
@@ -888,10 +894,12 @@ h2 {
 .how-it-works {
   padding: 20px;
   background-color: #fff;
+  padding-top: 100px;
 }
 
 .how-it-works h2 {
-  color: #501214; /* Maroon */
+  color: #054957; 
+  font-size: 22px;
 }
 
 .how-it-works ol {
@@ -980,3 +988,5 @@ button {
 button:hover {
   background-color: #0056b3;
 }
+
+

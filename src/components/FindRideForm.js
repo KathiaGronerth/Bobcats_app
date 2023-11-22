@@ -13,7 +13,9 @@ const FindRideForm = () => {
   const [source, setSource] = useState("");
   const [destination, setDestination] = useState("");
   const [travelers, setTravelers] = useState("");
-  const [dateTime, setDateTime] = useState("2023-11-01T12:00");
+  const [dateTime, setDateTime] = useState(
+    new Date().toISOString().slice(0, 16)
+  );
   const [specialNeeds, setSpecialNeeds] = useState("");
 
   const navigate = useNavigate();
@@ -71,7 +73,7 @@ const FindRideForm = () => {
         body: JSON.stringify(requestBody),
       });
       console.log("requestBody : ", requestBody);
-
+      navigate("/rides");
       /*if (response.ok) {
         console.log("Ride search request sent successfully");
         // Navigate to the appropriate page after the successful API call
@@ -219,6 +221,7 @@ const FindRideForm = () => {
               value={travelers}
               onChange={(e) => setTravelers(e.target.value)}
               placeholder="Number of Travelers"
+              min="1"
               required
             />
           </div>
