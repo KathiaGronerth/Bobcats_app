@@ -707,52 +707,53 @@ button:hover {
 }
 /*User Profile */
 .user-profile {
-  background-color: #fff;
-  padding: 30px;
-  border-radius: 5px;
-  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-top: 100px;
 }
 
 .profile-header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  justify-content: space-between; /* Adjusts the space between the image/details and the edit button */
 }
 
-h1,
-h2 {
-  color: #054957; /* Maroon */
-  margin-bottom: 10px;
+.profile-info {
+  display: flex;
+  align-items: center; /* Aligns the image and text vertically */
 }
 
+.profile-pic {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-right: 20px; /* Adds space between the image and the text */
+}
+
+.car-profile,
 .rides,
 .reviews {
-  margin-bottom: 20px;
-}
-
-.ride,
-.review {
-  padding: 10px;
-  background-color: #f5f5f5;
-  border-radius: 5px;
-  margin-bottom: 10px;
+  margin-top: 20px;
 }
 
 .edit-profile-btn,
 .settings-btn {
-  padding: 10px 15px;
-  background-color: #501214; /* Maroon */
-  color: #fff;
+  background-color: #054957;
+  color: white;
   border: none;
+  padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  margin-top: 10px;
 }
 
 .edit-profile-btn:hover,
 .settings-btn:hover {
-  background-color: #3a0d0a;
+  background-color: #00aff5;
 }
 
 /* LoginRegister */
