@@ -9,15 +9,34 @@ const UserFeedback = () => {
   };
 
   return (
-    <div>
-      <h2>Leave Feedback</h2>
-      <form onSubmit={handleSubmit}>
+    <div
+      className="feeback-container"
+      style={{
+        paddingTop: "100px",
+        backgroundColor: "#e7f7fe",
+        alignSelf: "center",
+        justifyContent: "center",
+      }}
+    >
+      <h2 style={{ color: "#054957", fontSize: "22px" }}>Leave Feedback</h2>
+      <form
+        onSubmit={handleSubmit}
+        style={{
+          width: "100%",
+          padding: "20px",
+        }}
+      >
         <textarea
           value={feedback}
           onChange={(e) => setFeedback(e.target.value)}
           required
         ></textarea>
-        <button type="submit">Submit</button>
+        <button
+          type="submit"
+          style={{ backgroundColor: "#00aff5", borderRadius: "25px" }}
+        >
+          Submit
+        </button>
       </form>
     </div>
   );

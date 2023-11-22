@@ -1,9 +1,13 @@
 import React from "react";
+import { FaAddressBook } from "react-icons/fa6";
 
 const HowItWorks = () => {
   return (
     <div className="how-it-works">
-      <h2>How Bobcat Carpool Works</h2>
+      <h2>
+        How Bobcat Carpool Works{" "}
+        <FaAddressBook style={{ color: "#98ed64", margin: "5px" }} />
+      </h2>
       <ol>
         <li>
           Register on the platform using your Texas State University

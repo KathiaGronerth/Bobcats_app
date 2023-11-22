@@ -10,7 +10,9 @@ import config from "../config.js";
 import "./Search.css";
 
 const Search = () => {
-  const [dateTime, setDateTime] = useState("2023-11-01T12:00");
+  const [dateTime, setDateTime] = useState(
+    new Date().toISOString().slice(0, 16)
+  );
   const [passengerCount, setPassengerCount] = useState(1);
   const [source, setSource] = useState("");
   const [destination, setDestination] = useState("");
