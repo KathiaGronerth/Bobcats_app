@@ -269,32 +269,96 @@ p {
   color: #666;
 }
 
-.reviews {
-  margin-top: 10px;
-}
 
+/*Reviews*/
 .review {
-  padding: 5px;
-  border-bottom: 1px solid #eee;
+  margin-left: 50px;
 }
 
-.review:last-child {
-  border-bottom: none;
+.review-card {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  background-color: #fff;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 85%;
+  margin-left: 50px;
 }
 
-.join-ride-btn {
-  display: inline-block;
-  padding: 10px 15px;
-  background-color: #501214; /* Maroon */
+.review-form {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.review-user-photo {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 16px;
+}
+
+.review-text {
+  flex-grow: 1;
+}
+
+.review-user-name {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.review-rating {
+  color: #ffc107; /*gold color for stars */
+  margin-bottom: 4px;
+}
+
+.review-content {
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.reviewInput {
+  width: 80%;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-right: 20px;
+}
+
+/* .review-form input, */
+.review-form textarea,
+.review-form select {
+  width: 80%;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.review-form button {
+  background-color: #00aff5;
   color: #fff;
   border: none;
-  border-radius: 5px;
+  border-radius: 25px;
   cursor: pointer;
+  font-family: "Poppins", sans-serif;
+  width: 300px;
+  margin-bottom: 10px;
   transition: background-color 0.3s;
 }
 
-.join-ride-btn:hover {
-  background-color: #3a0d0a;
+.review-form button:hover {
+  background-color: #004d80; /*darker shade for hover state */
+}
+
+.error-message {
+  color: red;
+  margin-top: 10px;
 }
 
 /* Chat */
