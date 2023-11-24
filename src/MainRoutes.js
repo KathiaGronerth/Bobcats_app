@@ -1,7 +1,7 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Home from "./components/Home";
-import CarProfile from "./components/CarProfile";
+import CreateCar from "./components/CreateCar";
 import CreateRide from "./components/CreateRide";
 import SearchRides from "./components/SearchRides";
 import ChatComponent from "./components/chat/ChatComponent";
@@ -25,7 +25,7 @@ const MainRoutes = () => {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<LoginRegister />} />
-      <Route path="/car-profile" element={<CarProfile />} />
+      <Route path="/create-car" element={<CreateCar />} />
       <Route path="/create-ride" element={<CreateRide />} />
       <Route path="/search-rides" element={<SearchRides />} />
       <Route path="/chat" element={<ChatComponent />} />
