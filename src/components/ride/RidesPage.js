@@ -149,6 +149,7 @@ const RidesPage = () => {
 
   return (
     <div className="main-container">
+      <Search />
       <div className="rides-page">
         <div className="rides-column">
           <div className="rides-list">

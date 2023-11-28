@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { MdLogin } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
+  const navigate = useNavigate();
+
   // State for registration
   const [fullName, setFullName] = useState("");
   const [registerEmail, setRegisterEmail] = useState("");
@@ -17,20 +20,6 @@ const Register = () => {
   const [carColor, setCarColor] = useState("");
   const [carYear, setCarYear] = useState("");
   const [licensePlate, setLicensePlate] = useState("");
-
-  const handleLogin = (e) => {
-    e.preventDefault();
-
-    // Dummy data for login
-    const dummyEmail = "admin@example.com";
-    const dummyPassword = "admin123";
-
-    if (email === dummyEmail && password === dummyPassword) {
-      alert("Logged in successfully!");
-    } else {
-      alert("Invalid credentials!");
-    }
-  };
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -78,6 +67,11 @@ const Register = () => {
       console.error("Error during registration:", error);
       alert("An error occurred during registration. Please try again later.");
     }
+  };
+
+  const handleLogin = () => {
+    // Navigate to the Register page
+    navigate("/login");
   };
 
   return (
@@ -197,6 +191,22 @@ const Register = () => {
           )}
           <button type="submit" className="submit-btn">
             Sign Up
+          </button>
+          <div
+            style={{ textAlign: "center", margin: "15px", fontSize: "14px" }}
+          >
+            -------------OR-------------
+          </div>
+          <div style={{ paddingLeft: "5px", fontSize: "14px", margin: "0px" }}>
+            Already have an account?
+          </div>
+          <button
+            type="button"
+            className="signup-btn"
+            style={{ background: "#054957" }}
+            onClick={handleLogin}
+          >
+            Log In
           </button>
         </form>
       </div>
