@@ -909,6 +909,18 @@ button:hover {
   margin: 10px;
 }
 
+.register-form .login-register-input {
+  padding: 10px;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  outline: none;
+  font-family: 'Poppins', sans-serif;
+  width: 95%;
+  margin-bottom: 25px;
+
+}
+
 .eye-icon {
   cursor: pointer;
   position: absolute;
