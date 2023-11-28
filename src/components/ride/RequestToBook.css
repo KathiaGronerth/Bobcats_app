@@ -1,0 +1,86 @@
+.request-to-book-main-container {
+    padding-top: 100px;
+    background-color: #e7f7fe;
+    margin: 0 auto; 
+}
+
+.request-to-book {
+    width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    color: #054957;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: grid;
+    grid-template-columns: 1fr 0.2fr; /* Two columns with equal width */
+    margin-bottom: 15px;
+  }
+
+  .request-to-book-container2 {
+    width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    color: #054957;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+     margin-bottom: 15px;
+  }
+
+  .request-to-book-container2:hover{
+    cursor: pointer;
+    background-color: #ededed;
+  }
+
+  .request-to-book-container3 {
+    width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    color: #054957;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 15px;
+  }
+  
+  .request-to-book-main-container h2 {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 15px;
+  }
+  
+  .request-to-book div {
+    margin-bottom: 10px;
+    padding: 10px;
+  }
+  
+  .request-to-book strong {
+    font-weight: bold;
+  }
+  
+  .request-to-book a {
+    color: #fff;
+    text-decoration: underline;
+  }
+  
+  .request-to-book-main-container button {
+    background-color: #00aff5;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    width: 50%;
+    font-size: 16px;
+    margin: 10px;
+    font-style: bold;
+    text-align: center;
+    align-self: center;
+   
+  }
+  
+  .request-to-book-main-container button:hover {
+    background-color: #008ec2;
+  }
+  

@@ -4,8 +4,14 @@ import FindRideForm from "./FindRideForm";
 import Search from "./ride/Search";
 import backgroundImage from "../../assets/images/background1.png";
 import { SiGooglemaps } from "react-icons/si";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  const navigate = useNavigate();
+  const handleJoinButton = () => {
+    navigate("/register");
+  };
+
   return (
     <div className="content-wrapper">
       <section className="hero">
@@ -14,7 +20,9 @@ const Home = () => {
           Your sustainable ride-sharing solution for the Texas State University
           community.
         </p>
-        <button className="cta-btn">Join Us Today!</button>
+        <button className="cta-btn" onClick={handleJoinButton}>
+          Join Us Today!
+        </button>
       </section>
       <div className="tag">
         <img
