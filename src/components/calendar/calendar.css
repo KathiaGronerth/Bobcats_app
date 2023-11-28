@@ -5,12 +5,14 @@ body > div { /* the react root */
   margin: 0;
   padding: 0;
   height: 100%;
+  font-family: 'Poppins', sans-serif;
 }
 
 h2 {
   margin: 0;
   font-size: 16px;
-  color: #007bff; /* Text color for headings */
+  color: #054957; /* Text color for headings */
+  font-family: 'Poppins', sans-serif;
 }
 
 ul {
@@ -28,12 +30,21 @@ b { /* used for event dates/times */
   margin-right: 3px;
 }
 
+.main-container {
+  padding-top: 50px;
+}
+
 .demo-app {
   display: flex;
   min-height: 100%;
-  font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 14px;
- 
+  padding: 10px;
+}
+
+.demo-app-sidebar-section {
+  
+  padding: 10px;
 }
 
 .demo-app-sidebar {
@@ -41,11 +52,12 @@ b { /* used for event dates/times */
   line-height: 1.5;
   background: white; /* Background color for the sidebar */
   border-right: 1px solid #ccc; /* Border color */
+  padding-top: 20px;
+  align-content: center;
+  justify-content: center;
 }
 
-.demo-app-sidebar-section {
-  padding: 2em;
-}
+
 
 .demo-app-main {
   flex-grow: 1;
@@ -60,7 +72,7 @@ b { /* used for event dates/times */
 
 /* Update the event and hover colors */
 .fc-event {
-  background-color: #337ab7; /* Event background color */
+  background-color: #00aff5; /* Event background color */
   color: #fff; /* Event text color */
   padding: 5px;
   border-radius: 5px;
