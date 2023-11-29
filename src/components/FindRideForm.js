@@ -12,11 +12,13 @@ const FindRideForm = () => {
   // Using dummy data for the fields as initial values
   const [source, setSource] = useState("");
   const [destination, setDestination] = useState("");
-  const [travelers, setTravelers] = useState("");
+  const [passengerCount, setPassengerCount] = useState("");
   const [dateTime, setDateTime] = useState(
     new Date().toISOString().slice(0, 16)
   );
   const [specialNeeds, setSpecialNeeds] = useState("");
+  const [sourceCoordinates, setSourceCoordinates] = useState(null);
+  const [destinationCoordinates, setDestinationCoordinates] = useState(null);
 
   const navigate = useNavigate();
   const apiKey = config.googleMapsApiKey;
@@ -59,7 +61,7 @@ const FindRideForm = () => {
         destination,
         destination_coordinates: destinationLatLng,
         datetime: dateTime,
-        travelers: parseInt(travelers, 10),
+        travelers: parseInt(passengerCount, 10),
         specialneeds: specialNeeds,
       };
 
@@ -73,7 +75,15 @@ const FindRideForm = () => {
         body: JSON.stringify(requestBody),
       });
       console.log("requestBody : ", requestBody);
-      navigate("/rides");
+      const searchCriteria = {
+        source,
+        destination,
+        dateTime,
+        passengerCount,
+        source_coordinates: sourceCoordinates,
+        destination_coordinates: destinationCoordinates,
+      };
+      navigate("/rides", { state: { searchCriteria } });
       /*if (response.ok) {
         console.log("Ride search request sent successfully");
         // Navigate to the appropriate page after the successful API call
@@ -99,6 +109,7 @@ const FindRideForm = () => {
 
       // Set the selected address to the input field
       setSource(selected);
+      setSourceCoordinates(latLng);
 
       // Focus on the input field after selection
       document.activeElement.blur();
@@ -116,6 +127,7 @@ const FindRideForm = () => {
 
       // Set the selected address to the input field
       setDestination(selected);
+      setDestinationCoordinates(latLng);
 
       // Focus on the input field after selection
       document.activeElement.blur();
@@ -218,8 +230,8 @@ const FindRideForm = () => {
           <div className="input-group">
             <input
               type="number"
-              value={travelers}
-              onChange={(e) => setTravelers(e.target.value)}
+              value={passengerCount}
+              onChange={(e) => setPassengerCount(e.target.value)}
               placeholder="Number of Travelers"
               min="1"
               required

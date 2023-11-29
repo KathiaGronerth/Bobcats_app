@@ -9,13 +9,22 @@ import useScript from "../useScript.js";
 import config from "../config.js";
 import "./Search.css";
 
-const Search = () => {
+const Search = ({
+  sourceValue,
+  destinationValue,
+  dateTimeValue,
+  passengerCountValue,
+}) => {
   const [dateTime, setDateTime] = useState(
-    new Date().toISOString().slice(0, 16)
+    dateTimeValue || new Date().toISOString().slice(0, 16)
   );
-  const [passengerCount, setPassengerCount] = useState(1);
-  const [source, setSource] = useState("");
-  const [destination, setDestination] = useState("");
+  const [passengerCount, setPassengerCount] = useState(
+    passengerCountValue || 1
+  );
+  const [source, setSource] = useState(sourceValue || "");
+  const [destination, setDestination] = useState(destinationValue || "");
+  const [sourceCoordinates, setSourceCoordinates] = useState(null);
+  const [destinationCoordinates, setDestinationCoordinates] = useState(null);
   const navigate = useNavigate();
   const apiKey = config.googleMapsApiKey;
 
@@ -25,6 +34,13 @@ const Search = () => {
   );
 
   useEffect(() => {
+    console.log("Initial values from props:", {
+      sourceValue,
+      destinationValue,
+      dateTimeValue,
+      passengerCountValue,
+    });
+
     // Check if the script has been loaded successfully
     if (scriptLoaded) {
       console.log("Google Maps API script has been loaded");
@@ -33,12 +49,25 @@ const Search = () => {
     if (scriptError) {
       console.error("Error loading Google Maps API script", scriptError);
     }
-  }, [scriptLoaded, scriptError]);
+  }, [
+    scriptLoaded,
+    scriptError,
+    source,
+    destination,
+    dateTime,
+    passengerCount,
+  ]);
 
   const handleSearchClick = () => {
-    // Add logic for handling the search (e.g., fetching available rides)
-    // Once the search is done, navigate to the RidesPage
-    navigate("/rides");
+    const searchCriteria = {
+      source,
+      destination,
+      dateTime,
+      passengerCount,
+      source_coordinates: sourceCoordinates,
+      destination_coordinates: destinationCoordinates,
+    };
+    navigate("/rides", { state: { searchCriteria } });
   };
 
   const handleSelectSource = async (selected) => {
@@ -50,6 +79,7 @@ const Search = () => {
 
       // Set the selected address to the input field
       setSource(selected);
+      setSourceCoordinates(latLng);
 
       // Focus on the input field after selection
       document.activeElement.blur();
@@ -67,6 +97,7 @@ const Search = () => {
 
       // Set the selected address to the input field
       setDestination(selected);
+      setDestinationCoordinates(latLng);
 
       // Focus on the input field after selection
       document.activeElement.blur();

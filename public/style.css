@@ -94,6 +94,7 @@ button:hover {
   border: none;
   outline: none;
   box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
+  font-family: 'Poppins', sans-serif;
 }
 
 .nav-links {
@@ -112,6 +113,7 @@ button:hover {
 
 .nav-item:hover {
   color: #008ec2; /* Maroon text on hover */
+  cursor: pointer;
 }
 
 .user-profile-icon {
@@ -136,15 +138,46 @@ button:hover {
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Add a box shadow for styling */
   border-radius: 4px; /* Add border-radius for rounded corners */
   z-index: 1;
+  
 }
 
 .dropdown-item {
   padding: 8px 12px;
   text-decoration: none;
   color: #054957; /* Add your preferred text color */
-  &:hover {
-    background-color: #ededed; /* Add a background color for hover effect */
-  }
+  font-weight: bold;
+  transition: background-color 0.3s;
+ 
+}
+
+.dropdown-item:hover {
+  background-color: #ededed; /* Add a background color for hover effect */
+  cursor: pointer;
+}
+
+.submenu {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  background-color: #fff;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  z-index: 2; /* Set a higher z-index */
+}
+
+.submenu-item {
+  padding: 8px 12px;
+  text-decoration: none;
+  color: #054957;
+  font-style: normal;
+  transition: background-color 0.3s;
+ 
+}
+
+.submenu-item:hover {
+  background-color: #ededed;
+  cursor: pointer;
 }
 /* Forms */
 form {
