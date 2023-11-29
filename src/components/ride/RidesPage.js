@@ -4,8 +4,10 @@ import config from "../config.js";
 import Search from "./Search.js";
 import { MdAccessTime } from "react-icons/md";
 import { MdOutlineAirlineSeatReclineNormal } from "react-icons/md";
+import { useLocation } from "react-router-dom";
 
 const apiKey = config.googleMapsApiKey;
+const carLogoUrl = "../../../assets/images/car-logo2.gif"; // Replace with the actual path or URL
 
 const ridesData = [
   {
@@ -83,64 +85,130 @@ const RideCard = ({ ride, onMapClick, isSelected }) => {
 
 const RidesPage = () => {
   const [selectedRide, setSelectedRide] = useState(null);
-  const [directionsRenderer, setDirectionsRenderer] = useState(null);
+  const [googleMapsLoaded, setGoogleMapsLoaded] = useState(false);
+  const location = useLocation();
+  const { searchCriteria } = location.state || {};
 
   useEffect(() => {
     const googleMapsScript = document.createElement("script");
     googleMapsScript.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places`;
     googleMapsScript.async = true;
     googleMapsScript.defer = true;
-    googleMapsScript.addEventListener("load", initializeMap);
+    googleMapsScript.addEventListener("load", () => setGoogleMapsLoaded(true));
     document.head.appendChild(googleMapsScript);
 
     return () => {
       document.head.removeChild(googleMapsScript);
     };
-  }, [selectedRide]);
+  }, [searchCriteria.source]);
+
+  useEffect(() => {
+    if (googleMapsLoaded) {
+      initializeMap();
+    }
+  }, [googleMapsLoaded, searchCriteria, selectedRide]);
 
   const initializeMap = () => {
-    const texasCenter = { lat: 31.9686, lng: -99.9018 }; // Center of Texas
-    const mapOptions = {
-      center: texasCenter,
-      zoom: 7,
-    };
+    if (!window.google) {
+      console.error("Google Maps API not loaded");
+      return;
+    }
+
+    const mapOptions = {};
 
     const map = new window.google.maps.Map(
       document.getElementById("map"),
       mapOptions
     );
 
-    if (selectedRide) {
+    const markers = [];
+
+    if (
+      searchCriteria?.source_coordinates &&
+      searchCriteria?.destination_coordinates
+    ) {
       const sourceMarker = new window.google.maps.Marker({
-        position: selectedRide.source_coordinates,
+        position: searchCriteria.source_coordinates,
         map: map,
         title: "Source Location",
+        label: "A",
       });
+
+      markers.push(sourceMarker);
 
       const destinationMarker = new window.google.maps.Marker({
-        position: selectedRide.destination_coordinates,
+        position: searchCriteria.destination_coordinates,
         map: map,
         title: "Destination Location",
+        label: "B",
       });
 
-      const directionsService = new window.google.maps.DirectionsService();
-      const renderer = new window.google.maps.DirectionsRenderer();
-      renderer.setMap(map);
+      markers.push(destinationMarker);
 
-      setDirectionsRenderer(renderer);
+      const directionsService = new window.google.maps.DirectionsService();
+      const renderer = new window.google.maps.DirectionsRenderer({
+        map: map,
+        suppressMarkers: true,
+      });
 
       const request = {
-        origin: selectedRide.source_coordinates,
-        destination: selectedRide.destination_coordinates,
+        origin: searchCriteria.source_coordinates,
+        destination: searchCriteria.destination_coordinates,
         travelMode: window.google.maps.TravelMode.DRIVING,
       };
 
       directionsService.route(request, function (result, status) {
         if (status === window.google.maps.DirectionsStatus.OK) {
           renderer.setDirections(result);
+
+          const infoWindow = new window.google.maps.InfoWindow({
+            content: `<div>Estimated time: ${result.routes[0].legs[0].duration.text}</div>`,
+          });
+
+          infoWindow.open(map, sourceMarker);
+        } else {
+          console.error("Error fetching directions:", status);
         }
       });
     }
+
+    // Show marker for the selected ride
+    if (selectedRide?.source_coordinates) {
+      const selectedRideMarker = new window.google.maps.Marker({
+        position: selectedRide.source_coordinates,
+        map: map,
+        title: "Selected Ride Source Location",
+        icon: {
+          url: carLogoUrl,
+          scaledSize: new window.google.maps.Size(40, 40), // Adjust the size as needed
+        },
+      });
+
+      markers.push(selectedRideMarker);
+    }
+
+    // Create a LatLngBounds object to include all markers
+    const bounds = new window.google.maps.LatLngBounds();
+
+    // Extend the bounds with each marker's position
+    markers.forEach((marker) => bounds.extend(marker.getPosition()));
+
+    // Set the map bounds to include all markers
+    map.fitBounds(bounds);
+
+    // Adjust the zoom level to provide some padding
+    const listener = window.google.maps.event.addListenerOnce(
+      map,
+      "idle",
+      function () {
+        if (map.getZoom() > 15) {
+          map.setZoom(15);
+        }
+      }
+    );
+
+    // Remove the listener after it's been executed
+    window.google.maps.event.removeListener(listener);
   };
 
   const handleMapClick = (ride) => {
@@ -149,7 +217,12 @@ const RidesPage = () => {
 
   return (
     <div className="main-container">
-      <Search />
+      <Search
+        sourceValue={searchCriteria?.source}
+        destinationValue={searchCriteria?.destination}
+        dateTimeValue={searchCriteria?.dateTime}
+        passengerCountValue={searchCriteria?.passengerCount}
+      />
       <div className="rides-page">
         <div className="rides-column">
           <div className="rides-list">
