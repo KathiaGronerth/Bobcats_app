@@ -82,3 +82,83 @@ b { /* used for event dates/times */
 .fc-event:hover {
   background-color: #286090; /* Event background color on hover */
 }
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border: 1px solid #ccc;
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+  border-radius: 8px;
+}
+
+.modal h2 {
+  margin-bottom: 20px;
+}
+
+.modal button {
+  background-color: #00aff5;
+  color: white;
+  padding: 10px;
+  margin: 10px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+}
+
+.modal button:hover {
+  background-color: #008ec2;
+}
+
+.modal button.cancel {
+  background-color: #ccc;
+}
+
+.modal-overlay {
+  background-color: rgba(0, 0, 0, 0.5); /* Adjust the alpha value as needed */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000; /* Make sure it's higher than the modal's z-index */
+}
+
+.button-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.modal-options {
+  padding: 10px;
+  margin: 10px 10px;
+  background-color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  border: 1.5px solid #ccc;
+  border-radius: 20px;
+  font-size: 14px;
+  color: #054957;
+}
+
+.modal-options:hover {
+  background-color: #e0e0e0;
+}
+
+.selected {
+  background-color: #6B9626;
+  color: #fff;
+  border: 2px solid #c3d5a8;
+}
+
+.selected:hover{
+  background-color: #6B9626;
+}
