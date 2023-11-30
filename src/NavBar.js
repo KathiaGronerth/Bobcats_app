@@ -161,6 +161,13 @@ const NavBar = () => {
                 >
                   Contact
                 </Link>
+                <Link
+                  to="/about"
+                  className="submenu-item"
+                  onClick={(event) => handleHelpDropdownToggle(event)}
+                >
+                  About
+                </Link>
               </div>
             )}
           </div>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { formatDate } from "@fullcalendar/core";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
@@ -6,6 +6,8 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import "./calendar.css";
 import RRule from "rrule-alt";
+import Modal from "react-modal";
+import { useNavigate } from "react-router-dom";
 
 // Function to create a unique ID for each event
 const createEventId = () => String(Math.random().toString(36).substr(2, 9));
@@ -77,80 +79,39 @@ const DEMO_COURSE_EVENTS = [
 
 const ALL_DEMO_EVENTS = [...DEMO_EVENTS, ...DEMO_COURSE_EVENTS];
 
-export default class Calendar extends React.Component {
-  state = {
-    weekendsVisible: true,
-    currentEvents: [],
+export default function Calendar() {
+  const [weekendsVisible, setWeekendsVisible] = useState(true);
+  const [currentEvents, setCurrentEvents] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedEvent, setSelectedEvent] = useState(null);
+  const [selectedOption, setSelectedOption] = useState(null);
+  const [disableContinue, setDisableContinue] = useState(true);
+
+  const navigate = useNavigate();
+
+  const handleOptionClick = (option) => {
+    setSelectedOption(option);
+    setDisableContinue(false);
   };
 
-  render() {
-    return (
-      <div className="main-container">
-        <div className="demo-app">
-          {this.renderSidebar()}
-          <div className="demo-app-main">
-            <FullCalendar
-              plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-              headerToolbar={{
-                left: "prev,next,today",
-                center: "title",
-                right: "dayGridMonth,timeGridWeek,timeGridDay",
-              }}
-              initialView="dayGridMonth"
-              editable={true}
-              selectable={true}
-              selectMirror={true}
-              dayMaxEvents={true}
-              weekends={this.state.weekendsVisible}
-              initialEvents={ALL_DEMO_EVENTS} // Use the demo data for courses
-              select={this.handleDateSelect}
-              eventContent={renderEventContent} // custom render function
-              eventClick={this.handleEventClick}
-              eventsSet={this.handleEvents} // called after events are initialized/added/changed/removed
-            />
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  renderSidebar() {
-    return (
-      <div className="demo-app-sidebar">
-        <div className="demo-app-sidebar-section">
-          <label>
-            <input
-              type="checkbox"
-              checked={this.state.weekendsVisible}
-              onChange={this.handleWeekendsToggle}
-            ></input>
-            Toggle Weekends
-          </label>
-        </div>
-        <div className="demo-app-sidebar-section">
-          <div
-            style={{
-              color: "#054957",
-              fontWeight: "bold",
-              fontSize: "18px",
-              margin: "5px",
-            }}
-          >
-            All Events ({this.state.currentEvents.length})
-          </div>
-          <ul>{this.state.currentEvents.map(renderSidebarEvent)}</ul>
-        </div>
-      </div>
-    );
-  }
-
-  handleWeekendsToggle = () => {
-    this.setState({
-      weekendsVisible: !this.state.weekendsVisible,
-    });
+  const handleContinue = () => {
+    switch (selectedOption) {
+      case "Reserve a ride":
+        handleBookRide();
+        break;
+      case "Delete the event":
+        handleDeleteEvent();
+        break;
+      default:
+        break;
+    }
   };
 
-  handleDateSelect = (selectInfo) => {
+  const handleWeekendsToggle = () => {
+    setWeekendsVisible(!weekendsVisible);
+  };
+
+  const handleDateSelect = (selectInfo) => {
     let title = prompt("Please enter a new title for your event");
     let calendarApi = selectInfo.view.calendar;
 
@@ -167,34 +128,41 @@ export default class Calendar extends React.Component {
     }
   };
 
-  handleEventClick = (clickInfo) => {
-    if (
-      confirm(
-        `Are you sure you want to delete the event '${clickInfo.event.title}'`
-      )
-    ) {
-      clickInfo.event.remove();
+  const handleEventClick = (clickInfo) => {
+    setIsModalOpen(true);
+    setSelectedEvent(clickInfo.event);
+    setSelectedOption(null);
+    setDisableContinue(true);
+  };
+
+  const handleDeleteEvent = () => {
+    if (selectedEvent) {
+      if (
+        window.confirm(
+          `Are you sure you want to delete the event '${selectedEvent.title}'?`
+        )
+      ) {
+        selectedEvent.remove();
+        closeModal();
+      }
     }
   };
 
-  handleEvents = (events) => {
-    this.setState({
-      currentEvents: events,
-    });
+  const handleBookRide = () => {
+    navigate("/find-ride-form");
+    closeModal();
   };
-}
 
-function renderEventContent(eventInfo) {
-  return (
-    <>
-      <b>{eventInfo.timeText}</b>
-      <i>{eventInfo.event.title}</i>
-    </>
-  );
-}
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedEvent(null);
+  };
 
-function renderSidebarEvent(event) {
-  return (
+  const handleEvents = (events) => {
+    setCurrentEvents(events);
+  };
+
+  const renderSidebarEvent = (event) => (
     <li key={event.id}>
       <b>
         {formatDate(event.start, {
@@ -205,5 +173,106 @@ function renderSidebarEvent(event) {
       </b>
       <i>{event.title}</i>
     </li>
+  );
+
+  const renderEventContent = (eventInfo) => (
+    <>
+      <b>{eventInfo.timeText}</b>
+      <i>{eventInfo.event.title}</i>
+    </>
+  );
+
+  const renderSidebar = () => (
+    <div className="demo-app-sidebar">
+      <div className="demo-app-sidebar-section">
+        <label>
+          <input
+            type="checkbox"
+            checked={weekendsVisible}
+            onChange={handleWeekendsToggle}
+          ></input>
+          Toggle Weekends
+        </label>
+      </div>
+      <div className="demo-app-sidebar-section">
+        <div
+          style={{
+            color: "#054957",
+            fontWeight: "bold",
+            fontSize: "18px",
+            margin: "5px",
+          }}
+        >
+          All Events ({currentEvents.length})
+        </div>
+        <ul>{currentEvents.map(renderSidebarEvent)}</ul>
+      </div>
+    </div>
+  );
+
+  return (
+    <div className="main-container">
+      <div className="demo-app">
+        {renderSidebar()}
+        <div className="demo-app-main">
+          <FullCalendar
+            plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+            headerToolbar={{
+              left: "prev,next,today",
+              center: "title",
+              right: "dayGridMonth,timeGridWeek,timeGridDay",
+            }}
+            initialView="dayGridMonth"
+            editable={true}
+            selectable={true}
+            selectMirror={true}
+            dayMaxEvents={true}
+            weekends={weekendsVisible}
+            initialEvents={ALL_DEMO_EVENTS} // Use the demo data for courses
+            select={handleDateSelect}
+            eventContent={renderEventContent} // custom render function
+            eventClick={handleEventClick}
+            eventsSet={handleEvents} // called after events are initialized/added/changed/removed
+          />
+        </div>
+      </div>
+      <Modal
+        isOpen={isModalOpen}
+        onRequestClose={closeModal}
+        contentLabel="Event Options"
+        overlayClassName="modal-overlay"
+        className="modal"
+      >
+        <h2>What would you like to do?</h2>
+        <div
+          className={`modal-options ${
+            selectedOption === "Reserve a ride" ? "selected" : ""
+          }`}
+          onClick={() => handleOptionClick("Reserve a ride")}
+        >
+          Reserve a ride
+        </div>
+        <div
+          className={`modal-options ${
+            selectedOption === "Delete the event" ? "selected" : ""
+          }`}
+          onClick={() => handleOptionClick("Delete the event")}
+        >
+          Delete the event
+        </div>
+        <div className="button-container">
+          <button onClick={closeModal}>Cancel</button>
+          <button
+            onClick={handleContinue}
+            disabled={disableContinue}
+            style={{
+              backgroundColor: disableContinue ? "lightgray" : "#00aff5",
+            }}
+          >
+            Continue
+          </button>
+        </div>
+      </Modal>
+    </div>
   );
 }
