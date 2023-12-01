@@ -5,6 +5,7 @@ import Search from "./Search.js";
 import { MdAccessTime } from "react-icons/md";
 import { MdOutlineAirlineSeatReclineNormal } from "react-icons/md";
 import { useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const apiKey = config.googleMapsApiKey;
 const carLogoUrl = "../../../assets/images/car-logo2.gif"; // Replace with the actual path or URL
@@ -55,39 +56,13 @@ const ridesData = [
   // Add more ride objects as needed
 ];
 
-const RideCard = ({ ride, onMapClick, isSelected }) => {
-  return (
-    <div
-      className={`ride-card ${isSelected ? "selected" : ""}`}
-      onClick={() => onMapClick(ride)}
-    >
-      <div className="name">{ride.name}</div>
-      <div className="source">From {ride.source}</div>
-      <div className="time-distance">
-        {ride.time}{" "}
-        <MdAccessTime
-          style={{
-            width: "20px",
-            height: "auto",
-          }}
-        />
-        / {ride.distance}
-      </div>
-      <div className="seat">
-        Seats available
-        <MdOutlineAirlineSeatReclineNormal />: {ride.seats_available}
-      </div>
-      <div className="seat">Price : {ride.price_per_seat}</div>
-      <div className="calculate-time">Driver is 10 mins away from you!</div>
-    </div>
-  );
-};
-
 const RidesPage = () => {
   const [selectedRide, setSelectedRide] = useState(null);
   const [googleMapsLoaded, setGoogleMapsLoaded] = useState(false);
   const location = useLocation();
   const { searchCriteria } = location.state || {};
+  const [disableContinue, setDisableContinue] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const googleMapsScript = document.createElement("script");
@@ -107,6 +82,10 @@ const RidesPage = () => {
       initializeMap();
     }
   }, [googleMapsLoaded, searchCriteria, selectedRide]);
+
+  const onBookRideClick = (selectedRide) => {
+    navigate("/requesttobook", { state: { searchCriteria, selectedRide } });
+  };
 
   const initializeMap = () => {
     if (!window.google) {
@@ -211,8 +190,48 @@ const RidesPage = () => {
     window.google.maps.event.removeListener(listener);
   };
 
+  const RideCard = ({ ride, onMapClick, isSelected, disableContinue }) => {
+    return (
+      <div
+        className={`ride-card ${isSelected ? "selected" : ""}`}
+        onClick={() => onMapClick(ride)}
+      >
+        <div className="name">{ride.name}</div>
+        <div className="source">From {ride.source}</div>
+        <div className="time-distance">
+          {ride.time}{" "}
+          <MdAccessTime
+            style={{
+              width: "20px",
+              height: "auto",
+            }}
+          />
+          / {ride.distance}
+        </div>
+        <div className="seat">
+          Seats available
+          <MdOutlineAirlineSeatReclineNormal />: {ride.seats_available}
+        </div>
+        <div className="seat">Price : {ride.price_per_seat}</div>
+        <div className="calculate-time">Driver is 10 mins away from you!</div>
+        <button
+          className="book-ride"
+          disabled={!isSelected || disableContinue}
+          style={{
+            backgroundColor:
+              !isSelected || disableContinue ? "lightgray" : "#00aff5",
+          }}
+          onClick={() => onBookRideClick(ride)}
+        >
+          Book Ride
+        </button>
+      </div>
+    );
+  };
+
   const handleMapClick = (ride) => {
     setSelectedRide(ride);
+    setDisableContinue(false);
   };
 
   return (
@@ -232,6 +251,7 @@ const RidesPage = () => {
                 ride={ride}
                 onMapClick={handleMapClick}
                 isSelected={selectedRide && selectedRide.id === ride.id}
+                disableContinue={disableContinue}
               />
             ))}
           </div>

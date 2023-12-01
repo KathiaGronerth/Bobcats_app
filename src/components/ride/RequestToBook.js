@@ -2,12 +2,19 @@ import React from "react";
 import "./RequestToBook.css";
 import { BsCalendarCheck } from "react-icons/bs";
 import { GiPathDistance } from "react-icons/gi";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { FaArrowRight } from "react-icons/fa";
 import { IoChatbubblesOutline } from "react-icons/io5";
 import { GrLocationPin } from "react-icons/gr";
+import { MdOutlineAirlineSeatReclineNormal } from "react-icons/md";
+import { HiOutlineCurrencyDollar } from "react-icons/hi2";
+import { FaCar } from "react-icons/fa";
+import { MdOutlineDateRange } from "react-icons/md";
 
 const RequestToBook = () => {
+  const location = useLocation();
+  const { searchCriteria, selectedRide } = location.state || {};
+
   const bookingDetails = {
     name: "John Doe",
     day: "Mon",
@@ -25,10 +32,12 @@ const RequestToBook = () => {
 
   return (
     <div className="request-to-book-main-container">
-      <h2>Ride Details</h2>
+      <h2>
+        Ride Details <FaCar style={{ color: "#98ed64" }} />
+      </h2>
 
       <div
-        className="request-to-book-container3"
+        className="request-to-book-container4"
         style={{
           display: "flex",
           justifyContent: "space-between",
@@ -36,39 +45,43 @@ const RequestToBook = () => {
         }}
       >
         <div>
-          <strong style={{ fontSize: "22px" }}>
-            <GrLocationPin style={{ marginRight: "5px" }} />
-            {bookingDetails.sourceLocation}
-          </strong>{" "}
+          <GrLocationPin style={{ marginRight: "5px", color: "#f04925" }} />
+          {searchCriteria?.source}
         </div>{" "}
         <div>
-          <strong style={{ fontSize: "22px" }}>
-            <GrLocationPin style={{ marginRight: "5px" }} />
-            {bookingDetails.destinationLocation}
-          </strong>
+          <GrLocationPin style={{ marginRight: "5px", color: "#f04925" }} />
+          {searchCriteria?.destination}
         </div>
       </div>
 
       <div className="request-to-book">
         <div>
-          <strong style={{ color: "#8E8E8E" }}>Date-Time</strong>{" "}
-        </div>{" "}
-        <div>
-          <strong>{bookingDetails.date}</strong>
-        </div>
-        <div>
           <strong style={{ color: "#8E8E8E" }}>
-            Total price for 1 passenger
+            Date-Time <MdOutlineDateRange style={{ color: "#f04925" }} />
           </strong>{" "}
         </div>{" "}
         <div>
-          <strong>{bookingDetails.pricePerPassenger}</strong>
+          <strong>{searchCriteria?.dateTime}</strong>
         </div>
         <div>
-          <strong style={{ color: "#8E8E8E" }}>No of seats available</strong>{" "}
+          <strong style={{ color: "#8E8E8E" }}>
+            Total price for 1 passenger{" "}
+            <HiOutlineCurrencyDollar
+              style={{ color: "#f04925", fontWeight: "bold" }}
+            />
+          </strong>{" "}
         </div>{" "}
         <div>
-          <strong>{bookingDetails.seats_available}</strong>
+          <strong>{selectedRide?.price_per_seat}</strong>
+        </div>
+        <div>
+          <strong style={{ color: "#8E8E8E" }}>
+            No of seats available{" "}
+            <MdOutlineAirlineSeatReclineNormal style={{ color: "#f04925" }} />
+          </strong>{" "}
+        </div>{" "}
+        <div>
+          <strong>{selectedRide?.seats_available}</strong>
         </div>
       </div>
 
@@ -120,7 +133,7 @@ const RequestToBook = () => {
       >
         <div style={{ fontSize: "14px" }}>
           <BsCalendarCheck style={{ color: "#98ed64", marginRight: "5px" }} />{" "}
-          Your booking won't be confirmed until the driver approves your request
+          Your booking will be confirmed immediately
         </div>
       </div>
       <div
