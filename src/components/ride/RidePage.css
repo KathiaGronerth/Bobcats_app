@@ -2,8 +2,7 @@
 
 .main-container {
   padding-top: 90px;
-  font-family: 'Poppins', sans-serif;
- 
+  font-family: "Poppins", sans-serif;
 }
 
 .name {
@@ -19,7 +18,7 @@
 .time-distance {
   color: #f04925;
   font-size: 12px;
-  margin: 5px
+  margin: 5px;
 }
 
 .calculate-time {
@@ -33,66 +32,80 @@
   margin: 5px;
 }
 .rides-page {
-    flex: 1;
-    display: flex;
-    justify-content: space-between;
-    padding: 20px;
-    background-color: #fff;
-    font-family: 'Poppins', sans-serif;
-  }
-  
-  .rides-column {
-    margin-right: 20px;
-    
-  }
-  
-  .rides-list {
-    max-height: 100%;
-    overflow-y: auto;
-  }
-  
-  .ride-card {
-    cursor: pointer;
-    padding: 25px;
-    margin-bottom: 10px;
-    border: 1.5px solid #ccc;
-    border-radius: 8px;
-    transition: background-color 0.3s;
-    background-color: #fff;
-    margin: 10px;
-    text-align: center;
-    
-  }
-  
-  .ride-card:hover {
-    cursor: pointer;
-    background-color:#ededed ;
-  }
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  background-color: #fff;
+  font-family: "Poppins", sans-serif;
+}
 
-  .rides-heading {
-    font-size: 24px;
-    margin-bottom: 10px;
-    color: #054957; /* Purple color */
-  }
-  
-  /* Map column styles */
-  .map-column {
-    flex: 3;
-  }
-  
-  .map-container {
-    height: 100vh;
-    width: 100%;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-  }
-  
-  .ride-card.selected {
-    color: #054957;
-    border: 2px solid #054957;
-  }
-  
-  .ride-card.selected:hover {
-    cursor: pointer;
-    background-color:#ededed ;
-  }
+.rides-column {
+  margin-right: 10px;
+  flex: 1; /* Grow to fill available space */
+  overflow-y: auto; /* Enable vertical scroll if content overflows */
+  max-height: 100vh; /* Maximum height of the rides column */
+}
+
+.rides-list {
+  max-height: 100%;
+  overflow-y: auto;
+}
+
+.ride-card {
+  cursor: pointer;
+  padding: 25px;
+  margin-bottom: 10px;
+  border: 1.5px solid #ccc;
+  border-radius: 8px;
+  transition: background-color 0.3s;
+  background-color: #fff;
+  margin: 10px;
+  text-align: center;
+}
+
+.ride-card:hover {
+  cursor: pointer;
+  background-color: #ededed;
+}
+
+.rides-heading {
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: #054957; /* Purple color */
+}
+
+/* Map column styles */
+.map-column {
+  flex: 2.5; /* Grow to fill available space */
+  position: relative; /* Ensure relative positioning for absolute children */
+}
+
+.map-container {
+  height: 100vh;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  position: absolute; /* Position map container absolutely */
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.ride-card.selected {
+  color: #054957;
+  border: 2px solid #054957;
+}
+
+.ride-card.selected:hover {
+  cursor: pointer;
+  background-color: #ededed;
+}
+
+.ride-card .book-ride {
+  background-color: #00aff5;
+  border-radius: 25px;
+  padding: 5px;
+  margin: 5px;
+}
