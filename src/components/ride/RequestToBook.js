@@ -92,7 +92,8 @@ const RequestToBook = () => {
       </div>
 
       <div className="request-to-book-container2">
-        <div
+        <Link
+          to="/driver-profile"
           style={{
             display: "flex",
             justifyContent: "space-between",
@@ -107,7 +108,7 @@ const RequestToBook = () => {
               <FaArrowRight style={{ fontSize: "18px" }} />
             </strong>
           </div>
-        </div>
+        </Link>
       </div>
 
       <div className="request-to-book-container2">
@@ -140,10 +141,10 @@ const RequestToBook = () => {
             textDecoration: "none",
           }}
         >
-          <div onClick={toggleUserProfile}>
+          <div>
             <strong style={{ color: "#00aff5" }}>View Your Profile</strong>
           </div>
-          <div>
+          <div onClick={toggleUserProfile}>
             <strong style={{ color: "#054957" }}>
               <FaArrowRight style={{ fontSize: "18px" }} />
             </strong>
