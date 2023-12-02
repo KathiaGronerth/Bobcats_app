@@ -11,11 +11,13 @@ import { HiOutlineCurrencyDollar } from "react-icons/hi2";
 import { FaCar } from "react-icons/fa";
 import { MdOutlineDateRange } from "react-icons/md";
 import UserProfile from "../UserProfile";
+import DriverProfile from "../DriverProfile";
 
 const RequestToBook = () => {
   const location = useLocation();
   const { searchCriteria, selectedRide } = location.state || {};
   const [showUserProfile, setShowUserProfile] = useState(false);
+  const [showDriverProfile, setShowDriverProfile] = useState(false);
 
   const bookingDetails = {
     name: "John Doe",
@@ -34,6 +36,10 @@ const RequestToBook = () => {
 
   const toggleUserProfile = () => {
     setShowUserProfile(!showUserProfile);
+  };
+
+  const toggleDriverProfile = () => {
+    setShowDriverProfile(!showDriverProfile);
   };
 
   return (
@@ -92,8 +98,7 @@ const RequestToBook = () => {
       </div>
 
       <div className="request-to-book-container2">
-        <Link
-          to="/driver-profile"
+        <div
           style={{
             display: "flex",
             justifyContent: "space-between",
@@ -103,12 +108,12 @@ const RequestToBook = () => {
           <div>
             <strong style={{ color: "#00aff5" }}>View Driver's Profile</strong>
           </div>
-          <div>
+          <div onClick={toggleDriverProfile}>
             <strong style={{ color: "#054957" }}>
               <FaArrowRight style={{ fontSize: "18px" }} />
             </strong>
           </div>
-        </Link>
+        </div>
       </div>
 
       <div className="request-to-book-container2">
@@ -164,6 +169,22 @@ const RequestToBook = () => {
           >
             <UserProfile />
             <button onClick={toggleUserProfile}>Close Profile</button>
+          </div>
+        </div>
+      )}
+      {showDriverProfile && (
+        <div>
+          <div className="overlay" onClick={toggleDriverProfile}></div>
+          <div
+            className="user-profile-modal"
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              textDecoration: "none",
+            }}
+          >
+            <DriverProfile />
+            <button onClick={toggleDriverProfile}>Close Profile</button>
           </div>
         </div>
       )}
