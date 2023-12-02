@@ -5,16 +5,17 @@ import interactionPlugin from "@fullcalendar/interaction";
 import CarProfile from "./CarProfile";
 import Reviews from "./Review"; // Assuming you have a Reviews component
 
-const dummyUser = {
+const userData = {
   /*From driver model*/
-  name: "Lucy Doe",
-  photoUrl: "/images/photo1.jpg",
-  coverPhotoUrl: "/images/cover_photo.jpg",
-  rating: 4.5 /*can get it from the average rating*/,
+  userId: 1,
+  name: "Kathia Villavicencio",
+  photourl: "/images/photo4.jpg",
+  coverphotourl: "/images/cover_photo2.jpg",
+  rating: 4.0 /*can get it from the average rating*/,
   bio: "Passionate traveler and friendly driver. Whether you're traveling for work or leisure, I look forward to being part of your next travel story!",
   trips: 120 /*can get this info from number of rides*/,
   years: 3 /*can get this info from createdAt*/,
-  from: "New York",
+  from_location: "New York",
   speaks: ["English", "Spanish"],
   studies: "Master of Computer Science",
   /*From car model*/
@@ -49,7 +50,7 @@ const dummyUser = {
       rating: 5,
       user: {
         name: "Natalie Smith",
-        photoUrl: "/images/photo2.jpg",
+        photourl: "/images/photo2.jpg",
       },
     },
     {
@@ -59,23 +60,23 @@ const dummyUser = {
       rating: 4,
       user: {
         name: "Luis Lopez",
-        photoUrl: "/images/photo3.jpg",
+        photourl: "/images/photo3.jpg",
       },
     },
   ],
 };
 
 // const UserProfile = ({ userId }) => {
-const UserProfile = ({ user = dummyUser }) => {
+const UserProfile = ({ user = userData }) => {
   const [weekendsVisible, setWeekendsVisible] = useState(true);
   const [userReviews, setUserReviews] = useState(user.reviews);
 
-  const addNewReview = (newReview) => {
-    setUserReviews([
-      ...userReviews,
-      { ...newReview, id: userReviews.length + 1 },
-    ]);
-  };
+  // const addNewReview = (newReview) => {
+  //   setUserReviews([
+  //     ...userReviews,
+  //     { ...newReview, id: userReviews.length + 1 },
+  //   ]);
+  // };
 
   const renderStars = (rating) => {
     const roundedRating = Math.round(rating * 2) / 2; // round to nearest half
@@ -92,9 +93,9 @@ const UserProfile = ({ user = dummyUser }) => {
     return stars;
   };
 
-  // const [userData, setUserData] = useState(null);
+  const [userData, setUserData] = useState(null);
   // const [loading, setLoading] = useState(true);
-  // const [error, setError] = useState(null);
+  const [error, setError] = useState(null);
 
   // useEffect(() => {
   //   const fetchUserData = async () => {
@@ -115,40 +116,44 @@ const UserProfile = ({ user = dummyUser }) => {
   //   fetchUserData();
   // }, [userId]);
 
-  // const addNewReview = async (newReview) => {
-  //  setUserReviews([...userReviews, newReview]);
-  //   try {
-  //     const response = await fetch(`/api/users/${userId}/reviews`, {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //       body: JSON.stringify(newReview),
-  //     });
-  //     if (!response.ok) {
-  //       throw new Error(`HTTP error! status: ${response.status}`);
-  //     }
-  //     const reviewData = await response.json();
-  //     setUserData({
-  //       ...userData,
-  //       reviews: [...userData.reviews, reviewData],
-  //     });
-  //   } catch (e) {
-  //     setError(e.message);
-  //   }
-  // };
+  const addNewReview = async (newReview) => {
+    setUserReviews([...userReviews, newReview]);
+    try {
+      // const response = await fetch(`/api/users/${userId}/reviews`, {
+      const response = await fetch(
+        "https://run.mocky.io/v3/57c67805-cf39-4902-b83c-cad6617dd210",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newReview),
+        }
+      );
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const reviewData = await response.json();
+      setUserData({
+        ...userData,
+        reviews: [...userData.reviews, reviewData],
+      });
+    } catch (e) {
+      setError(e.message);
+    }
+  };
 
   // if (loading) return <div>Loading...</div>;
   // if (error) return <div>Error: {error}</div>;
   // if (!userData) return <div>No user data found</div>;
 
   return (
-    <div className="user-profile">
+    <div className="user-profile-container">
       <div className="cover-photo">
-        <img src={user.coverPhotoUrl} alt="Cover" className="cover-photo-img" />
+        <img src={user.coverphotourl} alt="Cover" className="cover-photo-img" />
         <div className="profile-header">
           <img
-            src={user.photoUrl}
+            src={user.photourl}
             alt={`${user.name}'s profile`}
             className="profile-pic"
           />
@@ -193,7 +198,7 @@ const UserProfile = ({ user = dummyUser }) => {
       <div className="additional-info">
         <div className="user-description">
           <h3>From:</h3>
-          <p>{user.from}</p>
+          <p>{user.from_location}</p>
           <h3>Speaks:</h3>
           <p>{user.speaks.join(", ")}</p>
           <h3>Studies:</h3>
