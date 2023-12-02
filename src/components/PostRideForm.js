@@ -21,6 +21,7 @@ const PostRideForm = () => {
   });
   const navigate = useNavigate();
   const apiKey = config.googleMapsApiKey;
+  const access = JSON.parse(sessionStorage.getItem("access"));
 
   // Use the custom useScript hook
   const [scriptLoaded, scriptError] = useScript(
@@ -107,11 +108,12 @@ const PostRideForm = () => {
       price_per_seat: parseFloat(price),
     };
 
-    /* try {
+     try {
       // Make the API call
-      const response = await fetch("YOUR_API_ENDPOINT", {
+      const response = await fetch("http://127.0.0.1:8000/api/ride", {
         method: "POST",
         headers: {
+          'Authorization': `Bearer ${access}`,
           "Content-Type": "application/json",
           // Add any other headers you need, e.g., authorization token
         },
@@ -120,7 +122,7 @@ const PostRideForm = () => {
 
       if (response.ok) {
         console.log("Ride posted successfully");
-        navigate("/success");
+        navigate("/");
       } else {
         console.error(
           "Failed to post ride. Server returned:",
@@ -130,7 +132,7 @@ const PostRideForm = () => {
       }
     } catch (error) {
       console.error("Error posting ride:", error);
-    }*/
+    }
     // event.preventDefault();
     //console.log(formData);
     // navigate("/success");

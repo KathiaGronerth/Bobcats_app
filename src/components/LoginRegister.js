@@ -15,7 +15,7 @@ const LoginRegister = () => {
     e.preventDefault();
 
     const apiUrl =
-      "https://run.mocky.io/v3/ebecbfde-8ef8-42a7-8e0c-affffa3a7ac7";
+      "http://127.0.0.1:8000/api/login";
 
     try {
       const response = await fetch(apiUrl, {
@@ -31,8 +31,14 @@ const LoginRegister = () => {
       });
 
       if (!response.ok) {
-        alert("Invalid credentials!");
-        throw new Error(`HTTP error! Status: ${response.status}`);
+        if (response.status === 400) {
+          alert("Incorrect credentials!");
+        } else if (response.status === 403) {
+          alert("Please confirm your email in inbox before proceeding");
+        } else {
+          alert("An error occurred!");
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
       } else {
         const data = await response.json();
 

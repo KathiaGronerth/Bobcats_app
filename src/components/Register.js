@@ -56,6 +56,7 @@ const Register = () => {
       if (response.ok) {
         // Registration successful
         alert("Registration successful!");
+        navigate("/login");
         if (photo) {
           alert(`Uploaded photo: ${photo.name}`);
         }

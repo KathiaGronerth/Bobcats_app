@@ -1,1 +1,56 @@
-node_modules/*
+# Dependency directories
+/node_modules
+
+# Build output
+/build
+/dist
+
+# Environment files
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Logs and other auto-generated files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+*.pnp
+*.pnp.js
+.pnp.js
+
+# Editor and IDE files
+.idea/
+.vscode/
+.DS_Store
+
+# Other generated files
+*.cache
+*.rpt
+*.suo
+*.user
+*.dbmdl
+*.ilk
+*.pdb
+*.pch
+*.sbr
+*.ilk
+*.aps
+*.vshost.*
+*_i.c
+*_p.c
+*.ncb
+*.tlb
+*.tlh
+*.bak
+*.swp
+*.swo
+*~.nib
+*.app
+
+# OS generated files
+.DS_Store?
+ehthumbs.db
+Icon?
+Thumbs.db
