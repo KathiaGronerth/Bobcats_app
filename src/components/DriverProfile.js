@@ -14,9 +14,9 @@ const DriverProfile = () => {
     // Fetch user data
     const fetchUserData = async () => {
       try {
-        // const response = await fetch("http://127.0.0.1:8000/api/profile");
+        // const response = await fetch("http://127.0.0.1:8000/api/notrideyet/driver/user");
         const response = await fetch(
-          "https://run.mocky.io/v3/56dfafc1-2e0f-42e0-9c3d-91eabcf074c6"
+          "https://run.mocky.io/v3/1979ee24-f7b4-4a38-a062-43841f8823c0"
         );
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
