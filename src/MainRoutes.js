@@ -15,6 +15,7 @@ import About from "./components/About";
 import HowItWorks from "./components/HowItWorks";
 import LoginRegister from "./components/LoginRegister";
 import UserProfile from "./components/UserProfile";
+import DriverProfile from "./components/DriverProfile";
 import Calendar from "./components/calendar/Calendar";
 import Search from "./components/ride/Search";
 import RidesPage from "./components/ride/RidesPage";
@@ -37,6 +38,7 @@ const MainRoutes = () => {
         path="/register-as-driver-form"
         element={<RegisterAsDriverForm />}
       />
+      <Route path="/driver-profile" element={<DriverProfile />} />
       <Route path="/user-profile" element={<UserProfile />} />
       <Route path="/contact" element={<ContactForm />} />
       <Route path="/faq" element={<FAQ />} />
