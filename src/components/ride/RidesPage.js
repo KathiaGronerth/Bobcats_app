@@ -6,9 +6,10 @@ import { MdAccessTime } from "react-icons/md";
 import { MdOutlineAirlineSeatReclineNormal } from "react-icons/md";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import carlogo from "../../../assets/images/car-logo2.gif";
+import { FaFilter } from "react-icons/fa6";
 
 const apiKey = config.googleMapsApiKey;
-const carLogoUrl = "../../../assets/images/car-logo2.gif"; // Replace with the actual path or URL
 
 const ridesData = [
   {
@@ -25,7 +26,7 @@ const ridesData = [
     date: "2023-12-02",
     distance: "8.1 Miles",
     seats_available: 3,
-    price_per_seat: "10$",
+    price_per_seat: "10",
   },
   {
     id: 2,
@@ -38,7 +39,7 @@ const ridesData = [
     date: "2023-12-02",
     distance: "8.1 Miles",
     seats_available: 2,
-    price_per_seat: "5$",
+    price_per_seat: "5",
   },
   {
     id: 3,
@@ -51,7 +52,7 @@ const ridesData = [
     date: "2023-12-02",
     distance: "8.1 Miles",
     seats_available: 1,
-    price_per_seat: "8$",
+    price_per_seat: "8",
   },
   // Add more ride objects as needed
 ];
@@ -63,6 +64,8 @@ const RidesPage = () => {
   const { searchCriteria } = location.state || {};
   const [disableContinue, setDisableContinue] = useState(true);
   const navigate = useNavigate();
+  const [priceFilter, setPriceFilter] = useState("");
+  const [sortChoice, setSortChoice] = useState("");
 
   useEffect(() => {
     const googleMapsScript = document.createElement("script");
@@ -158,7 +161,7 @@ const RidesPage = () => {
         map: map,
         title: "Selected Ride Source Location",
         icon: {
-          url: carLogoUrl,
+          url: carlogo,
           scaledSize: new window.google.maps.Size(40, 40), // Adjust the size as needed
         },
       });
@@ -234,6 +237,21 @@ const RidesPage = () => {
     setDisableContinue(false);
   };
 
+  const filterRidesByPrice = () => {
+    let filteredRides = [...ridesData];
+    if (priceFilter !== "") {
+      filteredRides = filteredRides.filter(
+        (ride) => ride.price_per_seat <= parseInt(priceFilter)
+      );
+    }
+    if (sortChoice === "asc") {
+      filteredRides.sort((a, b) => a.price_per_seat - b.price_per_seat);
+    } else if (sortChoice === "desc") {
+      filteredRides.sort((a, b) => b.price_per_seat - a.price_per_seat);
+    }
+    return filteredRides;
+  };
+
   return (
     <div className="main-container">
       <Search
@@ -245,7 +263,25 @@ const RidesPage = () => {
       <div className="rides-page">
         <div className="rides-column">
           <div className="rides-list">
-            {ridesData.map((ride) => (
+            <div className="sort-dropdown">
+              <select
+                id="sort"
+                value={sortChoice}
+                onChange={(e) => setSortChoice(e.target.value)}
+                className="ride-filter"
+              >
+                <option value="" className="ride-filter-option">
+                  Sort by price
+                </option>
+                <option value="asc" className="ride-filter-option">
+                  Lowest to Highest
+                </option>
+                <option value="desc" className="ride-filter-option">
+                  Highest to Lowest
+                </option>
+              </select>
+            </div>
+            {filterRidesByPrice().map((ride) => (
               <RideCard
                 key={ride.id}
                 ride={ride}
