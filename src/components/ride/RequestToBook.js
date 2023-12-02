@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./RequestToBook.css";
 import { BsCalendarCheck } from "react-icons/bs";
 import { GiPathDistance } from "react-icons/gi";
@@ -10,10 +10,12 @@ import { MdOutlineAirlineSeatReclineNormal } from "react-icons/md";
 import { HiOutlineCurrencyDollar } from "react-icons/hi2";
 import { FaCar } from "react-icons/fa";
 import { MdOutlineDateRange } from "react-icons/md";
+import UserProfile from "../UserProfile";
 
 const RequestToBook = () => {
   const location = useLocation();
   const { searchCriteria, selectedRide } = location.state || {};
+  const [showUserProfile, setShowUserProfile] = useState(false);
 
   const bookingDetails = {
     name: "John Doe",
@@ -28,6 +30,10 @@ const RequestToBook = () => {
   const handleRequestToBook = () => {
     // Implement your logic for handling the request to book
     alert("Request to book submitted!");
+  };
+
+  const toggleUserProfile = () => {
+    setShowUserProfile(!showUserProfile);
   };
 
   return (
@@ -86,8 +92,7 @@ const RequestToBook = () => {
       </div>
 
       <div className="request-to-book-container2">
-        <Link
-          to="/user-profile"
+        <div
           style={{
             display: "flex",
             justifyContent: "space-between",
@@ -102,7 +107,7 @@ const RequestToBook = () => {
               <FaArrowRight style={{ fontSize: "18px" }} />
             </strong>
           </div>
-        </Link>
+        </div>
       </div>
 
       <div className="request-to-book-container2">
@@ -127,31 +132,68 @@ const RequestToBook = () => {
         </Link>
       </div>
 
+      <div className="request-to-book-container2">
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            textDecoration: "none",
+          }}
+        >
+          <div onClick={toggleUserProfile}>
+            <strong style={{ color: "#00aff5" }}>View Your Profile</strong>
+          </div>
+          <div>
+            <strong style={{ color: "#054957" }}>
+              <FaArrowRight style={{ fontSize: "18px" }} />
+            </strong>
+          </div>
+        </div>
+      </div>
+
+      {showUserProfile && (
+        <div>
+          <div className="overlay" onClick={toggleUserProfile}></div>
+          <div className="user-profile-modal">
+            <UserProfile />
+            <button onClick={toggleUserProfile}>Close Profile</button>
+          </div>
+        </div>
+      )}
+
       <div
         className="request-to-book-container3"
         style={{ paddingBottom: "90px" }}
       >
-        <div style={{ fontSize: "14px" }}>
-          <BsCalendarCheck style={{ color: "#98ed64", marginRight: "5px" }} />{" "}
-          Your booking will be confirmed immediately
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            textDecoration: "none",
+          }}
+        >
+          <div style={{ fontSize: "14px" }}>
+            <BsCalendarCheck style={{ color: "#98ed64", marginRight: "5px" }} />{" "}
+            Your booking will be confirmed immediately
+          </div>
         </div>
-      </div>
-      <div
-        style={{
-          position: "fixed",
-          bottom: 0,
-          left: 0,
-          width: "100%",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          background: "#fff",
-        }}
-      >
-        <button>
-          <BsCalendarCheck style={{ marginRight: "5px" }} />
-          Request to Book
-        </button>
+        <div
+          style={{
+            position: "fixed",
+            bottom: 0,
+            left: 0,
+            width: "100%",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            background: "#fff",
+          }}
+        >
+          <button>
+            <BsCalendarCheck style={{ marginRight: "5px" }} />
+            Request to Book
+          </button>
+        </div>
       </div>
     </div>
   );
