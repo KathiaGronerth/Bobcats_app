@@ -50,6 +50,28 @@
 .rides-list {
   max-height: 100%;
   overflow-y: auto;
+  font-family: "Poppins", sans-serif;
+}
+
+.rides-list .ride-filter {
+  cursor: pointer;
+  border: 1.5px solid #ccc;
+  margin: 5px;
+  width: 95%;
+  padding: 10px;
+  border-radius: 8px;
+  font-family: "Poppins", sans-serif;
+}
+
+.rides-list .ride-filter-option {
+  padding: 10px;
+  font-family: "Poppins", sans-serif;
+  cursor: pointer;
+}
+
+.sort-dropdown .ride-filter-option:hover {
+  background-color: #00aff5;
+  cursor: pointer;
 }
 
 .ride-card {
