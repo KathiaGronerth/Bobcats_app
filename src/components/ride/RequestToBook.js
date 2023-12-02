@@ -151,17 +151,22 @@ const RequestToBook = () => {
           </div>
         </div>
       </div>
-
       {showUserProfile && (
         <div>
           <div className="overlay" onClick={toggleUserProfile}></div>
-          <div className="user-profile-modal">
+          <div
+            className="user-profile-modal"
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              textDecoration: "none",
+            }}
+          >
             <UserProfile />
             <button onClick={toggleUserProfile}>Close Profile</button>
           </div>
         </div>
       )}
-
       <div
         className="request-to-book-container3"
         style={{ paddingBottom: "90px" }}
