@@ -5,7 +5,7 @@ import interactionPlugin from "@fullcalendar/interaction";
 import CarProfile from "./CarProfile";
 import Reviews from "./Review"; // Assuming you have a Reviews component
 
-const DriverProfile = () => {
+const UserProfile = () => {
   const [userData, setUserData] = useState(null);
   const [userReviews, setUserReviews] = useState([]);
   const [error, setError] = useState(null);
@@ -15,8 +15,15 @@ const DriverProfile = () => {
     const fetchUserData = async () => {
       try {
         // const response = await fetch("http://127.0.0.1:8000/api/profile");
+        const access = JSON.parse(sessionStorage.getItem("access"));
         const response = await fetch(
-          "https://run.mocky.io/v3/56dfafc1-2e0f-42e0-9c3d-91eabcf074c6"
+          "http://127.0.0.1:8000/api/profile",
+          {
+            headers: {
+              'Authorization': `Bearer ${access}`,
+            "Content-Type": "application/json",
+            }
+          }
         );
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -74,17 +81,19 @@ const DriverProfile = () => {
   return (
     <div className="user-profile-container">
       <div className="cover-photo">
-        <img
+        {/* <img
           src={userData.coverphotourl}
           alt="Cover"
           className="cover-photo-img"
-        />
+        /> */}
+        <img src={`data:image/jpeg;base64, ${userData.cover_photo}`} alt="Profile" className="cover-photo-img"/>
         <div className="profile-header">
-          <img
+          {/* <img
             src={userData.photourl}
             alt={`${userData.name}'s profile`}
             className="profile-pic"
-          />
+          /> */}
+          <img src={`data:image/jpeg;base64, ${userData.profile_photo}`} alt="Profile" className="profile-pic"/>
         </div>
       </div>
       <div className="profile-content">
@@ -160,4 +169,4 @@ const DriverProfile = () => {
   );
 };
 
-export default DriverProfile;
+export default UserProfile;
