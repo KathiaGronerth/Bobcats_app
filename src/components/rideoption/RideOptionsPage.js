@@ -7,19 +7,12 @@ import { useNavigate } from "react-router-dom";
 
 const RideOptionsPage = () => {
   const navigate = useNavigate();
-  const userDataString = sessionStorage.getItem("userData");
-  const userData = JSON.parse(userDataString);
-
   const handlefindride = () => {
     navigate("/find-ride-form");
   };
 
   const handlecreateride = () => {
-    if (userData?.has_car) {
-      navigate("/post-ride-form");
-    } else {
-      navigate("/register-as-driver-form");
-    }
+    navigate("/post-ride-form");
   };
   return (
     <div className="ride-options-page">

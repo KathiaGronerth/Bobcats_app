@@ -8,8 +8,6 @@ import {
   IoIosArrowForward,
 } from "react-icons/io";
 import { FaCalendarDays } from "react-icons/fa6";
-import { useNavigate } from "react-router-dom";
-
 const NavBar = () => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [isHelpDropdownOpen, setHelpDropdownOpen] = useState(false);
@@ -17,13 +15,6 @@ const NavBar = () => {
   const dropdownRef = useRef(null);
   const ridedropdownRef = useRef(null);
   const helpdropdownRef = useRef(null);
-  const navigate = useNavigate();
-
-  // Retrieve data from sessionStorage
-  const userDataString = sessionStorage.getItem("userData");
-
-  // Parse the JSON string into an object
-  const userData = JSON.parse(userDataString);
 
   const handleDropdownToggle = (event) => {
     event.stopPropagation();
@@ -87,13 +78,6 @@ const NavBar = () => {
     }
   };
 
-  const handleLogout = () => {
-    // Clear all items from sessionStorage
-    sessionStorage.clear();
-    navigate("/");
-    setDropdownOpen(false);
-  };
-
   useEffect(() => {
     document.addEventListener("click", handleClickOutside);
 
@@ -101,8 +85,6 @@ const NavBar = () => {
       document.removeEventListener("click", handleClickOutside);
     };
   }, []);
-
-  const isUserLoggedIn = sessionStorage.getItem("access") !== null;
 
   return (
     <nav className="navbar">
@@ -139,21 +121,13 @@ const NavBar = () => {
                 >
                   Find a Ride
                 </Link>
-
-                {userData?.has_car ? (
-                  <Link
-                    to="/post-ride-form"
-                    className="submenu-item"
-                    onClick={(event) => handleRideDropdownToggle(event)}
-                  >
-                    Create a Ride
-                  </Link>
-                ) : (
-                  // User doesn't have a car, redirect to /post-ride-form
-                  <Link to="/register-as-driver-form" className="submenu-item">
-                    Create a Ride
-                  </Link>
-                )}
+                <Link
+                  to="/post-ride-form"
+                  className="submenu-item"
+                  onClick={(event) => handleRideDropdownToggle(event)}
+                >
+                  Create a Ride
+                </Link>
               </div>
             )}
           </div>
@@ -210,48 +184,20 @@ const NavBar = () => {
           </div>
           {isDropdownOpen && (
             <div className="dropdown-menu">
-              {isUserLoggedIn ? (
-                <>
-                  <Link
-                    to="/user-profile"
-                    className="dropdown-item"
-                    onClick={(event) => handleDropdownToggle(event)}
-                  >
-                    User Profile{" "}
-                    <IoIosArrowForward style={{ paddingLeft: "45px" }} />
-                  </Link>
-                  <Link
-                    to="/ride-history"
-                    className="dropdown-item"
-                    onClick={(event) => handleDropdownToggle(event)}
-                  >
-                    Ride History{" "}
-                    <IoIosArrowForward style={{ paddingLeft: "35px" }} />
-                  </Link>
-                  <div className="dropdown-item" onClick={handleLogout}>
-                    Log out{" "}
-                    <IoIosArrowForward style={{ paddingLeft: "35px" }} />
-                  </div>
-                </>
-              ) : (
-                <>
-                  <Link
-                    to="/login"
-                    className="dropdown-item"
-                    onClick={(event) => handleDropdownToggle(event)}
-                  >
-                    Log in <IoIosArrowForward style={{ paddingLeft: "45px" }} />
-                  </Link>
-                  <Link
-                    to="/register"
-                    className="dropdown-item"
-                    onClick={(event) => handleDropdownToggle(event)}
-                  >
-                    Sign up{" "}
-                    <IoIosArrowForward style={{ paddingLeft: "35px" }} />
-                  </Link>
-                </>
-              )}
+              <Link
+                to="/login"
+                className="dropdown-item"
+                onClick={(event) => handleDropdownToggle(event)}
+              >
+                Log in <IoIosArrowForward style={{ paddingLeft: "45px" }} />
+              </Link>
+              <Link
+                to="/register"
+                className="dropdown-item"
+                onClick={(event) => handleDropdownToggle(event)}
+              >
+                Sign Up <IoIosArrowForward style={{ paddingLeft: "35px" }} />
+              </Link>
             </div>
           )}
         </div>

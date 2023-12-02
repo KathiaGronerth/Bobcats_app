@@ -14,8 +14,7 @@ const LoginRegister = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    const apiUrl =
-      "https://run.mocky.io/v3/ebecbfde-8ef8-42a7-8e0c-affffa3a7ac7";
+    const apiUrl = "http://127.0.0.1:8000/api/login";
 
     try {
       const response = await fetch(apiUrl, {
@@ -36,18 +35,17 @@ const LoginRegister = () => {
       } else {
         const data = await response.json();
 
-        // Assuming your response structure is { name, email, phone, has_car, access, refresh }
-        const { name, email, phone, has_car, access, refresh } = data;
+        // Handle the data here
+        console.log("Login successful:", data);
 
-        // Store user data in session storage
-        sessionStorage.setItem("userData", JSON.stringify(data.user));
-        sessionStorage.setItem("access", JSON.stringify(access));
-        sessionStorage.setItem("refresh", JSON.stringify(refresh));
+        // Assuming your response structure is { user, access, refresh }
+        const { user, access, refresh } = data;
 
-        // Handle the logged-in user, access token, and refresh token
-        console.log("Logged in user:", data.user.name);
-        console.log("Access token:", data.access);
-        console.log("Refresh token:", data.refresh);
+        // Now you can handle the logged-in user, access token, and refresh token
+        console.log("Logged in user:", user);
+        console.log("Access token:", access);
+        console.log("Refresh token:", refresh);
+        alert("Login Successful!");
         navigate("/rideoption");
       }
     } catch (error) {
