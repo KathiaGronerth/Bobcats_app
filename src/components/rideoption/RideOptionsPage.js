@@ -5,6 +5,9 @@ import reserveRideImage from "../../../assets/images/publishride.png";
 import "./RideOptionsPage.css"; // Import your custom styles
 import { useNavigate } from "react-router-dom";
 
+const userDataString = sessionStorage.getItem("userData");
+const userData = JSON.parse(userDataString);
+
 const RideOptionsPage = () => {
   const navigate = useNavigate();
   const handlefindride = () => {
@@ -12,7 +15,11 @@ const RideOptionsPage = () => {
   };
 
   const handlecreateride = () => {
-    navigate("/post-ride-form");
+    if (userData?.has_car) {
+      navigate("/post-ride-form");
+    } else {
+      navigate("/register-as-driver-form");
+    }
   };
   return (
     <div className="ride-options-page">

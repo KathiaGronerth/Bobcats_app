@@ -12,12 +12,18 @@ import { FaCar } from "react-icons/fa";
 import { MdOutlineDateRange } from "react-icons/md";
 import UserProfile from "../UserProfile";
 import DriverProfile from "../DriverProfile";
+import Modal from "react-modal";
+import { useNavigate } from "react-router-dom";
+import { MdHome } from "react-icons/md";
+import { MdHistory } from "react-icons/md";
 
 const RequestToBook = () => {
   const location = useLocation();
   const { searchCriteria, selectedRide } = location.state || {};
   const [showUserProfile, setShowUserProfile] = useState(false);
   const [showDriverProfile, setShowDriverProfile] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const navigate = useNavigate();
 
   const bookingDetails = {
     name: "John Doe",
@@ -31,7 +37,7 @@ const RequestToBook = () => {
 
   const handleRequestToBook = () => {
     // Implement your logic for handling the request to book
-    alert("Request to book submitted!");
+    setIsModalOpen(true);
   };
 
   const toggleUserProfile = () => {
@@ -42,8 +48,36 @@ const RequestToBook = () => {
     setShowDriverProfile(!showDriverProfile);
   };
 
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+  const handleRideHistory = () => {
+    navigate("/");
+  };
+  const handleHomePage = () => {
+    navigate("/");
+  };
+
   return (
     <div className="request-to-book-main-container">
+      <Modal
+        isOpen={isModalOpen}
+        onRequestClose={closeModal}
+        contentLabel="Event Options"
+        overlayClassName="modal-overlay"
+        className="modal"
+        shouldCloseOnOverlayClick={false}
+      >
+        <h2>Your ride has been successfully booked!</h2>
+        <div className="button-container">
+          <button onClick={handleRideHistory}>
+            Ride History <MdHistory />
+          </button>
+          <button onClick={handleHomePage}>
+            Home Page <MdHome />
+          </button>
+        </div>
+      </Modal>
       <h2>
         Ride Details <FaCar style={{ color: "#98ed64" }} />
       </h2>
@@ -201,7 +235,7 @@ const RequestToBook = () => {
         >
           <div style={{ fontSize: "14px" }}>
             <BsCalendarCheck style={{ color: "#98ed64", marginRight: "5px" }} />{" "}
-            Your booking will be confirmed immediately
+            Your booking will be confirmed immediately!
           </div>
         </div>
         <div
@@ -216,9 +250,9 @@ const RequestToBook = () => {
             background: "#fff",
           }}
         >
-          <button>
+          <button onClick={handleRequestToBook}>
             <BsCalendarCheck style={{ marginRight: "5px" }} />
-            Request to Book
+            Book a Ride
           </button>
         </div>
       </div>
