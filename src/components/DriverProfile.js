@@ -4,6 +4,7 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import CarProfile from "./CarProfile";
 import ReviewsListDriver from "./ReviewsList_Driver"; // Assuming you have a Reviews component
+import { DEMO_EVENTS, DEMO_COURSE_EVENTS } from "./calendar/Calendar";
 
 const default_profile_photo = "/images/default_profile_photo.jpg";
 const default_cover_photo = "/images/default_cover_photo.jpg";
@@ -168,6 +169,7 @@ const DriverProfile = () => {
             selectMirror={true}
             dayMaxEvents={true}
             weekends={true}
+            events={[...DEMO_EVENTS, ...DEMO_COURSE_EVENTS]}
           />
         </div>
       </div>
