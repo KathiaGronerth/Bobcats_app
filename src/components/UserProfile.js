@@ -5,6 +5,7 @@ import interactionPlugin from "@fullcalendar/interaction";
 import CarProfile from "./CarProfile";
 import ReviewsListUser from "./ReviewsList_User";
 import EditUserProfile from "./EditUserProfile";
+import { DEMO_EVENTS, DEMO_COURSE_EVENTS } from "./calendar/Calendar"; // Adjust the path as needed
 
 const default_profile_photo = "/images/default_profile_photo.jpg";
 const default_cover_photo = "/images/default_cover_photo.jpg";
@@ -218,6 +219,7 @@ const UserProfile = () => {
                 selectMirror={true}
                 dayMaxEvents={true}
                 weekends={true}
+                events={[...DEMO_EVENTS, ...DEMO_COURSE_EVENTS]}
               />
             </div>
           </div>
