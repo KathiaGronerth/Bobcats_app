@@ -1,124 +1,117 @@
-// export const users = [
-//   {
-//     id: "user1",
-//     name: "John Doe",
-//     type: "passenger",
-//   },
-//   {
-//     id: "user2",
-//     name: "Jane Smith",
-//     type: "driver",
-//   },
-// ];
-
-// export const initialMessages = [
-//   {
-//     messageId: "msg1",
-//     senderId: "user1",
-//     receiverId: "user2",
-//     text: "Hi, I'm outside the building.",
-//     timestamp: "2023-11-22T09:00:00Z",
-//   },
-//   {
-//     messageId: "msg2",
-//     senderId: "user2",
-//     receiverId: "user1",
-//     text: "Great, I'll be there in a minute.",
-//     timestamp: "2023-11-22T09:01:00Z",
-//   },
-// ];
-
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import MessageList from "./MessageList";
 import ChatInput from "./ChatInput";
 
-const ChatComponent = ({ user_id, ride_id }) => {
-  const [messages, setMessages] = useState([]); // Initialize with an empty array
+// const ChatComponent = ({selectedRide}) => {
+const ChatComponent = () => {
+  const [messages, setMessages] = useState([]);
+  const [userData, setUserData] = useState(null);
+  const [error, setError] = useState(null);
 
-  const [webSocket, setWebSocket] = useState(null);
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        //You can uncomment these lines
+        // const access = JSON.parse(sessionStorage.getItem("access"));
+        // const response = await fetch("http://127.0.0.1:8000/api/profile", {
+        //   headers: {
+        //     Authorization: `Bearer ${access}`,
+        //     "Content-Type": "application/json",
+        //   },
+        // });
 
-  // Function to fetch initial messages from the API
-  const fetchInitialMessages = async () => {
+        /* you can commented out these lines to... */
+        const response = await fetch(
+          "https://run.mocky.io/v3/d80c60c3-7f40-44f4-bace-31eaeada02ad"
+        );
+        /*...here*/
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        setUserData(data);
+      } catch (e) {
+        setError(e.message);
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
+  //const fetchMessages = async (ride_id) => {
+  const fetchMessages = async () => {
     try {
-      // Corrected the API endpoint to match the provided format
+      // const access = JSON.parse(sessionStorage.getItem("access"));
+      // const response = await axios.get(
+      //   "http://127.0.0.1:8000/api/ride/{{selectedRide.id}}/message",
+      //   {
+      //     headers: {
+      //       Authorization: `Bearer ${access}`,
+      //       "Content-Type": "application/json",
+      //     },
+      //   }
+      // );
       const response = await axios.get(
-        // `http://127.0.0.1:8000/api/ride/${ride_id}/message`
-        "https://run.mocky.io/v3/d25647b8-57ca-4f89-bbc2-23a3fbae5211"
+        "https://run.mocky.io/v3/78dacaf3-1c32-4363-9808-89ce24338a55"
       );
-      // Assuming the response has a 'messages' array, update the state
-      setMessages(response.data.messages);
+      const formattedMessages = response.data.map((msg) => ({
+        senderId: msg.sender.id,
+        text: msg.message,
+        timestamp: msg.timestamp,
+      }));
+      setMessages(formattedMessages);
     } catch (error) {
-      console.error("Error fetching initial messages:", error);
+      console.error("Error fetching messages:", error);
     }
   };
 
   useEffect(() => {
-    fetchInitialMessages(); // Fetch initial messages when the component mounts
-
-    // Create a new WebSocket connection
-    const newWebSocket = new WebSocket(
-      `ws://localhost:8000/ws/chat/${ride_id}`
-    );
-    newWebSocket.onopen = () => {
-      console.log("WebSocket Connected");
-    };
-
-    newWebSocket.onmessage = (e) => {
-      const data = JSON.parse(e.data);
-      // Assuming 'data' contains a 'message' object
-      if (data && data.message) {
-        setMessages((prevMessages) => [...prevMessages, data.message]);
-      }
-    };
-
-    newWebSocket.onclose = () => {
-      console.error("Chat socket closed unexpectedly");
-    };
-
-    setWebSocket(newWebSocket);
-
-    // Cleanup function to close the WebSocket connection when the component unmounts
-    return () => {
-      newWebSocket.close();
-    };
-  }, [ride_id]); // Added 'ride_id' as a dependency for useEffect
+    fetchMessages();
+    const intervalId = setInterval(fetchMessages, 5000);
+    return () => clearInterval(intervalId);
+  }, []);
 
   const sendMessage = async (messageText) => {
-    const messageData = {
-      messageId: `msg${messages.length + 1}`,
-      senderId: user_id,
-      receiverId: user_id === "user1" ? "user2" : "user1", // Assuming a two-user chat for simplicity
-      text: messageText,
-      timestamp: new Date().toISOString(),
-    };
+    if (userData) {
+      const newMessage = {
+        senderId: userData.id,
+        text: messageText,
+        timestamp: new Date().toISOString(),
+      };
 
-    if (webSocket && webSocket.readyState === WebSocket.OPEN) {
-      // Send the message through WebSocket
-      webSocket.send(JSON.stringify({ message: messageData }));
-    } else {
-      // Fallback to sending the message via the API
       try {
-        //await axios.post(`http://127.0.0.1:8000/api/ride/${ride_id}/message`, {
-        await axios.post(
-          "https://run.mocky.io/v3/d25647b8-57ca-4f89-bbc2-23a3fbae5211",
-          {
-            message: messageText,
-          }
-        );
-      } catch (error) {
-        console.error("Error sending message via API:", error);
-      }
-    }
+        setMessages((prevMessages) => [...prevMessages, newMessage]);
 
-    // Add the new message to the messages state
-    setMessages([...messages, messageData]);
+        await axios.post(
+          // "http://127.0.0.1:8000/api/ride/{{selectedRide.id}}/message",
+          "https://run.mocky.io/v3/78dacaf3-1c32-4363-9808-89ce24338a55",
+          newMessage
+        );
+        setTimeout(() => {
+          fetchMessages();
+        }, 10000);
+      } catch (error) {
+        console.error("Error sending message:", error);
+      }
+    } else {
+      console.error("User data is not loaded yet");
+    }
   };
+
+  if (error) {
+    return <div>Error loading chat: {error}</div>;
+  }
+
+  if (!userData) {
+    return <div>Loading...</div>; // or any other loading indicator
+  }
 
   return (
     <div className="chat">
       <div className="chat-container">
-        <MessageList messages={messages} currentuser_id={user_id} />
+        <MessageList messages={messages} currentUserId={userData.id} />
         <ChatInput onSend={sendMessage} />
       </div>
     </div>
