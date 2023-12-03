@@ -1,0 +1,44 @@
+/* Add this CSS to style your components */
+.ride-page {
+  padding: 20px;
+  padding-top: 100px;
+  flex: 1;
+  background-color: #e7f7fe;
+  font-family: "Poppins", sans-serif;
+}
+
+.rides-page-title {
+  font-size: 22px;
+}
+
+.ride-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.ride-card {
+  border: 2px solid #ccc;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 60%;
+  font-size: 14px;
+}
+
+.ride-card-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.ride-id {
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.ride-detail {
+  margin-bottom: 8px;
+}
