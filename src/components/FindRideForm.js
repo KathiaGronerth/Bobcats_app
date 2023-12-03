@@ -88,8 +88,9 @@ const FindRideForm = () => {
 
       if (response.ok) {
         console.log("Ride search request sent successfully");
+        const rides = await response.json()
         // Navigate to the appropriate page after the successful API call
-        navigate("/rides", { state: { searchCriteria, response } });
+        navigate("/rides", { state: { searchCriteria, rides } });
       } else {
         console.error(
           "Failed to send ride search request. Server returned:",

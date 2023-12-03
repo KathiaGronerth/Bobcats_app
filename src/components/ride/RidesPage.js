@@ -61,7 +61,7 @@ const RidesPage = () => {
   const [selectedRide, setSelectedRide] = useState(null);
   const [googleMapsLoaded, setGoogleMapsLoaded] = useState(false);
   const location = useLocation();
-  const { searchCriteria, response } = location.state || {};
+  const { searchCriteria, rides } = location.state || {};
   const [disableContinue, setDisableContinue] = useState(true);
   const navigate = useNavigate();
   const [priceFilter, setPriceFilter] = useState("");
@@ -238,7 +238,7 @@ const RidesPage = () => {
   };
 
   const filterRidesByPrice = () => {
-    let filteredRides = [...response];
+    let filteredRides = [...rides];
     if (priceFilter !== "") {
       filteredRides = filteredRides.filter(
         (ride) => ride.price_per_seat <= parseInt(priceFilter)
