@@ -261,7 +261,7 @@ const RequestToBook = () => {
               textDecoration: "none",
             }}
           >
-            <ChatComponent />
+            <ChatComponent selectedRide={selectedRide} />
             <button onClick={toggleChat}>Close Profile</button>
           </div>
         </div>
