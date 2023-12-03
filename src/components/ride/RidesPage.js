@@ -202,14 +202,14 @@ const RidesPage = () => {
         <div className="name">{ride.driver.name}</div>
         <div className="source">From {ride.source}</div>
         <div className="time-distance">
-          {ride.time}{" "}
+          {ride.time_in_hrs}{" "}
           <MdAccessTime
             style={{
               width: "20px",
               height: "auto",
             }}
           />
-          / 15 Miles
+          / {ride.distance_in_miles}
         </div>
         <div className="seat">
           Seats available
