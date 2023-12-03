@@ -43,7 +43,7 @@ const RegisterAsDriverForm = () => {
 
     try {
       const response = await fetch(apiUrl, {
-        method: "POST",
+        method: "PATCH",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${access}`,
@@ -78,10 +78,10 @@ const RegisterAsDriverForm = () => {
   const handleHomePage = () => {
     navigate("/");
   };
-  const handleRegisterVehicle = () => {
-    // Show the modal after the request is submitted
-    setIsModalOpen(true);
-  };
+  // const handleRegisterVehicle = () => {
+  //   // Show the modal after the request is submitted
+  //   setIsModalOpen(true);
+  // };
 
   return (
     <div className="register-driver-form-main">
@@ -103,7 +103,7 @@ const RegisterAsDriverForm = () => {
       <div className="register-driver-form">
         <h2>Register your car</h2>
         <form onSubmit={handleSubmit}>
-          <div className="input-group">
+          {/* <div className="input-group">
             <label>Full Name:</label>
             <input
               type="text"
@@ -111,7 +111,7 @@ const RegisterAsDriverForm = () => {
               onChange={(e) => setName(e.target.value)}
               placeholder="Enter your full name"
             />
-          </div>
+          </div> */}
           <div className="input-group">
             <label>Vehicle Make:</label>
             <input
@@ -161,7 +161,7 @@ const RegisterAsDriverForm = () => {
           <button
             type="submit"
             className="register-driver-form-button"
-            onClick={handleRegisterVehicle}
+            onClick={handleSubmit}
           >
             {" "}
             Register

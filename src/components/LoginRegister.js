@@ -31,9 +31,9 @@ const LoginRegister = () => {
 
       if (!response.ok) {
         if (response.status === 400) {
-          alert("Incorrect credentials!");
-        } else if (response.status === 403) {
           alert("Please confirm your email in inbox before proceeding");
+        } else if (response.status === 403) {
+          alert("Incorrect credentials!");
         } else {
           alert("An error occurred!");
           throw new Error(`HTTP error! Status: ${response.status}`);

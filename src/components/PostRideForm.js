@@ -137,7 +137,7 @@ const PostRideForm = () => {
     //console.log(formData);
     // navigate("/success");
     console.log("requestBody : ", requestBody);
-    navigate("/success");
+    navigate("/");
   };
 
   if (!scriptLoaded) {

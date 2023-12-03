@@ -57,17 +57,17 @@ const FindRideForm = () => {
 
       // Create the request body
       const requestBody = {
-        source,
-        source_coordinates: sourceLatLng,
-        destination,
-        destination_coordinates: destinationLatLng,
+        pickup_location: source,
+        pickup_coordinates: sourceLatLng,
+        drop_off_location: destination,
+        drop_off_coordinates: destinationLatLng,
         datetime: dateTime,
         travelers: parseInt(passengerCount, 10),
         specialneeds: specialNeeds,
       };
 
       // Make the API call
-      const response = await fetch("http://127.0.0.1:8000/api/passenger-ride", {
+      const response = await fetch("http://127.0.0.1:8000/api/find-ride", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -84,18 +84,18 @@ const FindRideForm = () => {
         source_coordinates: sourceCoordinates,
         destination_coordinates: destinationCoordinates,
       };
-      navigate("/rides", { state: { searchCriteria } });
-      /*if (response.ok) {
+      
+      if (response.ok) {
         console.log("Ride search request sent successfully");
         // Navigate to the appropriate page after the successful API call
-        navigate("/rides");
+        navigate("/rides", { state: { searchCriteria } });
       } else {
         console.error(
           "Failed to send ride search request. Server returned:",
           response.status,
           response.statusText
         );
-      } */
+      } 
     } catch (error) {
       console.error("Error sending ride search request:", error);
     }
