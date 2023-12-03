@@ -1,21 +1,21 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import findRideImage from "../../../assets/images/background.png";
 import reserveRideImage from "../../../assets/images/publishride.png";
 import "./RideOptionsPage.css"; // Import your custom styles
 import { useNavigate } from "react-router-dom";
 
-const userDataString = sessionStorage.getItem("userData");
-const userData = JSON.parse(userDataString);
-
 const RideOptionsPage = () => {
   const navigate = useNavigate();
+  const userDataString = sessionStorage.getItem("userData");
+  const userData = JSON.parse(userDataString);
+
   const handlefindride = () => {
     navigate("/find-ride-form");
   };
 
+
   const handlecreateride = () => {
-    if (userData?.has_car) {
+    if (userData.has_car === true) {
       navigate("/post-ride-form");
     } else {
       navigate("/register-as-driver-form");

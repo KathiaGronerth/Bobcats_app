@@ -38,6 +38,8 @@ const NavBar = () => {
   const handleLogout = () => {
     // Clear all items from sessionStorage
     sessionStorage.clear();
+    sessionStorage.removeItem("userData");
+    sessionStorage.removeItem("profile");
     navigate("/");
     setDropdownOpen(false);
   };
