@@ -7,14 +7,65 @@ const RegisterAsDriverForm = () => {
   const [name, setName] = useState("");
   const [make, setMake] = useState("");
   const [model, setModel] = useState("");
+  const [color, setColor] = useState("");
+  const [year, setYear] = useState("");
   const [license, setLicense] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle the registration logic here (e.g., call an API or update state)
-    console.log({ name, vehicle, license });
+
+    const apiUrl = "http://127.0.0.1:8000/api/profile"; // Replace with your actual API endpoint
+    const profile = JSON.parse(sessionStorage.getItem("profile"));
+    console.log("bio", profile.bio);
+    console.log("phone");
+    console.log("speaks", profile.speaks);
+
+    const requestBody = {
+      bio: profile.bio,
+      phone: profile.phone,
+      speaks: profile.speaks,
+      studies: profile.studies,
+      from_location: profile.from_location,
+      has_car: true,
+      cars: [
+        {
+          model: model,
+          make: make,
+          color: color,
+          year: year,
+          license_plate: license,
+        },
+      ],
+    };
+
+    try {
+      const response = await fetch(apiUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          // Include any other required headers here...
+        },
+        body: JSON.stringify(requestBody),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log("POST request successful:", data);
+        const currentUserData = JSON.parse(sessionStorage.getItem("userData"));
+        currentUserData.has_car = true;
+        sessionStorage.setItem("userData", JSON.stringify(currentUserData));
+        // Show the success modal
+        setIsModalOpen(true);
+      } else {
+        console.error("POST request failed! Status:", response.status);
+        // Handle error for the POST request if needed
+      }
+    } catch (error) {
+      // Handle errors for the POST request
+      console.error("Error making POST request:", error.message);
+    }
   };
 
   const closeModal = () => {
@@ -49,7 +100,7 @@ const RegisterAsDriverForm = () => {
         </div>
       </Modal>
       <div className="register-driver-form">
-        <h2>Register as a Driver</h2>
+        <h2>Register your car</h2>
         <form onSubmit={handleSubmit}>
           <div className="input-group">
             <label>Full Name:</label>
@@ -76,6 +127,25 @@ const RegisterAsDriverForm = () => {
               value={model}
               onChange={(e) => setModel(e.target.value)}
               placeholder="Enter vehicle model..."
+            />
+          </div>
+          <div className="input-group">
+            <label>Vehicle Year:</label>
+            <input
+              type="text"
+              value={year}
+              onChange={(e) => setYear(e.target.value)}
+              placeholder="Enter vehicle year..."
+            />
+          </div>
+
+          <div className="input-group">
+            <label>Vehicle Color:</label>
+            <input
+              type="text"
+              value={color}
+              onChange={(e) => setColor(e.target.value)}
+              placeholder="Enter vehicle color..."
             />
           </div>
           <div className="input-group">

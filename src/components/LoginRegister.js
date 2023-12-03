@@ -14,8 +14,7 @@ const LoginRegister = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    const apiUrl =
-      "http://127.0.0.1:8000/api/login";
+    const apiUrl = "http://127.0.0.1:8000/api/login";
 
     try {
       const response = await fetch(apiUrl, {
@@ -55,6 +54,34 @@ const LoginRegister = () => {
         console.log("Logged in user:", data.user.name);
         console.log("Access token:", data.access);
         console.log("Refresh token:", data.refresh);
+
+        const token = JSON.parse(sessionStorage.getItem("access"));
+        try {
+          const apiUrlGet = "http://127.0.0.1:8000/api/profile"; // Replace with your actual endpoint
+          const responseGet = await fetch(apiUrlGet, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              // Include any required headers (e.g., Authorization) here...
+              Authorization: `Bearer ${token}`, // Include the access token in the Authorization header
+            },
+          });
+
+          if (responseGet.ok) {
+            const dataGet = await responseGet.json();
+
+            console.log("GET request successful:", dataGet);
+
+            // Store the GET request response in sessionStorage
+            sessionStorage.setItem("profile", JSON.stringify(dataGet));
+          } else {
+            console.error("GET request failed! Status:", responseGet.status);
+            // Handle error for the GET request if needed
+          }
+        } catch (error) {
+          // Handle errors for the GET request
+          console.error("Error making GET request:", error.message);
+        }
         navigate("/rideoption");
       }
     } catch (error) {
