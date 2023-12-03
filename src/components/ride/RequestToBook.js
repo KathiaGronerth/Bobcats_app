@@ -175,7 +175,10 @@ const RequestToBook = () => {
 
       <div className="request-to-book-container2">
         <Link
-          to="/chat"
+          to={{
+            pathname: "/chat",
+            state: { selectedRide },
+          }}
           style={{
             display: "flex",
             justifyContent: "space-between",
