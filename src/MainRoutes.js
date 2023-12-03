@@ -25,6 +25,7 @@ import RequestToBook from "./components/ride/RequestToBook";
 import RideList from "./components/RideList";
 import RideHistory from "./components/ride/PassengerHistory";
 import DriverHistory from "./components/ride/DriverHistory";
+import CombinedHistory from "./components/ride/CombinedHistory";
 const MainRoutes = () => {
   return (
     <Routes>
@@ -56,6 +57,7 @@ const MainRoutes = () => {
       <Route path="/ridelist" element={<RideList />} />
       <Route path="/passengerhistory" element={<RideHistory />} />
       <Route path="/driverhistory" element={<DriverHistory />} />
+      <Route path="/combinedhistory" element={<CombinedHistory />} />
       {/* You can also add a 404 route here if you like */}
       {/* <Route path="*" element={<NotFound />} /> */}
     </Routes>

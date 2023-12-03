@@ -1,0 +1,45 @@
+/* CombinedHistory.css */
+html,
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+}
+
+.combined-history-container {
+  max-width: 90%;
+  margin: 20px auto;
+  padding-top: 70px;
+  background-color: #fff;
+  flex: 1;
+}
+
+.history-tabs {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.history-tab {
+  flex: 1;
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
+  background-color: #f0f0f0;
+  border: 2px solid #ddd;
+  color: #054957;
+}
+
+.history-tab.active {
+  background-color: #054957;
+  color: #fff;
+}
+
+.history-content {
+  border: 2px solid #ddd;
+  padding: 20px;
+}
+
+.history-content .ride-page {
+  padding-top: 10px !important;
+}
+/* Add more styles as needed */

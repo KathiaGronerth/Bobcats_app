@@ -219,7 +219,7 @@ const NavBar = () => {
                   </Link>
                   {/* TODO: Neha can you help me here to set up conditional navigation to Rides or Passengers */}
                   <Link
-                    to="/passengerhistory"
+                    to="/combinedhistory"
                     className="dropdown-item"
                     onClick={(event) => handleDropdownToggle(event)}
                   >
