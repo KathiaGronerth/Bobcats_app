@@ -12,6 +12,7 @@ import { FaCar } from "react-icons/fa";
 import { MdOutlineDateRange } from "react-icons/md";
 import UserProfile from "../UserProfile";
 import DriverProfile from "../DriverProfile";
+import ChatComponent from "../chat/ChatComponent";
 import Modal from "react-modal";
 import { useNavigate } from "react-router-dom";
 import { MdHome } from "react-icons/md";
@@ -22,6 +23,7 @@ const RequestToBook = () => {
   const { searchCriteria, selectedRide } = location.state || {};
   const [showUserProfile, setShowUserProfile] = useState(false);
   const [showDriverProfile, setShowDriverProfile] = useState(false);
+  const [showChat, setShowChat] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
   const access = JSON.parse(sessionStorage.getItem("access"));
@@ -69,6 +71,10 @@ const RequestToBook = () => {
 
   const toggleDriverProfile = () => {
     setShowDriverProfile(!showDriverProfile);
+  };
+
+  const toggleChat = () => {
+    setShowChat(!showChat);
   };
 
   const closeModal = () => {
@@ -174,11 +180,7 @@ const RequestToBook = () => {
       </div>
 
       <div className="request-to-book-container2">
-        <Link
-          to={{
-            pathname: "/chat",
-            state: { selectedRide },
-          }}
+        <div
           style={{
             display: "flex",
             justifyContent: "space-between",
@@ -190,12 +192,12 @@ const RequestToBook = () => {
               <IoChatbubblesOutline /> Contact {selectedRide?.driver.name}
             </strong>
           </div>
-          <div>
+          <div onClick={toggleChat}>
             <strong style={{ color: "#054957" }}>
               <FaArrowRight style={{ fontSize: "18px" }} />
             </strong>
           </div>
-        </Link>
+        </div>
       </div>
 
       <div className="request-to-book-container2">
@@ -245,6 +247,22 @@ const RequestToBook = () => {
           >
             <DriverProfile />
             <button onClick={toggleDriverProfile}>Close Profile</button>
+          </div>
+        </div>
+      )}
+      {showChat && (
+        <div>
+          <div className="overlay" onClick={toggleChat}></div>
+          <div
+            className="user-profile-modal"
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              textDecoration: "none",
+            }}
+          >
+            <ChatComponent />
+            <button onClick={toggleChat}>Close Profile</button>
           </div>
         </div>
       )}
