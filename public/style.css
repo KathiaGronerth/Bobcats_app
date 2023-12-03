@@ -394,6 +394,7 @@ p {
   align-items: center;
   height: 100vh;
 }
+
 .chat-container {
   display: flex;
   flex-direction: column;
@@ -409,6 +410,8 @@ p {
 }
 
 .message-list {
+  display: flex;
+  flex-direction: column;
   overflow-y: auto;
   padding: 10px;
   flex-grow: 1;
@@ -420,19 +423,19 @@ p {
   padding: 10px;
   border-radius: 8px;
   max-width: 70%;
+  align-self: flex-start; /* Align messages to the start by default */
 }
 
 .my-message {
   background-color: #00aff5;
   color: white;
-  align-self: flex-end;
+  align-self: flex-end; /* Align your messages to the end */
   border-bottom-right-radius: 0;
 }
 
 .other-message {
   background-color: #054957;
   color: white;
-  align-self: flex-start;
   border-bottom-left-radius: 0;
 }
 
