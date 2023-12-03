@@ -24,20 +24,43 @@ const RequestToBook = () => {
   const [showDriverProfile, setShowDriverProfile] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
+  const access = JSON.parse(sessionStorage.getItem("access"));
 
-  const bookingDetails = {
-    name: "John Doe",
-    day: "Mon",
-    date: "Nov 27",
-    sourceLocation: "Austin",
-    destinationLocation: "San Jose",
-    pricePerPassenger: "$50",
-    seats_available: 3,
-  };
+  const handleRequestToBook = async () => {
+    try {
+      const requestBody = {
+        ride_id: selectedRide?.id,
+        pickup_location: searchCriteria?.source,
+        pickup_coordinates: searchCriteria?.source_coordinates,
+        drop_off_location: searchCriteria?.destination,
+        drop_off_coordinates: searchCriteria?.destination_coordinates,
+        datetime: searchCriteria?.dateTime,
+      };
 
-  const handleRequestToBook = () => {
-    // Implement your logic for handling the request to book
-    setIsModalOpen(true);
+      const response = await fetch("http://127.0.0.1:8000/api/passenger-ride", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${access}`, // Include your authorization token
+        },
+        body: JSON.stringify(requestBody),
+      });
+
+      if (response.ok) {
+        console.log("Ride booked successfully");
+        // Optionally, you can redirect or show a success message
+        setIsModalOpen(true);
+      } else {
+        console.error(
+          "Failed to book ride. Server returned:",
+          response.status,
+          response.statusText
+        );
+        // Optionally, you can handle the error, show a message, or take other actions
+      }
+    } catch (error) {
+      console.error("Error booking ride:", error);
+    }
   };
 
   const toggleUserProfile = () => {
@@ -161,7 +184,7 @@ const RequestToBook = () => {
         >
           <div>
             <strong style={{ color: "#00aff5" }}>
-              <IoChatbubblesOutline /> Contact {bookingDetails.name}
+              <IoChatbubblesOutline /> Contact {selectedRide?.driver.name}
             </strong>
           </div>
           <div>
