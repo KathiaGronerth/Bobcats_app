@@ -245,7 +245,7 @@ const RequestToBook = () => {
               textDecoration: "none",
             }}
           >
-            <DriverProfile />
+            <DriverProfile selectedRide={selectedRide}/>
             <button onClick={toggleDriverProfile}>Close Profile</button>
           </div>
         </div>

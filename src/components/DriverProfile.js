@@ -9,27 +9,27 @@ import { DEMO_EVENTS, DEMO_COURSE_EVENTS } from "./calendar/Calendar";
 const default_profile_photo = "/images/default_profile_photo.jpg";
 const default_cover_photo = "/images/default_cover_photo.jpg";
 
-const DriverProfile = () => {
+const DriverProfile = ({selectedRide}) => {
   const [rideData, setRideData] = useState(null);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchRideData = async () => {
       try {
-        //You can uncomment these lines
-        //const access = JSON.parse(sessionStorage.getItem("access"));
-        //const response = await fetch("http://127.0.0.1:8000/api/ride", {
-        // {
-        //   headers: {
-        //     Authorization: `Bearer ${access}`,
-        //     "Content-Type": "application/json",
-        //   },
-        // });
+        // You can uncomment these lines
+        const access = JSON.parse(sessionStorage.getItem("access"));
+        console.log('Driver Profile', selectedRide)
+        const response = await fetch(`http://127.0.0.1:8000/api/review?driver=${selectedRide.driver.email}`, {
+          headers: {
+            Authorization: `Bearer ${access}`,
+            "Content-Type": "application/json",
+          },
+        });
 
         /* you can commented out these lines to... */
-        const response = await fetch(
-          "https://run.mocky.io/v3/f3b4b6f0-fea8-4ce7-b57f-e600d625a6fd"
-        );
+        // const response = await fetch(
+        //   "https://run.mocky.io/v3/f3b4b6f0-fea8-4ce7-b57f-e600d625a6fd"
+        // );
         /*...here*/
 
         if (!response.ok) {
@@ -94,16 +94,16 @@ const DriverProfile = () => {
           className="cover-photo-img"
         /> */}
         <div className="profile-header">
-          <img
+          {/* <img
             src={rideData.profile.profile_photo || default_profile_photo}
             alt={`${rideData.profile.name}'s profile`}
             className="profile-pic"
-          />
-          {/* <img
+          /> */}
+          <img
           src={`data:image/jpeg;base64, ${rideData.profile.profile_photo}` || default_profile_photo}
           alt={`${rideData.profile.name}'s profile`}
           className="profile-pic"
-        /> */}
+        />
         </div>
       </div>
       <div className="profile-content">
