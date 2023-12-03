@@ -108,12 +108,12 @@ const PostRideForm = () => {
       price_per_seat: parseFloat(price),
     };
 
-     try {
+    try {
       // Make the API call
       const response = await fetch("http://127.0.0.1:8000/api/ride", {
         method: "POST",
         headers: {
-          'Authorization': `Bearer ${access}`,
+          Authorization: `Bearer ${access}`,
           "Content-Type": "application/json",
           // Add any other headers you need, e.g., authorization token
         },
@@ -137,7 +137,7 @@ const PostRideForm = () => {
     //console.log(formData);
     // navigate("/success");
     console.log("requestBody : ", requestBody);
-    navigate("/");
+    navigate("/driverhistory");
   };
 
   if (!scriptLoaded) {

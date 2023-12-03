@@ -75,7 +75,7 @@ const RequestToBook = () => {
     setIsModalOpen(false);
   };
   const handleRideHistory = () => {
-    navigate("/");
+    navigate("/passengerhistory");
   };
   const handleHomePage = () => {
     navigate("/");
