@@ -215,8 +215,9 @@ const NavBar = () => {
                     User Profile{" "}
                     <IoIosArrowForward style={{ paddingLeft: "45px" }} />
                   </Link>
+                  {/* TODO: Neha can you help me here to set up conditional navigation to Rides or Passengers */}
                   <Link
-                    to="/ride-history"
+                    to="/passengerhistory"
                     className="dropdown-item"
                     onClick={(event) => handleDropdownToggle(event)}
                   >
