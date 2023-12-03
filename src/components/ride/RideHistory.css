@@ -1,5 +1,12 @@
 /* Add this CSS to style your components */
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
 .ride-page {
+  height: 100%;
   padding: 20px;
   padding-top: 100px;
   flex: 1;
@@ -12,6 +19,7 @@
 }
 
 .ride-container {
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -41,4 +49,13 @@
 
 .ride-detail {
   margin-bottom: 8px;
+}
+
+.ride-container-no-history {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center horizontally */
+  justify-content: center; /* Center vertically */
+  height: 100%; /* Ensure the container takes up the full height */
 }
