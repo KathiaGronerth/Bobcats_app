@@ -19,18 +19,18 @@ const UserProfile = () => {
     const fetchUserData = async () => {
       try {
         //You can uncomment these lines
-        // const access = JSON.parse(sessionStorage.getItem("access"));
-        // const response = await fetch("http://127.0.0.1:8000/api/profile", {
-        //   headers: {
-        //     Authorization: `Bearer ${access}`,
-        //     "Content-Type": "application/json",
-        //   },
-        // });
+        const access = JSON.parse(sessionStorage.getItem("access"));
+        const response = await fetch("http://127.0.0.1:8000/api/profile", {
+          headers: {
+            Authorization: `Bearer ${access}`,
+            "Content-Type": "application/json",
+          },
+        });
 
         /* you can commented out these lines to... */
-        const response = await fetch(
-          "https://run.mocky.io/v3/d80c60c3-7f40-44f4-bace-31eaeada02ad"
-        );
+        // const response = await fetch(
+        //   "https://run.mocky.io/v3/d80c60c3-7f40-44f4-bace-31eaeada02ad"
+        // );
         /*...here*/
 
         if (!response.ok) {
@@ -90,27 +90,27 @@ const UserProfile = () => {
     console.log("Saving updated profile:", updatedProfile);
 
     try {
-      //const access = JSON.parse(sessionStorage.getItem("access"));
-      //const response = await fetch("http://127.0.0.1:8000/api/profile", {
-      // {
-      //   method: "PATCH",
-      //   headers: {
-      //     Authorization: `Bearer ${access}`,
-      //     "Content-Type": "application/json",
-      //   },
-      //   body: JSON.stringify(updatedProfile),
-      // });
+      const access = JSON.parse(sessionStorage.getItem("access"));
+      const response = await fetch("http://127.0.0.1:8000/api/profile",
+      {
+        method: "PATCH",
+        headers: {
+          Authorization: `Bearer ${access}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedProfile),
+      });
 
-      const response = await fetch(
-        "https://run.mocky.io/v3/f3b4b6f0-fea8-4ce7-b57f-e600d625a6fd",
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(updatedProfile),
-        }
-      );
+      // const response = await fetch(
+      //   "https://run.mocky.io/v3/f3b4b6f0-fea8-4ce7-b57f-e600d625a6fd",
+      //   {
+      //     method: "PUT",
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //     },
+      //     body: JSON.stringify(updatedProfile),
+      //   }
+      // );
 
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -127,27 +127,27 @@ const UserProfile = () => {
   return (
     <div className="user-profile-container">
       <div className="cover-photo">
-        <img
+        {/* <img
           src={userData.cover_photo || default_cover_photo}
           alt="Cover"
           className="cover-photo-img"
-        />
-        {/* <img
-          src={`data:image/jpeg;base64, ${userData.profile.cover_photo}` || default_cover_photo}
+        /> */}
+        <img
+          src={`data:image/jpeg;base64, ${userData.cover_photo}` || default_cover_photo}
           alt="Profile"
           className="cover-photo-img"
-        /> */}
+        />
         <div className="profile-header">
-          <img
+          {/* <img
             src={userData.profile_photo || default_profile_photo}
             alt={`${userData.name}'s profile`}
             className="profile-pic"
-          />
-          {/* <img
-            src={`data:image/jpeg;base64, ${userData.profile.profile_photo}` || default_profile_photo}
+          /> */}
+          <img
+            src={`data:image/jpeg;base64, ${userData.profile_photo}` || default_profile_photo}
             alt="Profile"
             className="profile-pic"
-          /> */}
+          />
         </div>
       </div>
       {isEditing ? (
@@ -160,7 +160,7 @@ const UserProfile = () => {
           <div className="profile-content">
             <h1>{userData.name}</h1>
             {userData.has_car && <div className="driver-title">Driver</div>}
-            {/* <div className="studies">
+            <div className="studies">
               <span>{userData.studies}</span>
             </div>
             <div className="speaks">
@@ -172,7 +172,7 @@ const UserProfile = () => {
                     </span>
                   ))
                 : userData.speaks}
-            </div> */}
+            </div>
           </div>
           <div style={{ padding: "0px" }} className="stats-container">
             <div className="stats trips">

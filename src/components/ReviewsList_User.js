@@ -10,7 +10,8 @@ const ReviewUser = ({ review }) => {
   return (
     <div className="review-card">
       <img
-        src={review.ride.driver.profile_photo || default_profile_photo}
+        // src={review.ride.driver.profile_photo || default_profile_photo}
+        src={`data:image/jpeg;base64, ${review.ride.driver.profile_photo}` || default_profile_photo}
         alt={`${review.ride.driver.name}`}
         className="review-user-photo"
       />
