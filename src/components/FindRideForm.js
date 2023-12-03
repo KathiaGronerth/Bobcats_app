@@ -22,6 +22,7 @@ const FindRideForm = () => {
 
   const navigate = useNavigate();
   const apiKey = config.googleMapsApiKey;
+  const access = JSON.parse(sessionStorage.getItem("access"));
 
   // Use the custom useScript hook
   const [scriptLoaded, scriptError] = useScript(
@@ -66,11 +67,11 @@ const FindRideForm = () => {
       };
 
       // Make the API call
-      const response = await fetch("YOUR_API_ENDPOINT", {
+      const response = await fetch("http://127.0.0.1:8000/api/passenger-ride", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          // Add any other headers you need, e.g., authorization token
+          Authorization: `Bearer ${access}`,
         },
         body: JSON.stringify(requestBody),
       });

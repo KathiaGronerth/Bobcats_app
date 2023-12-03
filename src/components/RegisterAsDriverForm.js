@@ -12,6 +12,7 @@ const RegisterAsDriverForm = () => {
   const [license, setLicense] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
+  const access = JSON.parse(sessionStorage.getItem("access"));
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -45,7 +46,7 @@ const RegisterAsDriverForm = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          // Include any other required headers here...
+          Authorization: `Bearer ${access}`,
         },
         body: JSON.stringify(requestBody),
       });
