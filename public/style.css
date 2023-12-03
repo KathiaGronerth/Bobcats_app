@@ -924,7 +924,7 @@ button:hover {
 .stats-container {
   display: flex;
   justify-content: space-around;
-  padding: 30px;
+  padding: 10px;
   font-size: 1.5em;
 }
 
