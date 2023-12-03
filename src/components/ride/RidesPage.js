@@ -61,7 +61,7 @@ const RidesPage = () => {
   const [selectedRide, setSelectedRide] = useState(null);
   const [googleMapsLoaded, setGoogleMapsLoaded] = useState(false);
   const location = useLocation();
-  const { searchCriteria, response } = location.state || {};
+  const { searchCriteria } = location.state || {};
   const [disableContinue, setDisableContinue] = useState(true);
   const navigate = useNavigate();
   const [priceFilter, setPriceFilter] = useState("");
@@ -199,7 +199,7 @@ const RidesPage = () => {
         className={`ride-card ${isSelected ? "selected" : ""}`}
         onClick={() => onMapClick(ride)}
       >
-        <div className="name">{ride.driver.name}</div>
+        <div className="name">{ride.name}</div>
         <div className="source">From {ride.source}</div>
         <div className="time-distance">
           {ride.time}{" "}
@@ -209,7 +209,7 @@ const RidesPage = () => {
               height: "auto",
             }}
           />
-          / 15 Miles
+          / {ride.distance}
         </div>
         <div className="seat">
           Seats available
@@ -238,7 +238,7 @@ const RidesPage = () => {
   };
 
   const filterRidesByPrice = () => {
-    let filteredRides = [...response];
+    let filteredRides = [...ridesData];
     if (priceFilter !== "") {
       filteredRides = filteredRides.filter(
         (ride) => ride.price_per_seat <= parseInt(priceFilter)
