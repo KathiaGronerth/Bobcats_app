@@ -276,3 +276,4 @@ export default function Calendar() {
     </div>
   );
 }
+export { DEMO_EVENTS, DEMO_COURSE_EVENTS };
