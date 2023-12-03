@@ -58,16 +58,62 @@ const Search = ({
     passengerCount,
   ]);
 
-  const handleSearchClick = () => {
-    const searchCriteria = {
-      source,
-      destination,
-      dateTime,
-      passengerCount,
-      source_coordinates: sourceCoordinates,
-      destination_coordinates: destinationCoordinates,
-    };
-    navigate("/rides", { state: { searchCriteria } });
+  const handleSearchClick = async (e) => {
+    e.preventDefault();
+    try {
+      // Perform geocoding to get coordinates
+      const sourceResults = await geocodeByAddress(source);
+      const sourceLatLng = await getLatLng(sourceResults[0]);
+
+      const destinationResults = await geocodeByAddress(destination);
+      const destinationLatLng = await getLatLng(destinationResults[0]);
+
+      // Create the request body
+      const requestBody = {
+        pickup_location: source,
+        pickup_coordinates: sourceLatLng,
+        drop_off_location: destination,
+        drop_off_coordinates: destinationLatLng,
+        datetime: dateTime,
+        travelers: parseInt(passengerCount, 10),
+        specialneeds: specialNeeds,
+      };
+
+      // Make the API call
+
+      const response = await fetch("http://127.0.0.1:8000/api/find-ride", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${access}`,
+        },
+        body: JSON.stringify(requestBody),
+      });
+      console.log("requestBody : ", requestBody);
+      const searchCriteria = {
+        source,
+        destination,
+        dateTime,
+        passengerCount,
+        source_coordinates: sourceCoordinates,
+        destination_coordinates: destinationCoordinates,
+      };
+
+      if (response.ok) {
+        console.log("Ride search request sent successfully");
+        const rides = await response.json();
+        // Navigate to the appropriate page after the successful API call
+        navigate("/rides", { state: { searchCriteria, rides } });
+      } else {
+        console.error(
+          "Failed to send ride search request. Server returned:",
+          response.status,
+          response.statusText
+        );
+      }
+    } catch (error) {
+      console.error("Error sending ride search request:", error);
+    }
   };
 
   const handleSelectSource = async (selected) => {
