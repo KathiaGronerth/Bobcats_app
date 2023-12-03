@@ -962,6 +962,26 @@ button:hover {
   margin-top: 10px;
 }
 
+.edit-submit-btn {
+  background-color: #00aff5; /* Maroon */
+  color: #fff; /* Gold */
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 25px;
+  transition: background-color 0.3s;
+  margin-left: "450px";
+}
+
+.edit-submit-btn:hover {
+  background-color: #008ec2;
+}
+
+.autocomplete-dropdown-container {
+  cursor: pointer;
+}
+
 /* LoginRegister */
 
 .main-login-register {
