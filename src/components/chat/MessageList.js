@@ -8,7 +8,7 @@ const MessageList = ({ messages, currentUserId }) => {
         <MessageComponent
           key={index}
           message={message}
-          isOwnMessage={message.sender === currentUserId}
+          isOwnMessage={message.senderId === currentUserId}
         />
       ))}
     </div>
