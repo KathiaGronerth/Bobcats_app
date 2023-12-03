@@ -76,10 +76,11 @@ const Search = ({
         drop_off_coordinates: destinationLatLng,
         datetime: dateTime,
         travelers: parseInt(passengerCount, 10),
-        specialneeds: specialNeeds,
+        specialneeds: '',
       };
 
       // Make the API call
+      const access = JSON.parse(sessionStorage.getItem("access"));
 
       const response = await fetch("http://127.0.0.1:8000/api/find-ride", {
         method: "POST",
