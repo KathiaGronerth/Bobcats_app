@@ -154,7 +154,11 @@ const UserProfile = () => {
         <EditUserProfile profile={userData} onSave={handleSave} />
       ) : (
         <>
-          <button style={{ marginLeft: "450px" }} onClick={handleEditProfile}>
+            <button
+            className="edit-submit-btn"
+            style={{ marginLeft: "450px" }}
+            onClick={handleEditProfile}
+          >
             Edit Profile
           </button>
           <div className="profile-content">
