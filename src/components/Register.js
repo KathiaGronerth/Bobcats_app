@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { MdLogin } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
+import cover_photo from "../../public/images/default_cover_photo.jpg";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -58,19 +59,18 @@ const Register = () => {
         const formData = new FormData();
         formData.append("email", registerEmail);
         formData.append("profile_photo", photo);
+        formData.append("cover_photo", cover_photo);
         const imageResponse = await fetch("http://127.0.0.1:8000/api/image", {
           method: "POST",
           body: formData,
-        })
-          .then((imageResponse) => {
-            // Handle the response
-            if (!imageResponse.ok) {
-              throw new Error("Network response was not ok.");
-            }
-            console.log(imageResponse.json())
-            
-          })
-        alert("Registration successful!");          
+        }).then((imageResponse) => {
+          // Handle the response
+          if (!imageResponse.ok) {
+            throw new Error("Network response was not ok.");
+          }
+          console.log(imageResponse.json());
+        });
+        alert("Registration successful!");
         navigate("/login");
       } else {
         // Registration failed
