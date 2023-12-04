@@ -6,6 +6,7 @@ import CarProfile from "./CarProfile";
 import ReviewsListUser from "./ReviewsList_User";
 import EditUserProfile from "./EditUserProfile";
 import { DEMO_EVENTS, DEMO_COURSE_EVENTS } from "./calendar/Calendar"; // Adjust the path as needed
+import { useNavigate } from "react-router-dom"; 
 
 const default_profile_photo = "/images/default_profile_photo.jpg";
 const default_cover_photo = "/images/default_cover_photo.jpg";
@@ -14,6 +15,11 @@ const UserProfile = () => {
   const [userData, setUserData] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
   const [error, setError] = useState(null);
+  const navigate = useNavigate(); 
+
+  const navigateToHome = () => {
+    navigate("/"); 
+  };
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -233,6 +239,13 @@ const UserProfile = () => {
           </div>
         </>
       )}
+      <button
+        className="edit-submit-btn"
+        style={{ marginLeft: "20px" }} // Adjust styling as needed
+        onClick={navigateToHome}
+      >
+        Go to Home
+      </button>
     </div>
   );
 };
