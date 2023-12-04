@@ -119,6 +119,10 @@ button:hover {
   padding: 5px 10px;
 }
 
+.user-profile-container {
+  padding: 80px;
+}
+
 .nav-user {
   position: relative;
 }

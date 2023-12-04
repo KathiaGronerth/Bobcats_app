@@ -9,7 +9,7 @@ import { DEMO_EVENTS, DEMO_COURSE_EVENTS } from "./calendar/Calendar"; // Adjust
 import { useNavigate } from "react-router-dom"; 
 
 const default_profile_photo = "/images/default_profile_photo.jpg";
-const default_cover_photo = "/images/default_cover_photo.jpg";
+const default_cover_photo = "/images/texas_state_university_cover.jpeg";
 
 const UserProfile = () => {
   const [userData, setUserData] = useState(null);
@@ -133,16 +133,16 @@ const UserProfile = () => {
   return (
     <div className="user-profile-container" style={{backgroundColor:"#f9f9f9"}}>
       <div className="cover-photo">
-        {/* <img
+        <img
           src={userData.cover_photo || default_cover_photo}
           alt="Cover"
           className="cover-photo-img"
-        /> */}
-        <img
+        />
+        {/* <img
           src={`data:image/jpeg;base64, ${userData.cover_photo}` || default_cover_photo}
           alt="Profile"
           className="cover-photo-img"
-        />
+        /> */}
         <div className="profile-header">
           {/* <img
             src={userData.profile_photo || default_profile_photo}
