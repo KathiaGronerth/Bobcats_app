@@ -55,29 +55,22 @@ const Register = () => {
 
       if (response.ok) {
         // Registration successful
-        alert("Registration successful!");
         const formData = new FormData();
         formData.append("email", registerEmail);
         formData.append("profile_photo", photo);
-        fetch("http://127.0.0.1:8000/api/image", {
+        const imageResponse = await fetch("http://127.0.0.1:8000/api/image", {
           method: "POST",
           body: formData,
         })
-          .then((response) => {
+          .then((imageResponse) => {
             // Handle the response
-            if (!response.ok) {
+            if (!imageResponse.ok) {
               throw new Error("Network response was not ok.");
             }
-            return response.json();
+            console.log(imageResponse.json())
+            
           })
-          .then((data) => {
-            // Handle the data from the response
-            console.log("Response:", data);
-          })
-          .catch((error) => {
-            // Handle errors
-            console.error("Error:", error);
-          });
+        alert("Registration successful!");          
         navigate("/login");
       } else {
         // Registration failed

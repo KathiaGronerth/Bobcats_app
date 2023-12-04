@@ -125,7 +125,7 @@ const PostRideForm = () => {
 
       if (response.ok) {
         console.log("Ride posted successfully");
-        navigate("/");
+        setIsModalOpen(true);
       } else {
         console.error(
           "Failed to post ride. Server returned:",
