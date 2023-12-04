@@ -18,6 +18,9 @@ const HowItWorks = () => {
           search for available rides.
         </li>
         <li>
+          Or search for rides providing details of when and where you need to be picked up and where you wish to go
+        </li>
+        <li>
           Connect with other members of the community to carpool together.
         </li>
         <li>
@@ -25,10 +28,10 @@ const HowItWorks = () => {
           the community.
         </li>
       </ol>
-      <img
+      {/* <img
         src="path_to_how_it_works_image.jpg"
         alt="How It Works Illustration"
-      />
+      /> */}
     </div>
   );
 };

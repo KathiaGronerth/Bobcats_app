@@ -6,7 +6,7 @@ import { MdAccessTime } from "react-icons/md";
 import { MdOutlineAirlineSeatReclineNormal } from "react-icons/md";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import carlogo from "../../../assets/images/car-logo2.gif";
+import carlogo from "../../../assets/images/car-logo1.png";
 import { FaFilter } from "react-icons/fa6";
 
 const apiKey = config.googleMapsApiKey;
@@ -282,13 +282,13 @@ const RidesPage = () => {
               </select>
             </div>
             {filterRidesByPrice().map((ride) => (
-              <RideCard
-                key={ride.id}
-                ride={ride}
-                onMapClick={handleMapClick}
-                isSelected={selectedRide && selectedRide.id === ride.id}
-                disableContinue={disableContinue}
-              />
+                <RideCard
+                  key={ride.id}
+                  ride={ride}
+                  onMapClick={handleMapClick}
+                  isSelected={selectedRide && selectedRide.id === ride.id}
+                  disableContinue={disableContinue}
+                />
             ))}
           </div>
         </div>

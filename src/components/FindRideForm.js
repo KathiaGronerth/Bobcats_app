@@ -142,7 +142,7 @@ const FindRideForm = () => {
   return (
     <div
       className="main-find-ride-form"
-      style={{ paddingTop: "100px", backgroundColor: "#e7f7fe" }}
+      style={{ paddingTop: "100px", backgroundColor: "#e7f7fe", height: "100%" }}
     >
       <div className="find-ride-form">
         <form onSubmit={handleSubmit}>

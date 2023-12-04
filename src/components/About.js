@@ -10,7 +10,7 @@ const About = () => {
         transportation, reduce the campus carbon footprint, and help students
         and staff travel efficiently.
       </p>
-      <img src="path_to_image.jpg" alt="About Bobcat Carpool" />
+      {/* <img src="path_to_image.jpg" alt="About Bobcat Carpool" /> */}
     </div>
   );
 };

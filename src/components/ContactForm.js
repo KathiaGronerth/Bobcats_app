@@ -56,7 +56,7 @@ const ContactForm = () => {
           Send Message
         </button>
       </form>
-      <Footer />
+      <Footer style={{position: "fixed", bottom: "0"}} />
     </div>
   );
 };

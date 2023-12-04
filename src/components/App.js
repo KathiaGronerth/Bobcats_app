@@ -7,7 +7,7 @@ import NavBar from "../NavBar";
 function App() {
   return (
     <Router>
-      <div>
+      <div style={{height: '100%'}}>
         <NavBar />
         <MainRoutes />
       </div>

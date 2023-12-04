@@ -772,6 +772,7 @@ button:hover {
   padding-top: 60px;
   font-family: "Poppins", sans-serif;
   background-color: #e7f7fe;
+  height: 100%;
 }
 .post-ride-form-wrapper {
   background-color: #fff;
@@ -980,7 +981,9 @@ button:hover {
   cursor: pointer;
   border-radius: 25px;
   transition: background-color 0.3s;
-  margin-left: "450px";
+  margin-top: 10px;
+  margin-left: "1200px";
+  width: 700px;
 }
 
 .edit-submit-btn:hover {
@@ -996,6 +999,7 @@ button:hover {
 .main-login-register {
   padding-top: 100px;
   background-color: #e7f7fe;
+  height: 100%;
 }
 
 .login-register-title {
@@ -1115,6 +1119,7 @@ button:hover {
 /* FAQ */
 .faq-container {
   padding-top: 80px;
+  height: 100%;
 }
 .faq {
   padding: 20px;
@@ -1146,6 +1151,7 @@ button:hover {
   align-items: center;
   justify-content: center;
   padding-bottom: 10px;
+  height: 100%;
 }
 
 .contact-form h2 {
@@ -1158,7 +1164,7 @@ button:hover {
   border: 1.5px solid #ccc;
   width: 70%; /* Set the width of the form if needed */
   padding: 30px;
-  margin-bottom: 15px;
+  margin-bottom: 250px;
 }
 
 .contact-form input,
@@ -1192,6 +1198,7 @@ button:hover {
   padding: 20px;
   background-color: #fff;
   padding-top: 100px;
+  height: 100px;
 }
 
 .about h2 {
@@ -1213,6 +1220,7 @@ button:hover {
   padding: 20px;
   background-color: #fff;
   padding-top: 100px;
+  height: 100%;
 }
 
 .how-it-works h2 {
