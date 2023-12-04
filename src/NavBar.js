@@ -201,6 +201,9 @@ const NavBar = () => {
             onClick={handleDropdownToggle}
           >
             <FaUserAlt className="user-profile-icon" />
+            {isUserLoggedIn && userData && (
+              <span style={{ paddingLeft: "10px" }}>{userData.name}</span>
+            )}
             <IoIosArrowDown
               style={{ paddingLeft: "5px", paddingBottom: "7px" }}
             />
