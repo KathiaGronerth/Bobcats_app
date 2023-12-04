@@ -7,6 +7,8 @@ import PlacesAutocomplete, {
 import { useNavigate } from "react-router-dom";
 import config from "./config";
 import useScript from "./useScript";
+import Modal from "react-modal";
+import "../components/ride/RequestToBook.css";
 
 const PostRideForm = () => {
   const [formData, setFormData] = useState({
@@ -22,6 +24,7 @@ const PostRideForm = () => {
   const navigate = useNavigate();
   const apiKey = config.googleMapsApiKey;
   const access = JSON.parse(sessionStorage.getItem("access"));
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Use the custom useScript hook
   const [scriptLoaded, scriptError] = useScript(
@@ -137,6 +140,14 @@ const PostRideForm = () => {
     //console.log(formData);
     // navigate("/success");
     console.log("requestBody : ", requestBody);
+    //navigate("/driverhistory");
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+  const handleOkayButton = () => {
     navigate("/driverhistory");
   };
 
@@ -146,6 +157,18 @@ const PostRideForm = () => {
 
   return (
     <div className="post-ride-main-container">
+      <Modal
+        isOpen={isModalOpen}
+        onRequestClose={closeModal}
+        contentLabel="Event Options"
+        overlayClassName="modal-overlay"
+        className="modal"
+      >
+        <h2> "🎉 Hooray! Your ride has been successfully created! 🚗"</h2>
+        <div className="button-container">
+          <button onClick={handleOkayButton}>Okay</button>
+        </div>
+      </Modal>
       <div className="post-ride-form-wrapper">
         <h2>
           Post Your Ride <IoCarSportSharp style={{ color: "#98ed64" }} />
