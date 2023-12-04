@@ -5,6 +5,9 @@ const MessageComponent = ({ message, isOwnMessage }) => {
 
   return (
     <div className={`message ${messageClass}`}>
+      {!isOwnMessage && (
+        <div className="message-sender-name">{message.senderName}</div>
+      )}
       <div className="message-content">{message.text}</div>
     </div>
   );
