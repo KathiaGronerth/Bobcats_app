@@ -443,6 +443,11 @@ p {
   word-break: break-word;
 }
 
+.message-sender-name {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
 .chat-input {
   display: flex;
   padding: 10px;
