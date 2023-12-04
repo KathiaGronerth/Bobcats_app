@@ -197,16 +197,25 @@ const NavBar = () => {
         </div>
         <div className="nav-user" ref={dropdownRef}>
           <div
-            className="nav-item login-dropdown"
+            style={{
+              display: "flex",
+              flexDirection: "row",
+            }}
             onClick={handleDropdownToggle}
           >
             <FaUserAlt className="user-profile-icon" />
-            {isUserLoggedIn && userData && (
-              <span style={{ paddingLeft: "10px" }}>{userData.name}</span>
-            )}
-            <IoIosArrowDown
-              style={{ paddingLeft: "5px", paddingBottom: "7px" }}
-            />
+            <div
+              className="nav-item login-dropdown"
+              style={{
+                display: "flex",
+                flexDirection: "row",
+              }}
+            >
+              {isUserLoggedIn && userData && <div>{userData.name}</div>}
+              <IoIosArrowDown
+                style={{ paddingLeft: "5px", paddingBottom: "7px" }}
+              />
+            </div>
           </div>
           {isDropdownOpen && (
             <div className="dropdown-menu">
