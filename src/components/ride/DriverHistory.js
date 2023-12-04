@@ -6,8 +6,8 @@ import { FiCalendar } from "react-icons/fi";
 import { MdAccessTime } from "react-icons/md";
 import { IoPerson } from "react-icons/io5";
 import { FaCar } from "react-icons/fa";
-import ridesHistoryData from "./rideHistoryData.json";
-//import ridehistory from "../../../assets/images/ridehistory.png";
+// import ridesHistoryData from "./rideHistoryData.json";
+import ridehistory from "../../../assets/images/ridehistory.png";
 
 const Card = ({ ride }) => {
   return (
