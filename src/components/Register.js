@@ -56,10 +56,29 @@ const Register = () => {
       if (response.ok) {
         // Registration successful
         alert("Registration successful!");
+        const formData = new FormData();
+        formData.append("email", registerEmail);
+        formData.append("profile_photo", photo);
+        fetch("http://127.0.0.1:8000/api/image", {
+          method: "POST",
+          body: formData,
+        })
+          .then((response) => {
+            // Handle the response
+            if (!response.ok) {
+              throw new Error("Network response was not ok.");
+            }
+            return response.json();
+          })
+          .then((data) => {
+            // Handle the data from the response
+            console.log("Response:", data);
+          })
+          .catch((error) => {
+            // Handle errors
+            console.error("Error:", error);
+          });
         navigate("/login");
-        if (photo) {
-          alert(`Uploaded photo: ${photo.name}`);
-        }
       } else {
         // Registration failed
         alert("Registration failed!");
@@ -128,9 +147,10 @@ const Register = () => {
           />
           <input
             type="file"
-            accept=".jpg"
+            accept=".jpg, .jpeg, .png"
             onChange={(e) => setPhoto(e.target.files[0])}
             className="login-register-input"
+            placeholder="Upload your photo"
           />
           {/* New Car fields */}
           <div className="car-question">
