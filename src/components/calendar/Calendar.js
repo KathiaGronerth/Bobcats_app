@@ -44,17 +44,40 @@ const generateRecurringEvents = (
 const DEMO_EVENTS = [
   {
     id: createEventId(),
-    title: "Meeting with Client",
-    start: new Date().toISOString(),
-    end: new Date(new Date().getTime() + 2 * 60 * 60 * 1000).toISOString(), // 2 hours later
+    title: "Therapy Dogs",
+    start: new Date("2023-12-05T12:00:00").toISOString(),
+    end: new Date("2023-12-05T14:00:00").toISOString(),
     allDay: false,
+    destination: "Texas State University, University Drive, San Marcos, TX",
+    destination_coordinates: {
+      lat: 29.888057687626,
+      lng: -97.9383831914355,
+    },
+  },
+
+  {
+    id: createEventId(),
+    title: "Texas State Women's Basketball Vs Oklahoma State",
+    start: new Date("2023-12-09T14:00:00").toISOString(),
+    end: new Date("2023-12-09T16:00:00").toISOString(),
+    allDay: false,
+    destination: "Bobcat Stadium",
+    destination_coordinates: {
+      lat: 29.89124822797564,
+      lng: -97.9255701257591,
+    },
   },
   {
     id: createEventId(),
-    title: "Lunch Break",
-    start: new Date(new Date().getTime() + 3 * 60 * 60 * 1000).toISOString(), // 3 hours later
-    end: new Date(new Date().getTime() + 4 * 60 * 60 * 1000).toISOString(), // 4 hours later
+    title: "Texas State Men's Basketball at James Madison",
+    start: new Date("2023-12-30T13:00:00").toISOString(),
+    end: new Date("2023-12-30T15:00:00").toISOString(),
     allDay: false,
+    destination: "Bobcat Stadium",
+    destination_coordinates: {
+      lat: 38.43529359577231,
+      lng: -78.86986211736144,
+    },
   },
   // Add more demo events as needed
 ];
@@ -149,8 +172,40 @@ export default function Calendar() {
   };
 
   const handleBookRide = () => {
-    navigate("/find-ride-form");
-    closeModal();
+    if (selectedEvent) {
+      console.log("Selected Event:", selectedEvent);
+
+      const { start, extendedProps } = selectedEvent;
+
+      if (extendedProps) {
+        const { destination, destination_coordinates } = extendedProps;
+
+        // Format start date in CST timezone
+        const formattedStartDate = start.toLocaleString("en-US", {
+          timeZone: "America/Chicago", // Central Standard Time
+        });
+
+        console.log("calendar_start", formattedStartDate);
+        console.log("Destination", destination);
+        console.log("Destination Coordinates", destination_coordinates);
+
+        // Navigate to "/find-ride-form" and pass information as state
+        navigate("/find-ride-form", {
+          state: {
+            calendar_start: formattedStartDate,
+            calendar_destination: destination,
+            calendar_destination_coordinates: destination_coordinates,
+          },
+        });
+
+        closeModal();
+      } else {
+        console.error(
+          "Extended props not found in selectedEvent:",
+          selectedEvent
+        );
+      }
+    }
   };
 
   const closeModal = () => {
@@ -228,7 +283,7 @@ export default function Calendar() {
             selectMirror={true}
             dayMaxEvents={true}
             weekends={weekendsVisible}
-            initialEvents={ALL_DEMO_EVENTS} // Use the demo data for courses
+            initialEvents={DEMO_EVENTS} // Use the demo data for courses
             select={handleDateSelect}
             eventContent={renderEventContent} // custom render function
             eventClick={handleEventClick}

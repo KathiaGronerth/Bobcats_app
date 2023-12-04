@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { IoSearch } from "react-icons/io5";
 import useScript from "./useScript.js";
 import config from "./config.js";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
@@ -10,15 +10,27 @@ import PlacesAutocomplete, {
 
 const FindRideForm = () => {
   // Using dummy data for the fields as initial values
+  const location = useLocation();
+  const {
+    calendar_start,
+    calendar_destination,
+    calendar_destination_coordinates,
+  } = location.state || {};
+  const parsedDate = calendar_start ? new Date(calendar_start) : null;
+  const formattedDateTime = parsedDate
+    ? parsedDate.toISOString().slice(0, 16)
+    : new Date().toISOString().slice(0, 16);
   const [source, setSource] = useState("");
-  const [destination, setDestination] = useState("");
+  const [destination, setDestination] = useState(calendar_destination || "");
   const [passengerCount, setPassengerCount] = useState("");
   const [dateTime, setDateTime] = useState(
-    new Date().toISOString().slice(0, 16)
+    formattedDateTime || new Date().toISOString().slice(0, 16)
   );
   const [specialNeeds, setSpecialNeeds] = useState("");
   const [sourceCoordinates, setSourceCoordinates] = useState(null);
-  const [destinationCoordinates, setDestinationCoordinates] = useState(null);
+  const [destinationCoordinates, setDestinationCoordinates] = useState(
+    calendar_destination_coordinates || null
+  );
 
   const navigate = useNavigate();
   const apiKey = config.googleMapsApiKey;
@@ -31,6 +43,12 @@ const FindRideForm = () => {
 
   useEffect(() => {
     // Check if the script has been loaded successfully
+    console.log(
+      "NAvigated data",
+      calendar_destination,
+      calendar_start,
+      calendar_destination_coordinates
+    );
     if (scriptLoaded) {
       console.log("Google Maps API script has been loaded");
     }
@@ -88,7 +106,7 @@ const FindRideForm = () => {
 
       if (response.ok) {
         console.log("Ride search request sent successfully");
-        const rides = await response.json()
+        const rides = await response.json();
         // Navigate to the appropriate page after the successful API call
         navigate("/rides", { state: { searchCriteria, rides } });
       } else {
