@@ -125,7 +125,7 @@ const UserProfile = () => {
   };
 
   return (
-    <div className="user-profile-container">
+    <div className="user-profile-container" style={{backgroundColor:"#f9f9f9"}}>
       <div className="cover-photo">
         {/* <img
           src={userData.cover_photo || default_cover_photo}
