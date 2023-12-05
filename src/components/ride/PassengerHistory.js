@@ -22,7 +22,7 @@ const Card = ({ ride }) => {
       <div className="ride-card-container">
         <p className="ride-detail">
           <FaLocationDot style={{ paddingRight: "5px", color: "#f04925" }} />
-          {ride.source}
+          Source: {ride.source}
         </p>
         <p className="ride-detail">
           {ride.date} <FiCalendar />
@@ -32,7 +32,7 @@ const Card = ({ ride }) => {
       <div className="ride-card-container">
         <p className="ride-detail">
           <FaLocationDot style={{ paddingRight: "5px", color: "#f04925" }} />
-          {ride.destination}
+          Destination: {ride.destination}
         </p>
         <p className="ride-detail">
           {ride.time} <MdAccessTime />
