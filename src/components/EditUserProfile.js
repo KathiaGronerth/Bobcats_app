@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 
+
 const EditUserProfile = ({ profile, onSave }) => {
   const { name, bio, cars, speaks, studies, from_location } = profile;
 
@@ -35,8 +36,8 @@ const EditUserProfile = ({ profile, onSave }) => {
   };
 
   return (
-    <div className="edit-driver-profile">
-      <h2>Edit Driver Profile</h2>
+    <div className="edit-driver-profile" style={{border: "1.5px solid #ccc", background: "#fff"}}>
+      
       <form
         style={{
           display: "flex",
@@ -45,53 +46,95 @@ const EditUserProfile = ({ profile, onSave }) => {
         }}
         onSubmit={handleSubmit}
       >
+        <h2 style={{fontSize: "22px", background: "#fff", marginBottom: "15px"}}>Edit Driver Profile</h2>
         <label>
-          Name:
+          Name:</label>
           <input
             type="text"
             name="name"
             value={editedProfile.name}
             onChange={(e) => handleInputChange(e, "name")}
+            style={{width:"90%",
+              padding: "10px",
+              border: "2px solid #C0C0C0",
+              borderRadius: "4px",
+              padding: "10px",
+              width: "50%", 
+              marginBottom: "20px"
+             }}
           />
-        </label>
+        
         <label>
-          Bio:
+          Bio: </label>
           <textarea
             name="bio"
             value={editedProfile.bio}
             onChange={(e) => handleInputChange(e, "bio")}
+            style={{width:"90%",
+            padding: "10px",
+            border: "2px solid #C0C0C0",
+            borderRadius: "4px",
+            width: "50%",
+            marginBottom: "20px"
+           }}
           />
-        </label>
+       
         {/* Add more fields for car details as needed */}
         <label>
-          Studies:
+          Studies:  </label>
           <input
             type="text"
             name="studies"
             value={editedProfile.studies}
             onChange={(e) => handleInputChange(e, "studies")}
+            style={{width:"90%",
+            padding: "10px",
+            border: "2px solid #C0C0C0",
+            borderRadius: "4px",
+            padding: "10px",
+            width: "50%",
+            marginBottom: "20px"
+           }}
           />
-        </label>
+      
         <label>
-          Speaks:
+          Speaks: </label>
           <input
             type="text"
             name="speaks"
             value={editedProfile.speaks.join(", ")}
             onChange={(e) => handleInputChange(e, "speaks")}
+            style={{width:"90%",
+            padding: "10px",
+            border: "2px solid #C0C0C0",
+            borderRadius: "4px",
+            padding: "10px",
+            marginBottom: "20px",
+            width: "50%",
+           
+           }}
           />
-        </label>
+       
 
         <label>
-          From Location:
+          From Location: </label>
           <input
             type="text"
             name="from_location"
             value={editedProfile.from_location}
             onChange={(e) => handleInputChange(e, "from_location")}
+            style={{width:"90%",
+            padding: "10px",
+            border: "2px solid #C0C0C0",
+            borderRadius: "4px",
+            padding: "10px",
+            width: "50%",
+            marginBottom: "20pxx"
+            
+           }}
           />
-        </label>
-        <button type="submit">Save Changes</button>
+       
+        <button type="submit" style={{color: "#fff", borderRadius: "25px", backgroundColor: "#00aff5", margin: "20px"}}>Save Changes</button>
       </form>
     </div>
   );

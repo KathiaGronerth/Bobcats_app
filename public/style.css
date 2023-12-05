@@ -988,6 +988,7 @@ button:hover {
 
 .edit-submit-btn:hover {
   background-color: #008ec2;
+  display: flex;
 }
 
 .autocomplete-dropdown-container {

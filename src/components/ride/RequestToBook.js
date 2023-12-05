@@ -120,11 +120,11 @@ const RequestToBook = () => {
         }}
       >
         <div>
-          <GrLocationPin style={{ marginRight: "5px", color: "#f04925" }} />
+          <GrLocationPin style={{ marginRight: "5px", color: "#f04925", font: "16px"}} />
           {searchCriteria?.source}
         </div>{" "}
         <div>
-          <GrLocationPin style={{ marginRight: "5px", color: "#f04925" }} />
+          <GrLocationPin style={{ marginRight: "5px", color: "#f04925", font: "16px" }} />
           {searchCriteria?.destination}
         </div>
       </div>
@@ -136,7 +136,7 @@ const RequestToBook = () => {
           </strong>{" "}
         </div>{" "}
         <div>
-          <strong>{searchCriteria?.dateTime}</strong>
+          {searchCriteria?.dateTime}
         </div>
         <div>
           <strong style={{ color: "#8E8E8E" }}>

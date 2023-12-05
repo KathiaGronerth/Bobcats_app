@@ -6,7 +6,7 @@ import { MdAccessTime } from "react-icons/md";
 import { MdOutlineAirlineSeatReclineNormal } from "react-icons/md";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import carlogo from "../../../assets/images/car-logo1.png";
+import carlogo from "../../../assets/images/car-logo2.gif";
 import { FaFilter } from "react-icons/fa6";
 
 const apiKey = config.googleMapsApiKey;
@@ -74,7 +74,7 @@ const RidesPage = () => {
     googleMapsScript.defer = true;
     googleMapsScript.addEventListener("load", () => setGoogleMapsLoaded(true));
     document.head.appendChild(googleMapsScript);
-
+    console.log("rides", rides)
     return () => {
       document.head.removeChild(googleMapsScript);
     };
@@ -154,10 +154,30 @@ const RidesPage = () => {
       });
     }
 
-    // Show marker for the selected ride
-    if (selectedRide?.source_coordinates) {
+   /* if (selectedRide?.source_coordinates) {
+      console.log("Selected Ride Source Location carlogo");
+      console.log("selectedRide", selectedRide, selectedRide.source_coordinates);
+      const { lat, lng } = selectedRide.source_coordinates;
       const selectedRideMarker = new window.google.maps.Marker({
-        position: selectedRide.source_coordinates,
+        position: { lat: lng, lng: lat }, // Swap lat and lng here
+        map: map,
+        title: "Selected Ride Source Location",
+        icon: {
+          path: window.google.maps.SymbolPath.CIRCLE,
+          fillColor: "blue",
+          fillOpacity: 1,
+          strokeWeight: 0,
+          scale: 10, // Adjust the size as needed
+        },
+      });
+      markers.push(selectedRideMarker);
+    } */
+
+    // Show marker for the selected ride
+   if (selectedRide?.source_coordinates) {
+      const { lat, lng } = selectedRide.source_coordinates;
+      const selectedRideMarker = new window.google.maps.Marker({
+        position: { lat: lng, lng: lat },
         map: map,
         title: "Selected Ride Source Location",
         icon: {
@@ -165,7 +185,6 @@ const RidesPage = () => {
           scaledSize: new window.google.maps.Size(40, 40), // Adjust the size as needed
         },
       });
-
       markers.push(selectedRideMarker);
     }
 
