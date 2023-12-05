@@ -79,6 +79,19 @@ const DEMO_EVENTS = [
       lng: -78.86986211736144,
     },
   },
+  {
+    id: createEventId(),
+    title: "Exhibition-Lonesome Dove Collection",
+    start: new Date("2023-12-06T09:00:00").toISOString(),
+    end: new Date("2023-12-06T12:00:00").toISOString(),
+    allDay: false,
+    destination: "Texas State University, University Drive, San Marcos, TX",
+    destination_coordinates: {
+      lat: 29.888057687626,
+      lng: -97.9383831914355,
+    },
+  },
+
   // Add more demo events as needed
 ];
 // Demo data for recurring events (courses)
@@ -109,6 +122,7 @@ export default function Calendar() {
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [selectedOption, setSelectedOption] = useState(null);
   const [disableContinue, setDisableContinue] = useState(true);
+  const today = new Date();
 
   const navigate = useNavigate();
 
@@ -288,6 +302,9 @@ export default function Calendar() {
             eventContent={renderEventContent} // custom render function
             eventClick={handleEventClick}
             eventsSet={handleEvents} // called after events are initialized/added/changed/removed
+            validRange={{
+              start: today,
+            }}
           />
         </div>
       </div>
