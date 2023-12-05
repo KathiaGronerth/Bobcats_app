@@ -83,7 +83,7 @@ const UserProfile = () => {
       (currentDate.getMonth() === givenDate.getMonth() &&
         currentDate.getDate() < givenDate.getDate())
     ) {
-      return yearsDiff - 1;
+      return yearsDiff;
     }
     return yearsDiff;
   };
