@@ -47,31 +47,35 @@ const ReviewsListDriver = ({ reviews }) => {
 
     try {
       //You can uncomment these lines
-      // const access = JSON.parse(sessionStorage.getItem("access"));
-      // const response = await fetch("http://127.0.0.1:8000/api/ride", {
-      //   method: "POST",
-      //   headers: {
-      //     Authorization: `Bearer ${access}`,
-      //     "Content-Type": "application/json",
-      //   },
-      //   body: JSON.stringify(newReview),
-      // });
+      const access = JSON.parse(sessionStorage.getItem("access"));
+      const response = await fetch("http://127.0.0.1:8000/api/review", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${access}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newReview),
+      });
 
       /* you can commented out these lines to... */
-      const response = await fetch(
-        "https://run.mocky.io/v3/f3b4b6f0-fea8-4ce7-b57f-e600d625a6fd",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(newReview),
-        }
-      );
+      // const response = await fetch(
+      //   "https://run.mocky.io/v3/f3b4b6f0-fea8-4ce7-b57f-e600d625a6fd",
+      //   {
+      //     method: "POST",
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //     },
+      //     body: JSON.stringify(newReview),
+      //   }
+      // );
       /*...here*/
 
       if (!response.ok) {
         throw new Error("Network response was not ok");
+      } else {
+        const newResponseData = response.json();
+
+        console.log(newResponseData);
       }
 
       console.log("Response received"); // Debugging log
@@ -98,7 +102,7 @@ const ReviewsListDriver = ({ reviews }) => {
       {reviews.map((review, index) => (
         <ReviewDriver key={index} review={review} />
       ))}
-      <div className="review-form">
+      {/* <div className="review-form">
         <textarea
           value={newReview.review}
           onChange={(e) =>
@@ -121,7 +125,7 @@ const ReviewsListDriver = ({ reviews }) => {
         </select>
         <button onClick={handleSubmit}>Submit Review</button>
         {error && <p className="error-message">{error}</p>}
-      </div>
+      </div> */}
     </div>
   );
 };
