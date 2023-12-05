@@ -89,7 +89,7 @@ const ChatComponent = (selectedRide) => {
       const newMessage = {
         senderId: userData.id,
         senderName: userData.name, // assuming userData contains the user's name
-        text: messageText,
+        message: messageText,
         timestamp: new Date().toISOString(),
       };
 
@@ -98,23 +98,42 @@ const ChatComponent = (selectedRide) => {
 
         console.log(messageText);
 
-        await axios.post(
-          //`http://127.0.0.1:8000/api/ride/${selectedRide.id}/message`,
-          "https://run.mocky.io/v3/78dacaf3-1c32-4363-9808-89ce24338a55",
-          // {
-          //   message: messageText,
-          // }
-          newMessage
-          // {
-          //   headers: {
-          //     Authorization: `Bearer ${access}`,
-          //     "Content-Type": "application/json",
-          //   },
-          // }
+        const access = JSON.parse(sessionStorage.getItem("access"));
+        const newMessageResponse = await fetch(
+          `http://127.0.0.1:8000/api/ride/${selectedRide['selectedRide']['id']}/message`,
+          {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${access}`,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              message: messageText
+            })
+          }
         );
-        setTimeout(() => {
-          fetchMessages();
-        }, 10000);
+
+        if (newMessageResponse.ok) {
+          fetchMessages(selectedRide);
+        }
+        
+        // await axios.post(
+        //   //`http://127.0.0.1:8000/api/ride/${selectedRide.id}/message`,
+        //   "https://run.mocky.io/v3/78dacaf3-1c32-4363-9808-89ce24338a55",
+        //   // {
+        //   //   message: messageText,
+        //   // }
+        //   newMessage
+        //   // {
+        //   //   headers: {
+        //   //     Authorization: `Bearer ${access}`,
+        //   //     "Content-Type": "application/json",
+        //   //   },
+        //   // }
+        // );
+        // setTimeout(() => {
+        //   fetchMessages(selectedRide);
+        // }, 10000);
       } catch (error) {
         console.error("Error sending message:", error);
       }
