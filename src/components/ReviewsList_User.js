@@ -12,14 +12,14 @@ const ReviewUser = ({ review }) => {
       <img
         // src={review.ride.driver.profile_photo || default_profile_photo}
         src={
-          `data:image/jpeg;base64, ${review.ride.driver.profile_photo}` ||
+          `data:image/jpeg;base64, ${review.passenger.profile_photo}` ||
           default_profile_photo
         }
         alt={`${review.ride.driver.name}`}
         className="review-user-photo"
       />
       <div className="review-text">
-        <div className="review-user-name">{review.ride.driver.name}</div>
+        <div className="review-user-name">{review.passenger.name}</div>
         <div className="review-rating">{renderStars(review.rating)}</div>
         <div className="review-content">{review.review}</div>
       </div>
